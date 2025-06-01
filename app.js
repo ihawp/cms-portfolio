@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const compression = require('compression');
-const corsOptions = require('../utils/corsOptions');
+const corsOptions = require('./utils/corsOptions');
 
 const app = express();
 
@@ -13,9 +13,9 @@ app.use(compression());
 app.use(cors(corsOptions));
 
 /* Routers */
-const authRouter = require('../routers/authRouter');
-const portfolioRouter = require('../routes/portfolioRouter');
-const blogRouter = require('../routes/blogRouter');
+const authRouter = require('./routers/authRouter');
+const portfolioRouter = require('./routers/portfolioRouter');
+const blogRouter = require('./routers/blogRouter');
 
 /**
  * @route USE /auth
