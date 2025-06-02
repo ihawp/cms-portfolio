@@ -21,8 +21,7 @@ app.use(express.json());
 
 /* Routers */
 const authRouter = require('./routers/authRouter');
-const portfolioRouter = require('./routers/portfolioRouter');
-const blogRouter = require('./routers/blogRouter');
+const apiRouter = require('./routers/apiRouter');
 
 /**
  * @route USE /auth
@@ -31,15 +30,9 @@ const blogRouter = require('./routers/blogRouter');
 app.use('/auth', authRouter);
 
 /**
- * @route USE /portfolio
- * @description
+ * @route USE /api
+ * @description API routes for content like /blog or /portfolio.
  */
-app.use('/portfolio', portfolioRouter);
-
-/**
- * @route USE /blog
- * @description
- */
-app.use('/blog', blogRouter);
+app.use('/api/v1', apiRouter);
 
 module.exports = app;
