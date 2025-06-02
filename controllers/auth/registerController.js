@@ -1,39 +1,38 @@
-const { insertUser } = require("../utils/authQueries");
+const { insertUser } = require("../../utils/authQueries");
 const bcrypt = require('bcryptjs');
-const crypto = require('node:crypto');
-const { sendEmailTemplate } = require('../utils/sendEmail');
-const { generateMagicTokenEmailTemplate } = require('../utils/emailTemplates');
+const crypto = require('crypto');
+const { sendEmailTemplate } = require('../../utils/sendEmail');
+const { generateMagicTokenEmailTemplate } = require('../../utils/emailTemplates');
 
 const registerController = async (req, res) => {
 
     const { username, email, password } = req.body;
 
+    console.log('made it here');
+
     const passwordHash = await bcrypt.hash(password, 10);
 
-    const authToken = crypto.randomBytes(32);
+    const authTokenBuffer = await crypto.randomBytes(32);
+    const authToken = authTokenBuffer.toString('hex');
 
-    const authTokenHash = bcrypt.hash(authToken, 10);
+    console.log(authToken);
+
+    const authTokenHash = await bcrypt.hash(authToken, 10);
 
     const insertId = {
-        the_id: undefined,
+        id: undefined,
     }
 
     try {
         const response = await insertUser(username, email, passwordHash, authTokenHash);
-        
-        console.log(response);
-
-        if (response?.insertId) {
-            console.log('wow');
-        }
-    
+        insertId.id = response.insertId;
     } catch (error) {
         return res.status(500).json({ success: false, error: 'Database error.', code: 'DATABASE_ERROR' });
     }
 
     // User account could be deleted if this fails
     try {
-        const emailTemplate = generateMagicTokenEmailTemplate();
+        const emailTemplate = generateMagicTokenEmailTemplate(email, insertId.id, authToken);
         await sendEmailTemplate(emailTemplate);
     } catch (error) {
         return res.status(500).json({ success: false, error: 'Email error.', code: 'EMAIL_ERROR' });

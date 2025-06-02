@@ -14,7 +14,7 @@ const generateMagicTokenEmailTemplate = (userEmail, id, magicToken) => {
         text: 'Here is your magic link!',
         html: `
             <h1>Magic Login Link:</h1>
-            <p>Here is your magic login link: <a href="${process.env.SERVER_URL}auth/magic?id=${id}&key=${magicToken}">Login Now</a></p>
+            <p>Here is your magic login link: <a href="ihawp://magic?id=${id}&key=${magicToken}">Login Now</a></p>
         `,
     }
 }

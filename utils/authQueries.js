@@ -14,12 +14,33 @@ const selectUserIdByUsernameOrEmail = async (username, email) => {
     return response;
 }
 
-const selectUserLoginInfoByUsername = async (username) => {
+const selectUserLoginInfoByEmail = async (username) => {
     const [response] = await pool.execute(`
         SELECT id, password_hash
         FROM accounts
-        WHERE username = ?`,
+        WHERE email = ?`,
         [username]
+    );
+    return response;
+}
+
+const selectAuthById = async (id) => {
+    const [response] = await pool.execute(`
+        SELECT auth_token_hash 
+        FROM accounts 
+        WHERE id = ?`,
+        [id]);
+    return response;
+}
+
+const selectFrontendUserById = async (id) => {
+    const [response] = await pool.execute(`
+        SELECT username, email, 
+        email_verified, pfp_url, 
+        account_created 
+        FROM accounts 
+        WHERE id = ?`, 
+        [id]
     );
     return response;
 }
@@ -35,6 +56,23 @@ const updateAuthToken = async (authTokenHash, userId) => {
         WHERE id = ?`,
         [authTokenHash, userId]
     );
+    return response;
+}
+
+const updateUserAuthById = async (newAuthToken, id) => {
+    const [response] = await pool.execute(`
+        UPDATE accounts 
+        SET auth_token_hash = ? 
+        WHERE id = ?`, [newAuthToken, id]);
+    return response;
+}
+
+const updateUserEmailVerifiedById = async (newEmailVerifiedLevel, id) => {
+    const [response] = await pool.execute(`
+        UPDATE accounts 
+        SET email_verified = ?, 
+        email_verified_at = CURRENT_TIMESTAMP(6) 
+        WHERE id = ?`, [newEmailVerifiedLevel, id]);
     return response;
 }
 
@@ -72,9 +110,13 @@ const deleteUser = async (userId) => {
 
 module.exports = {
     selectUserIdByUsernameOrEmail,
-    selectUserLoginInfoByUsername,
+    selectUserLoginInfoByEmail,
+    selectAuthById,
+    selectFrontendUserById,
 
     updateAuthToken,
+    updateUserAuthById,
+    updateUserEmailVerifiedById,
 
     insertUser,
 

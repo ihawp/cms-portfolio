@@ -1,6 +1,6 @@
 const { body } = require('express-validator');
 
-const registerValidate = () => [
+const registerValidate = [
   body('email')
     .isEmail()
     .withMessage('Enter a valid email')
@@ -12,7 +12,7 @@ const registerValidate = () => [
 
   body('username')
     .notEmpty()
-    .isLength({ min: 5, max: 16 })
+    .isLength({ min: 5, max: 16})
     .withMessage('Name is required')
     .trim()
     .escape(),
