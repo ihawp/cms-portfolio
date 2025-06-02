@@ -1,0 +1,70 @@
+/* ihawp.com 2025 */
+
+:root {
+    --color-primary: red;
+    --color-secondary: blue;
+}
+
+html {
+    box-sizing: border-box;
+    scroll-behaviour: smooth;
+}
+
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+body {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+}
+
+/* Reset */
+
+ul {
+    list-style: none;
+}
+
+/* Display (display) */
+
+.flex {
+    display: flex;
+}
+
+.grid {
+    display: grid;
+}
+
+/* Justify Content (justify-content) */
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-end {
+    justify-content: end;
+}
+
+.justify-start {
+    justify-content: start;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+/* Align Items (align-items) */
+
+.items-center {
+    align-items: center;
+}
+
+.items-start {
+    align-items: start;
+}
+
+.items-end {
+    align-items: end;
+}
