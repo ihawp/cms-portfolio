@@ -59,21 +59,19 @@ const updateAuthToken = async (authTokenHash, userId) => {
     return response;
 }
 
-const updateUserAuthById = async (newAuthToken, id) => {
-    const [response] = await pool.execute(`
+const updateUserAuthById = async (connection, newAuthToken, id) => {
+    await connection.execute(`
         UPDATE accounts 
         SET auth_token_hash = ? 
         WHERE id = ?`, [newAuthToken, id]);
-    return response;
 }
 
-const updateUserEmailVerifiedById = async (newEmailVerifiedLevel, id) => {
-    const [response] = await pool.execute(`
+const updateUserEmailVerifiedById = async (connection, newEmailVerifiedLevel, id) => {
+    await connection.execute(`
         UPDATE accounts 
         SET email_verified = ?, 
         email_verified_at = CURRENT_TIMESTAMP(6) 
         WHERE id = ?`, [newEmailVerifiedLevel, id]);
-    return response;
 }
 
 // #######################################################################

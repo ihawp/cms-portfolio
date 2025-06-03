@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const pool = require('../utils/pool');
 
 const { selectAuthById, updateUserAuthById, updateUserEmailVerifiedById } = require('../../utils/authQueries');
 const { jwtOptions1h, jwtOptions1w } = require('../../utils/jwtOptions');
@@ -26,28 +27,28 @@ const magicController = async (req, res) => {
         return res.status(400).json({ data: null, error: 'Failure.' });
     }
     
-    console.log(id, key);
+    // Use ACID principles (create a transaction).
+    const connection = pool.getConnection();
 
-
-    // Remove the old authentication token (1 time use)
     try {
-        await updateUserAuthById('', id);
+        await connection.beginTransaction();
+
+        await updateUserAuthById(connection, '', id);
+
+        await updateUserEmailVerifiedById(connection, 1, id);
+
+        await connection.commit();
+
     } catch (error) {
-        return res.status(500).json({ data: null, error: 'Failure updating authentication token. Please try clicking the link again.' });
+        await connection.rollback();
+        return res.status(400).json({ success: false, error: 'Database error.', code: 'DATABASE_ERROR' });
+    } finally {
+        connection.release();
     }
 
-    // Update the users email_verified status to 1 (verified)
-    try {
-        await updateUserEmailVerifiedById(1, id);
-    } catch (error) {
-        return res.status(500).json({ data: null, error: 'Failure updating email verification level. Please try again later.' })
-    }
-
-    // Create JWT tokens
+    // Create JWT tokens.
     const createJWT = jwt.sign({ id }, process.env.JWT_SECRET, jwtOptions1h);
     const createLongLastingJWT = jwt.sign({ id }, process.env.LONG_JWT_SECRET, jwtOptions1w);
-
-    console.log(createJWT);
 
     res.cookie('jwt', createJWT, cookieOptions1h);
     res.cookie('long-jwt', createLongLastingJWT, cookieOptions1w);
