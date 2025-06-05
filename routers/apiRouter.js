@@ -2,8 +2,8 @@ const express = require('express');
 
 const apiRouter = express.Router();
 
-const portfolioRouter = require('./routers/portfolioRouter');
-const blogRouter = require('./routers/blogRouter');
+const portfolioRouter = require('./portfolioRouter');
+const blogRouter = require('./blogRouter');
 
 /**
  * @route USE /portfolio

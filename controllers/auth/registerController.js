@@ -8,14 +8,10 @@ const registerController = async (req, res) => {
 
     const { username, email, password } = req.body;
 
-    console.log('made it here');
-
     const passwordHash = await bcrypt.hash(password, 10);
 
     const authTokenBuffer = await crypto.randomBytes(32);
     const authToken = authTokenBuffer.toString('hex');
-
-    console.log(authToken);
 
     const authTokenHash = await bcrypt.hash(authToken, 10);
 

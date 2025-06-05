@@ -4,4 +4,4 @@ const blogSelectController = (req, res) => {
 
 }
 
-module.exports = blogInsertController;
+module.exports = blogSelectController;

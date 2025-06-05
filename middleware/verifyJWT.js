@@ -1,4 +1,3 @@
-const { asyncVerifyJWT } = require('../utils/asyncJWT');
 const validator = require('validator');
 
 const verifyJWT = async (req, res, next) => {

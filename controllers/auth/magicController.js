@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const pool = require('../utils/pool');
+const pool = require('../../utils/pool');
 
 const { selectAuthById, updateUserAuthById, updateUserEmailVerifiedById } = require('../../utils/authQueries');
 const { jwtOptions1h, jwtOptions1w } = require('../../utils/jwtOptions');
@@ -14,6 +14,7 @@ const magicController = async (req, res) => {
         token: null,
     }
 
+    // Get the current auth_token_hash from the DB 
     try {
         const getAuthToken = await selectAuthById(id);
         authToken.token = getAuthToken[0]?.auth_token_hash;
@@ -21,6 +22,7 @@ const magicController = async (req, res) => {
         return res.status(500).json({ data: null, error: 'Failed to retrieve authentication token from the database.' });
     }
 
+    // Do comparison between auth_token_hash from DB and submitted `key`.
     const compareToken = await bcrypt.compare(key, authToken.token);
 
     if (!compareToken) {
