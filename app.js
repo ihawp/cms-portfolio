@@ -3,6 +3,7 @@ const cors = require('cors');
 const compression = require('compression');
 const corsOptions = require('./utils/corsOptions');
 const cookieParser = require('cookie-parser');
+const path = require('node:path');
 
 const app = express();
 
@@ -34,5 +35,14 @@ app.use('/auth', authRouter);
  * @description API routes for content like /blog or /portfolio.
  */
 app.use('/api/v1', apiRouter);
+
+/**
+ * @route GET /
+ * @description Serve the frontend of the site.
+ */
+app.use(express.static(path.join(__dirname, 'frontend')));
+app.get(/.*/, (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
 
 module.exports = app;

@@ -4,35 +4,15 @@ const { insertPortfolioPost } = require('../../utils/portfolioQueries');
 
 const portfolioInsertController = async (req, res) => {
 
-    // Assume we have properly validated these items and now they are available
-    // via req.body.
-
-    // Deal with image uploads here... or in seperate middleware.
-    // Uploaded images to DB as array of image names (strings) where the stored location will be known by frontend person (me!).
-
-    const {
-        title,
-        intro,
-        role,
-        timeline,
-        toolsUsed,
-        skillsApplied,
-        keyTasks,
-        challenges,
-        takeaways
-    } = req.body;
-
+    // Attach eventual images array here (or maybe it will be attached earlier in middleware)
+    req.body.images = [];
+    
     try {
-        await insertPortfolioPost();
+        // Pass req.body to avoid making redundant const variable for each form item
+        await insertPortfolioPost(req.body);
     } catch (error) {
         return res.status(400).json({ success: false, error: 'Database error when uploading portfolio post.', code: 'DATABASE_ERROR' });
     }
-
-    console.log({
-        title, intro, role,
-        timeline, toolsUsed, skillsApplied,
-        keyTasks, challenges, takeaways
-    });
 
     res.status(200).json({ success: true, data: {}, message: 'Portfolio item inserted successfully!' });
 

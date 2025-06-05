@@ -25,24 +25,65 @@ const selectPortfolioPostsByAmount = async (amountOfPosts) => {
 // #######################################################################
 // INSERT
 
-const insertPortfolioPost = async () => {
-    await pool.execute(`
+/**
+ * Insert a portfolio post to the database.
+ * 
+ * @param {Object} d - Data; Shortened name for simplicity.
+ */
+const insertPortfolioPost = async (d) => {
+    return await pool.execute(`
         INSERT INTO portfolio
-        ()
-        VALUES (?, ?, ?)
+        (title, intro, role,
+        timeline, toolsUsed,
+        skillsApplied, keyTasks,
+        challenges, takeaways,
+        solutionSummary, githubURL,
+        projectSite, images)
+        VALUES (?, ?, ?, ?, ?, ?, ?, 
+                ?, ?, ?, ?, ?, ?)
         `,
-        []
+        [
+            d.title, d.intro, d.role, d.timeline, 
+            d.toolsUsed, d.skillsApplied, 
+            d.keyTasks, d.challenges, 
+            d.takeaways, d.solutionSummary, 
+            d.githubURL, d.projectSite, d.images
+        ]
     );
 }
 
 // #######################################################################
 // UPDATE
 
-const updatePortfolioPost = async (portfolioPostId) => {
+/**
+ * Update a portfolio post by it's Id number.
+ * 
+ * @param {Object} d - Data; simplified name.
+ * @param {Number} portfolioPostId - The post Id in question.
+ * 
+ * Will not be used in a transactional manor.
+ */
+const updatePortfolioPost = async (d, portfolioPostId) => {
     await pool.execute(`
-        UPDATE accounts SET () WHERE id = ?
+        UPDATE portfolio SET (
+        title, intro, role,
+        timeline, toolsUsed,
+        skillsApplied, keyTasks,
+        challenges, takeaways,
+        solutionSummary, githubURL,
+        projectSite, images) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, 
+                ?, ?, ?, ?, ?, ?)
+        WHERE id = ?
         `,
-        [portfolioPostId]
+        [
+            d.title, d.intro, d.role, d.timeline, 
+            d.toolsUsed, d.skillsApplied, 
+            d.keyTasks, d.challenges, 
+            d.takeaways, d.solutionSummary, 
+            d.githubURL, d.projectSite, d.images,
+            portfolioPostId
+        ]
     )
 }
 
