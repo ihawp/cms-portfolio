@@ -24,8 +24,6 @@ const verifyJWT = require('../middleware/verifyJWT');
  * @middleware registerValidate, validate, checkAccountExistsByUsername
  * @controller registerController
  */
-
-// does not work! but the java app can interact with this server!
 authRouter.post('/register', 
     registerValidate,
     validate,
