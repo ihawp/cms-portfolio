@@ -8,6 +8,7 @@ const portfolioInsertController = async (req, res) => {
     // via req.body.
 
     // Deal with image uploads here... or in seperate middleware.
+    // Uploaded images to DB as array of image names (strings) where the stored location will be known by frontend person (me!).
 
     const {
         title,

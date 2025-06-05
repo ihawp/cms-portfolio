@@ -14,6 +14,14 @@ const selectPortfolioPostById = async (portfolioPostId) => {
     return response;
 }
 
+const selectPortfolioPostsByAmount = async (amountOfPosts) => {
+    const [resonse] = await pool.execute(`
+        SELECT 
+        `,
+        []
+    )
+}
+
 // #######################################################################
 // INSERT
 

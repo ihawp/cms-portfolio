@@ -18,6 +18,9 @@ const { body } = require('express-validator');
  * solutionSummary: string (max: 1000)
  * githubURL: string (max: 1000)
  * projectSite: string (max: 1000)
+ * 
+ * Some images (maybe videos) are possible, but those will be dealt with seperately in middleware.
+ * I will assume storing this will be best done as array of strings, where the strings are the names of the image files, and their location is public/portfolio/images.!?
  */
 
 const portfolioValidate = [
