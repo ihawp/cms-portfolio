@@ -10,6 +10,8 @@ const portfolioDeleteController = require('../controllers/portfolio/portfolioDel
 
 /* Middleware */
 const verifyJWT = require('../middleware/verifyJWT');
+const portfolioValidate = require('../middleware/portfolioValidate');
+const validate = require('../middleware/validate');
 
 /**
  * @route GET /portfolio
@@ -18,10 +20,30 @@ const verifyJWT = require('../middleware/verifyJWT');
  */
 portfolioRouter.get('/', portfolioSelectController); 
 
-portfolioRouter.post('/', verifyJWT, portfolioInsertController);
+// Wrote portfolioValidate for portfolio insertion queries, but I assume I will UPDATE posts by submitting all content anyway, so the validator will obviously carry.
+// There could be added validation for 'has the post actually changed?' but that would be frontend specific, and not worthwhile to run on the server (checking against database and all)
+/**
+ * @route POST /portfolio
+ * @description INSERT a new portfolio item to the DB.
+ * @middleware verifyJWT, portfolioValidate, validate
+ * @controller portfolioInsertController
+ */
+portfolioRouter.post('/', verifyJWT, portfolioValidate, validate, portfolioInsertController);
 
-portfolioRouter.put('/:id', verifyJWT, portfolioUpdateController);
+/**
+ * @route PUT /portfolio/:id
+ * @description Update a portfolio post by the provided ID.
+ * @middleware verifyJWT, portfolioValidate, validate
+ * @controller portfolioUpdateController
+ */
+portfolioRouter.put('/:id', verifyJWT, portfolioValidate, validate, portfolioUpdateController);
 
+/**
+ * @route DELETE /portfolio/:id
+ * @description Delete a portfolio post by the provided ID.
+ * @middleware verifyJWT
+ * @controller portfolioDeleteController
+ */
 portfolioRouter.delete('/:id', verifyJWT, portfolioDeleteController);
 
 module.exports = portfolioRouter;

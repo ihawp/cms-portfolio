@@ -10,6 +10,8 @@ const blogDeleteController = require('../controllers/blog/blogDeleteController')
 
 /* Middleware */
 const verifyJWT = require('../middleware/verifyJWT');
+const blogValidate = require('../middleware/blogValidate');
+const validate = require('../middleware/validate');
 
 /**
  * @route GET /blog
@@ -24,7 +26,7 @@ blogRouter.get('/', blogSelectController);
  * @middleware verifyJWT
  * @controller blogInsertController
  */
-blogRouter.post('/', verifyJWT, blogInsertController);
+blogRouter.post('/', verifyJWT, blogValidate, validate, blogInsertController);
 
 /**
  * @route
@@ -32,7 +34,7 @@ blogRouter.post('/', verifyJWT, blogInsertController);
  * @middleware verifyJWT
  * @controller blogUpdateController
  */
-blogRouter.put('/:id', verifyJWT, blogUpdateController);
+blogRouter.put('/:id', verifyJWT, blogValidate, validate, blogUpdateController);
 
 /**
  * @route DELETE /blog/:id
