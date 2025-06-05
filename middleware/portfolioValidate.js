@@ -2,22 +2,23 @@ const { body } = require('express-validator');
 
 // Validate a portfolio form submission from CMS.
 
-/*
-
-    Expected Types:
-
-        - Title: string (max: 255)
-        - Intro: string (max: 255)
-        - Role: string (max: 255)
-        - Timeline: array (contents must be string (min: 1, max: 255))
-        - toolsUsed: array (contents must be string (min: 1, max: 255))
-        - skillsApplied: array (contents must be string (min: 1, max: 255))
-        - keyTasks: array (contents must be string (min: 1, max: 255))
-        - challenges: array
-            - each array item is object that has `challenge` and `solve`
-        - takeaways: array
-
-*/
+/**
+ * Expected Types:
+ * 
+ * Title: string (max: 255)
+ * Intro: string (max: 255)
+ * Role: string (max: 255)
+ * Timeline: array (contents must be string (min: 1, max: 255))
+ * toolsUsed: array (contents must be string (min: 1, max: 255))
+ * skillsApplied: array (contents must be string (min: 1, max: 255))
+ * keyTasks: array (contents must be string (min: 1, max: 255))
+ * challenges: array
+ *     each array item is object that has `challenge` and `solve`
+ * takeaways: array
+ * solutionSummary: string (max: 1000)
+ * githubURL: string (max: 1000)
+ * projectSite: string (max: 1000)
+ */
 
 const portfolioValidate = [
     body([
