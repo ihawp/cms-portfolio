@@ -18,7 +18,9 @@ const validate = require('../middleware/validate');
  * @description Select portfolio items by (filter)
  * @controller portfolioSelectController
  */
-portfolioRouter.get('/', portfolioSelectController); 
+portfolioRouter.get('/', 
+    portfolioSelectController
+); 
 
 // Wrote portfolioValidate for portfolio insertion queries, but I assume I will UPDATE posts by submitting all content anyway, so the validator will obviously carry.
 // There could be added validation for 'has the post actually changed?' but that would be frontend specific, and not worthwhile to run on the server (checking against database and all)
@@ -28,7 +30,12 @@ portfolioRouter.get('/', portfolioSelectController);
  * @middleware verifyJWT, portfolioValidate, validate
  * @controller portfolioInsertController
  */
-portfolioRouter.post('/', verifyJWT, portfolioValidate, validate, portfolioInsertController);
+portfolioRouter.post('/', 
+    verifyJWT, 
+    portfolioValidate, 
+    validate, 
+    portfolioInsertController
+);
 
 /**
  * @route PUT /portfolio/:id
@@ -36,7 +43,12 @@ portfolioRouter.post('/', verifyJWT, portfolioValidate, validate, portfolioInser
  * @middleware verifyJWT, portfolioValidate, validate
  * @controller portfolioUpdateController
  */
-portfolioRouter.put('/:id', verifyJWT, portfolioValidate, validate, portfolioUpdateController);
+portfolioRouter.put('/:id', 
+    verifyJWT, 
+    portfolioValidate, 
+    validate, 
+    portfolioUpdateController
+);
 
 /**
  * @route DELETE /portfolio/:id
@@ -44,6 +56,9 @@ portfolioRouter.put('/:id', verifyJWT, portfolioValidate, validate, portfolioUpd
  * @middleware verifyJWT
  * @controller portfolioDeleteController
  */
-portfolioRouter.delete('/:id', verifyJWT, portfolioDeleteController);
+portfolioRouter.delete('/:id', 
+    verifyJWT, 
+    portfolioDeleteController
+);
 
 module.exports = portfolioRouter;

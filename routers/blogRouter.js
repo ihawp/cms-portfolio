@@ -18,7 +18,9 @@ const validate = require('../middleware/validate');
  * @description Select blog posts by (filters)
  * @controller blogSelectController
  */
-blogRouter.get('/', blogSelectController);
+blogRouter.get('/', 
+    blogSelectController
+);
 
 /**
  * @route
@@ -26,7 +28,12 @@ blogRouter.get('/', blogSelectController);
  * @middleware verifyJWT
  * @controller blogInsertController
  */
-blogRouter.post('/', verifyJWT, blogValidate, validate, blogInsertController);
+blogRouter.post('/', 
+    verifyJWT, 
+    blogValidate, 
+    validate, 
+    blogInsertController
+);
 
 /**
  * @route
@@ -34,7 +41,12 @@ blogRouter.post('/', verifyJWT, blogValidate, validate, blogInsertController);
  * @middleware verifyJWT
  * @controller blogUpdateController
  */
-blogRouter.put('/:id', verifyJWT, blogValidate, validate, blogUpdateController);
+blogRouter.put('/:id', 
+    verifyJWT, 
+    blogValidate, 
+    validate, 
+    blogUpdateController
+);
 
 /**
  * @route DELETE /blog/:id
@@ -42,6 +54,9 @@ blogRouter.put('/:id', verifyJWT, blogValidate, validate, blogUpdateController);
  * @middleware verifyJWT
  * @controller blogDeleteController
  */
-blogRouter.delete('/:id', verifyJWT, blogDeleteController);
+blogRouter.delete('/:id', 
+    verifyJWT, 
+    blogDeleteController
+);
 
 module.exports = blogRouter;
