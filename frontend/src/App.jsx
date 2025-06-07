@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from '../pages/Home';
+import Blog from '../pages/Blog';
+import Portfolio from '../pages/Portfolio';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Error from '../pages/Error';
@@ -76,6 +78,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={ <Home /> } />
+        <Route path="/blog" element={ <Blog /> } />
+        <Route path="/portfolio" element={ <Portfolio /> } />
         <Route path="/login" element={ <Login /> } />
         <Route path="/register" element={ <Register /> } />
         <Route path="*" element={ <Error /> } />

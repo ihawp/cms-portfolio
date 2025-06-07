@@ -1,6 +1,9 @@
+import PortfolioForm from "../components/PortfolioForm";
+
 function Portfolio() {
     return <>
         Portfolio
+        <PortfolioForm />
     </>
 }
 
