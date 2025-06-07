@@ -79,36 +79,54 @@ function PortfolioForm() {
         }));
     };
 
-    const submitPortfolioEntry = async (event) => {
-        event.preventDefault();
+   const submitPortfolioEntry = async (event) => {
+    event.preventDefault();
 
-        const formData = new FormData();
+    const formData = new FormData();
 
-        Object.entries(form).forEach(([key, value]) => {
-            if (typeof value === 'object') {
+    Object.entries(form).forEach(([key, value]) => {
+        if (key === 'files') return; // skip files for now
+
+        if (Array.isArray(value)) {
+            // Check if array items are objects with a `value` property
+            if (value.length > 0 && typeof value[0] === 'object' && 'value' in value[0]) {
+                const simplifiedArray = value.map(item => item.value);
+                formData.append(key, JSON.stringify(simplifiedArray));
+            } else {
+                // Already flat array of strings/numbers
                 formData.append(key, JSON.stringify(value));
-            } else if (key !== 'files') {
-                formData.append(key, value);
             }
+        } else if (typeof value === 'object' && value !== null) {
+            formData.append(key, JSON.stringify(value));
+        } else {
+            formData.append(key, value);
+        }
+    });
+
+    // Append files individually
+    for (let i = 0; i < form.files.length; i++) {
+        formData.append('files', form.files[i]);
+    }
+
+    // Debug print to verify final structure
+    for (const [key, value] of formData.entries()) {
+        console.log(key, value);
+    }
+
+    try {
+        const res = await fetch('http://localhost:3000/api/v1/portfolio/', {
+            method: 'POST',
+            body: formData,
+            credentials: 'include'
         });
 
-        for (let i = 0; i < form.files.length; i++) {
-            formData.append('files', form.files[i]);
-        }
+        const data = await res.json();
+        console.log(data);
+    } catch (error) {
+        console.error('Submission error:', error);
+    }
+}
 
-        try {
-            const response = await fetch('http://localhost:3000/api/v1/portfolio/', {
-                method: 'POST',
-                body: formData,
-                credentials: 'include',
-            });
-
-            const result = await response.json();
-            console.log(result);
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
 
     return <form onSubmit={submitPortfolioEntry} encType="multipart/form-data" className='flex flex-col w-180'>
             <input type="text" name="title" id="title" placeholder="Title" value={form.title} onChange={handleChange} required />
@@ -123,7 +141,7 @@ function PortfolioForm() {
 
             <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Timeline" sectionName="timeline" form={form}/>
 
-            <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Challenges" sectionName="challenges" form={form}/>
+            <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Challenge and Solution" sectionName="challenges" form={form}/>
 
             <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Takeaways" sectionName="takeaways" form={form}/>
 

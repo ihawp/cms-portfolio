@@ -10,6 +10,17 @@ const portfolioInsertController = async (req, res) => {
     // create json array of the file locations after movement, make middleware that does this movement/verification.
     // assign that for database upload
 
+    console.log(req.files);
+
+    const wowt = [];
+
+    
+
+    req.files.forEach(item => {
+        wowt.push(item.filename);
+    });
+
+    console.log(wowt);
 
     req.body.files = [];
     

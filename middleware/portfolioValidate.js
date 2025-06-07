@@ -50,6 +50,8 @@ const portfolioValidate = [
         'skillsApplied.*', 
         'keyTasks.*',
         'takeaways.*'
+
+        , 'challenges.*'
     ])
         .isString()
         .isLength({ min: 1, max: 255 })
@@ -59,14 +61,14 @@ const portfolioValidate = [
         .isString()
         .isLength({ max: 1000 })
         .withMessage('Solution Summary must not be longer than 1000 characters.'),
-
+/*
     body([
         'challenges.*.challenge',
         'challenges.*.solve'
     ])
         .isString()
         .withMessage('Challenges content must be a string.')
-
+*/
 ];
 
 module.exports = portfolioValidate;

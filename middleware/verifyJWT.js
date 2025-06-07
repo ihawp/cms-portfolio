@@ -41,7 +41,7 @@ const verifyJWT = async (req, res, next) => {
     return next();
   } catch (err) {
     return res.status(403).json({
-      data: { loggedOut: false },
+      data: { loggedIn: false },
       error: 'Authentication token is invalid. Please log in again.',
     });
   }
