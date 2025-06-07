@@ -1,23 +1,25 @@
 import { useState } from 'react';
 import CMSInput from './CMSInput';
 
+const formOrig = {
+    title: '',
+    intro: '',
+    role: '',
+    timeline: [],
+    toolsUsed: [],
+    skillsApplied: [],
+    keyTasks: [],
+    challenges: [],
+    takeaways: [],
+    solutionSummary: '',
+    githubURL: '',
+    projectSite: '',
+    files: []
+}
+
 function PortfolioForm() {
 
-    const [form, setForm] = useState({
-        title: '',
-        intro: '',
-        role: '',
-        timeline: [],
-        toolsUsed: [],
-        skillsApplied: [],
-        keyTasks: [],
-        challenges: [],
-        takeaways: [],
-        solutionSummary: '',
-        githubURL: '',
-        projectSite: '',
-        files: []
-    });
+    const [form, setForm] = useState(formOrig);
 
     const handleChange = (e) => {
         const { name, value, id } = e.target;
@@ -122,6 +124,7 @@ function PortfolioForm() {
 
         const data = await res.json();
         console.log(data);
+        setForm(formOrig);
     } catch (error) {
         console.error('Submission error:', error);
     }

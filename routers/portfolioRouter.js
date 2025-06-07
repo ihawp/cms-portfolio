@@ -14,6 +14,7 @@ const portfolioValidate = require('../middleware/portfolioValidate');
 const validate = require('../middleware/validate');
 const upload = require('../middleware/useMulter');
 const parseJSONFields = require('../middleware/parseJSONFields');
+const verifyAndMoveUploads = require('../middleware/verifyUploadedFiles');
 
 /**
  * @route GET /portfolio
@@ -35,6 +36,7 @@ portfolioRouter.get('/',
 portfolioRouter.post('/', 
     verifyJWT,
     upload.array('files', 5),
+    verifyAndMoveUploads,
     parseJSONFields,
     portfolioValidate, 
     validate, 
