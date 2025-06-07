@@ -20,22 +20,33 @@ function PortfolioForm() {
   const handleChange = (e) => {
     const { name, value, id } = e.target;
     setForm(prev => {
-
-        console.log(prev);
-
-        if (typeof prev[name] === 'object') {
-            return { 
-                ...prev, 
-                [name]: { 
-                    ...prev[name], 
-                    [id]: value 
-                } 
-            }
-        } else {
-            return { ...prev, [name]: value }
-        }
-
+      if (Array.isArray(prev[name])) {
+        return {
+          ...prev,
+          [name]: prev[name].map(item =>
+            item.id === id ? { ...item, value } : item
+          )
+        };
+      } else {
+        return { ...prev, [name]: value };
+      }
     });
+  };
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    const { name } = e.target;
+
+    const lengthOfArray = form[name].length;
+    const newId = `${name}${lengthOfArray}`;
+
+    setForm(prev => ({
+      ...prev,
+      [name]: [
+        ...prev[name],
+        { id: newId, value: '' }
+      ]
+    }));
   };
 
   const handleFileChange = (e) => {
@@ -86,8 +97,27 @@ function PortfolioForm() {
         <input type="text" name="role" id="role" placeholder="Role" value={form.role} onChange={handleChange} />
         <textarea name="timeline" id="timeline" placeholder="Timeline" value={form.timeline} onChange={handleChange}></textarea>
         <textarea name="toolsUsed" id="toolsUsed" placeholder="Tools Used" value={form.toolsUsed} onChange={handleChange}></textarea>
-        <textarea name="skillsApplied" id="skillsApplied" placeholder="Skills Applied" value={form.skillsApplied['skillsApplied']} onChange={handleChange} maxLength={255}></textarea>
-        <textarea name="skillsApplied" id="skillsApplied2" placeholder="Skills Applied" value={form.skillsApplied['skillsApplied2']} onChange={handleChange} maxLength={255}></textarea>
+
+        <div aria-label="Add Skills Applied Section" className="flex flex-col">
+            <button type="button" onClick={handleAdd} name="skillsApplied" value="skillsApplied">
+                Add Skills Applied
+            </button>
+            
+            {form.skillsApplied.length > 0 ? form.skillsApplied.map((item, key) => {
+                return (
+                    <textarea
+                        key={item.id} // Use item.id as the key
+                        name="skillsApplied"
+                        id={item.id} // Unique id for each input
+                        placeholder="Skills Applied"
+                        value={item.value} // Bind to the value of the object in the array
+                        onChange={handleChange} // Handle the change for this specific item
+                        maxLength={255}
+                    ></textarea>
+                );
+            }) : null}
+        </div>
+
         <textarea name="keyTasks" id="keyTasks" placeholder="Key Tasks" value={form.keyTasks} onChange={handleChange}></textarea>
         <textarea name="challenges" id="challenges" placeholder="Challenges" value={form.challenges} onChange={handleChange}></textarea>
         <textarea name="takeaways" id="takeaways" placeholder="Takeaways" value={form.takeaways} onChange={handleChange}></textarea>
