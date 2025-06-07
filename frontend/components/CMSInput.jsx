@@ -3,7 +3,7 @@ function CMSInput({ handleAdd, handleClear, handleRemove, handleChange, sectionT
         <div className="flex flex-row items-center justify-between">
             <h2 className="text-xl">{sectionTitle}</h2>
             <div className="flex flex-row gap-2">
-                <button className="w-max p-2 bg-green-700 cursor-pointer rounded" type="button" onClick={handleAdd} name={sectionName} value={sectionName}>
+                <button className="w-max p-2 bg-green-700 cursor-pointer rounded" title={`Add a ${sectionTitle}`} type="button" onClick={handleAdd} name={sectionName} value={sectionName}>
                     + Add
                 </button>
                 <button className="w-max p-2 bg-red-600 cursor-pointer rounded" type="button" onClick={handleClear} name={sectionName} value={sectionName}>

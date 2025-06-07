@@ -13,6 +13,7 @@ const verifyJWT = require('../middleware/verifyJWT');
 const portfolioValidate = require('../middleware/portfolioValidate');
 const validate = require('../middleware/validate');
 const upload = require('../middleware/useMulter');
+const parseJSONFields = require('../middleware/parseJSONFields');
 
 /**
  * @route GET /portfolio
@@ -34,6 +35,7 @@ portfolioRouter.get('/',
 portfolioRouter.post('/', 
     verifyJWT,
     upload.array('files', 5),
+    parseJSONFields,
     portfolioValidate, 
     validate, 
     portfolioInsertController

@@ -44,10 +44,6 @@ const portfolioValidate = [
         .isArray()
         .withMessage('Must be an array'),
 
-    body('toolsUsed')
-        .isLength({ max: 10 })
-        .withMessage('10 Tools used maximum'),
-
     body([
         'timeline.*', 
         'toolsUsed.*', 

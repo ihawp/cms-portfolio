@@ -68,40 +68,46 @@ function PortfolioForm() {
         setForm(prev => ({
             ...prev,
             [name]: []
-        }))
+        }));
     }
 
     const handleFileChange = (e) => {
-        setForm(prev => ({ ...prev, files: e.target.files }));
+        console.log(e.target.files);
+        setForm(prev => ({ 
+            ...prev, 
+            files: e.target.files 
+        }));
     };
 
     const submitPortfolioEntry = async (event) => {
         event.preventDefault();
 
-        console.log(form);
-
         const formData = new FormData();
 
-        /*
-        // Append all non-file fields
         Object.entries(form).forEach(([key, value]) => {
-        if (key === 'files') return;
-        formData.append(key, value);
+            if (typeof value === 'object') {
+                formData.append(key, JSON.stringify(value));
+            } else if (key !== 'files') {
+                formData.append(key, value);
+            }
         });
 
-        // Append files from form.files
         for (let i = 0; i < form.files.length; i++) {
-        formData.append('files', form.files[i]);
+            formData.append('files', form.files[i]);
         }
-        */
-        try {
-        const response = await fetch('http://localhost:3000/api/v1/portfolio/', {
-            method: 'POST',
-            body: formData,
-            credentials: 'include',
-        });
 
-        const result = await response.json();
+        for (const [key, value] of formData.entries()) {
+            console.log(key, value);
+        }
+
+        try {
+            const response = await fetch('http://localhost:3000/api/v1/portfolio/', {
+                method: 'POST',
+                body: formData,
+                credentials: 'include',
+            });
+
+            const result = await response.json();
             console.log(result);
         } catch (error) {
             console.error('Error:', error);
