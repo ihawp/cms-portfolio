@@ -40,9 +40,9 @@ app.use('/api/v1', apiRouter);
  * @route GET /
  * @description Serve the frontend of the site.
  */
-app.use(express.static(path.join(__dirname, 'frontend')));
+app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 app.get(/.*/, (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });
 
 module.exports = app;

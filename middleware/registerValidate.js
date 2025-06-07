@@ -7,8 +7,8 @@ const registerValidate = [
     .normalizeEmail(),
 
   body('password')
-    .isLength({ min: 6 })
-    .withMessage('Password must be at least 6 characters'),
+    .isLength({ min: 1 })
+    .withMessage('Password must be at least 1 characters'),
 
   body('username')
     .notEmpty()

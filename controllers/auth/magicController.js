@@ -8,7 +8,7 @@ const { cookieOptions1h, cookieOptions1w } = require('../../utils/cookieOptions'
 
 const magicController = async (req, res) => {
 
-    const { id, key } = req.body;
+    const { id, key } = req.query;
 
     const authToken = {
         token: null,
@@ -30,7 +30,7 @@ const magicController = async (req, res) => {
     }
     
     // Use ACID principles (create a transaction).
-    const connection = pool.getConnection();
+    const connection = await pool.getConnection();
 
     try {
         await connection.beginTransaction();
@@ -44,8 +44,6 @@ const magicController = async (req, res) => {
     } catch (error) {
         await connection.rollback();
         return res.status(400).json({ success: false, error: 'Database error.', code: 'DATABASE_ERROR' });
-    } finally {
-        connection.release();
     }
 
     // Create JWT tokens.

@@ -5,7 +5,7 @@ const { insertPortfolioPost } = require('../../utils/portfolioQueries');
 const portfolioInsertController = async (req, res) => {
 
     // Attach eventual images array here (or maybe it will be attached earlier in middleware)
-    req.body.images = [];
+    console.log(req.files);
     
     try {
         // Pass req.body to avoid making redundant const variable for each form item

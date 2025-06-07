@@ -12,6 +12,7 @@ const portfolioDeleteController = require('../controllers/portfolio/portfolioDel
 const verifyJWT = require('../middleware/verifyJWT');
 const portfolioValidate = require('../middleware/portfolioValidate');
 const validate = require('../middleware/validate');
+const upload = require('../middleware/useMulter');
 
 /**
  * @route GET /portfolio
@@ -31,7 +32,8 @@ portfolioRouter.get('/',
  * @controller portfolioInsertController
  */
 portfolioRouter.post('/', 
-    verifyJWT, 
+    verifyJWT,
+    upload.array('files', 5),
     portfolioValidate, 
     validate, 
     portfolioInsertController

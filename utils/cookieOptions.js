@@ -24,5 +24,5 @@ const cookieOptions1w = {
 
 module.exports = {
     cookieOptions1h,
-    cookieOptions1w,
-};
+    cookieOptions1w
+}

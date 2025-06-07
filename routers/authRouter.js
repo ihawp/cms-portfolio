@@ -49,7 +49,7 @@ authRouter.post('/login',
  * @middleware magicValidate, validate
  * @controller magicController
  */
-authRouter.post('/magic',
+authRouter.get('/magic',
     magicValidate,
     validate,
     magicController

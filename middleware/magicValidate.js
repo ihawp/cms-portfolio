@@ -1,14 +1,15 @@
-const { body } = require('express-validator');
+const { query } = require('express-validator');
 
 const magicValidate = [
-  body('key')
+  query('key')
     .notEmpty()
+    .withMessage('Key must not be empty.')
     .isLength({ min: 64, max: 64 })
-    .withMessage('Key must not be empty.'),
+    .withMessage('Key must be exactly 64 characters long.'),
 
-  body('id')
+  query('id')
     .isInt()
-    .withMessage('ID must be an integer.'),
+    .withMessage('ID must be an integer.')
 ];
 
 module.exports = magicValidate;

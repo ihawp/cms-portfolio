@@ -37,7 +37,7 @@ const selectFrontendUserById = async (id) => {
     const [response] = await pool.execute(`
         SELECT username, email, 
         email_verified, pfp_url, 
-        account_created 
+        date_created 
         FROM accounts 
         WHERE id = ?`, 
         [id]

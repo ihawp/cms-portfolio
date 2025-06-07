@@ -1,4 +1,16 @@
 const validator = require('validator');
+const jwt = require('jsonwebtoken');
+
+const asyncVerifyJWT = (token, secret) => {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, secret, (err, decoded) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(decoded);
+    });
+  });
+};
 
 const verifyJWT = async (req, res, next) => {
   const shortToken = req.signedCookies['jwt'] || '';
