@@ -32,6 +32,8 @@ const selectPortfolioPostsByAmount = async (amountOfPosts) => {
  */
 const insertPortfolioPost = async (d) => {
 
+    console.log(d);
+
     await pool.execute(`
         INSERT INTO portfolio
         (title, intro, role,
@@ -44,11 +46,16 @@ const insertPortfolioPost = async (d) => {
                 ?, ?, ?, ?, ?, ?)
         `,
         [
-            d.title, d.intro, d.role, d.timeline, 
-            d.toolsUsed, d.skillsApplied, 
-            d.keyTasks, d.challenges, 
-            d.takeaways, d.solutionSummary, 
-            d.githubURL, d.projectSite, d.files
+            d.title, d.intro, d.role, 
+            JSON.stringify(d.timeline), 
+            JSON.stringify(d.toolsUsed), 
+            JSON.stringify(d.skillsApplied), 
+            JSON.stringify(d.keyTasks), 
+            JSON.stringify(d.challenges), 
+            JSON.stringify(d.takeaways), 
+            d.solutionSummary, 
+            d.githubURL, d.projectSite, 
+            JSON.stringify(d.files)
         ]
     );
 }

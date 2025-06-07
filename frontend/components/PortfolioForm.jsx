@@ -96,10 +96,6 @@ function PortfolioForm() {
             formData.append('files', form.files[i]);
         }
 
-        for (const [key, value] of formData.entries()) {
-            console.log(key, value);
-        }
-
         try {
             const response = await fetch('http://localhost:3000/api/v1/portfolio/', {
                 method: 'POST',

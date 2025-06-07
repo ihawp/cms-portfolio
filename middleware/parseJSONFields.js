@@ -1,6 +1,5 @@
 function parseJSONFields(req, res, next) {
   const fieldsToParse = ['timeline', 'toolsUsed', 'skillsApplied', 'keyTasks', 'challenges', 'takeaways'];
-  console.log(req.body);
   fieldsToParse.forEach(field => {
     try {
       req.body[field] = JSON.parse(req.body[field]);
