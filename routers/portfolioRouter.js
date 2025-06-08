@@ -30,7 +30,7 @@ portfolioRouter.get('/',
 /**
  * @route POST /portfolio
  * @description INSERT a new portfolio item to the DB.
- * @middleware verifyJWT, portfolioValidate, validate
+ * @middleware 
  * @controller portfolioInsertController
  */
 portfolioRouter.post('/', 
@@ -38,21 +38,24 @@ portfolioRouter.post('/',
     upload.array('files', 5),
     verifyAndMoveUploads,
     parseJSONFields,
-    portfolioValidate, 
-    validate, 
+    portfolioValidate,
+    validate,
     portfolioInsertController
 );
 
 /**
  * @route PUT /portfolio/:id
  * @description Update a portfolio post by the provided ID.
- * @middleware verifyJWT, portfolioValidate, validate
+ * @middleware 
  * @controller portfolioUpdateController
  */
 portfolioRouter.put('/:id', 
-    verifyJWT, 
-    portfolioValidate, 
-    validate, 
+    verifyJWT,
+    upload.array('files', 5),
+    verifyAndMoveUploads,
+    parseJSONFields,
+    portfolioValidate,
+    validate,
     portfolioUpdateController
 );
 

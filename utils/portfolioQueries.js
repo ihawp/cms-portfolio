@@ -22,6 +22,18 @@ const selectPortfolioPostsByAmount = async (amountOfPosts) => {
     )
 }
 
+/* use * for now */
+const selectPortfolioPosts = async () => {
+    const [response] = await pool.execute(`
+        SELECT *
+        FROM portfolio
+        LIMIT 25
+        `,
+        []
+    );
+    return response;
+}
+
 // #######################################################################
 // INSERT
 
@@ -122,6 +134,8 @@ const deletePortfolioPostById = async (portfolioPostId) => {
 
 module.exports = {
     selectPortfolioPostById,
+    selectPortfolioPostsByAmount,
+    selectPortfolioPosts,
 
     insertPortfolioPost,
 

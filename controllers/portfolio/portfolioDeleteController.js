@@ -2,8 +2,8 @@ const { deletePortfolioPostById } = require('../../utils/portfolioQueries');
 
 const portfolioDeleteController = async (req, res) => {
 
-    const { id } = req.query;
-    
+    const { id } = req.params;
+
     // Should also delete any affiliated media from the appropriate directory.
 
     try {
