@@ -41,22 +41,32 @@ function PortfolioForm() {
     const { portfolioItems, setPortfolioItems } = useContext(PortfolioContext);
 
     const handleChange = (e) => {
-        const { name, value, id } = e.target;
-        setForm(prev => {
-            if (Array.isArray(prev[name])) {
-                return {
-                ...prev,
-                [name]: prev[name].map(item =>
-                    item.id === id ? { ...item, value } : item
-                )
-                };
-            } else {
-                return { ...prev, [name]: value };
+        const { name, id, value, dataset } = e.target;
+        const field = dataset.type;
+
+        setForm((prevForm) => {
+            const currentField = prevForm[name];
+
+            if (Array.isArray(currentField)) {
+            return {
+                ...prevForm,
+                [name]: currentField.map((item) =>
+                item.id === id
+                    ? { ...item, [field || "value"]: value }
+                    : item
+                ),
+            };
             }
+
+            return {
+                ...prevForm,
+                [name]: value,
+            };
         });
     };
 
-    const handleAdd = (e) => {
+
+    const handleAdd = (e, template) => {
         e.preventDefault();
         const { name } = e.target;
 
@@ -67,26 +77,10 @@ function PortfolioForm() {
             ...prev,
             [name]: [
                 ...prev[name],
-                { id: newId, value: '' }
+                { id: newId, ...template }
             ]
         }));
     };
-
-    const challengeAdd = (e) => {
-        e.preventDefault();
-        const { name } = e.target;
-
-        const lengthOfArray = form[name].length;
-        const newId = `${name}${lengthOfArray}`;
-
-        setForm(prev => ({
-            ...prev,
-            [name]: [
-                ...prev[name],
-                { id: newId, challenge: '', solution: '' }
-            ]
-        }));
-    }
 
     const handleRemove = (e, id) => {
         e.preventDefault();
@@ -186,35 +180,11 @@ function PortfolioForm() {
                 : current.filter(v => v !== value)
             };
         });
-
-        console.log(form);
     };
 
     const resetForm = (e) => {
         e.preventDefault();
         setForm(formOrig);
-    }
-
-    const challengeChange = (e) => {
-
-        const { name, value, id } = e.target;
-        const dataType = e.target.dataset.type;
-
-        setForm(prev => {
-            if (Array.isArray(prev[name])) {
-                return {
-                ...prev,
-                [name]: prev[name].map(item =>
-                    item.id === id ? { ...item, [dataType]: value } : item
-                )
-                };
-            } else {
-                return { ...prev, [name]: { ...prev[name], [dataType]: value } };
-            }
-        });
-
-        console.log(form);
-
     }
 
     return <form onSubmit={submitPortfolioEntry} encType="multipart/form-data" className='flex flex-col w-180 bg-[#222] p-8 rounded-[8px]'>
@@ -273,15 +243,15 @@ function PortfolioForm() {
         <ToolsUsed handleCheckboxUpdate={handleCheckboxUpdate} selectedTools={form.toolsUsed} />
 
         <div className="flex flex-col gap-4 mb-8">
-                <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Skills Applied" sectionTitleSingle="Skill Applied" sectionName="skillsApplied" form={form}/>
+                <CMSInput handleAdd={(e) => handleAdd(e, { value: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Skills Applied" sectionTitleSingle="Skill Applied" sectionName="skillsApplied" form={form}/>
 
-                <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Key Tasks" sectionTitleSingle="Key Task" sectionName="keyTasks" form={form}/>
+                <CMSInput handleAdd={(e) => handleAdd(e, { value: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Key Tasks" sectionTitleSingle="Key Task" sectionName="keyTasks" form={form}/>
 
-                <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Timeline" sectionName="timeline" form={form}/>
+                <CMSInput handleAdd={(e) => handleAdd(e, { value: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Timeline" sectionName="timeline" form={form}/>
 
-                <DualInput handleAdd={challengeAdd} handleChange={challengeChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Challenge and Solution" sectionName="challenges" form={form}/>
+                <DualInput dataTypes={["challenge", "solution"]} handleAdd={(e) => handleAdd(e, { challenge: '', solution: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Challenge and Solution" sectionName="challenges" form={form}/>
 
-                <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Takeaways" sectionTitleSingle="Takeaway" sectionName="takeaways" form={form}/>
+                <CMSInput handleAdd={(e) => handleAdd(e, { value: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Takeaways" sectionTitleSingle="Takeaway" sectionName="takeaways" form={form}/>
         </div>
 
         <div className="flex flex-row gap-2">

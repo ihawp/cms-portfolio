@@ -1,5 +1,6 @@
-function DualInput({ handleAdd, handleClear, handleRemove, handleChange, sectionTitle, sectionTitleSingle, sectionName, form }) {
+function DualInput({ handleAdd, handleClear, handleRemove, handleChange, sectionTitle, sectionName, form, dataTypes }) {
     return <div className="flex flex-col rounded-[8px]">
+        
         <div className="flex flex-row items-center justify-between">
             <h2 className="">{sectionTitle}</h2>
             <div className="flex flex-row gap-2">
@@ -14,9 +15,9 @@ function DualInput({ handleAdd, handleClear, handleRemove, handleChange, section
         
         <div>
             {form[sectionName].length > 0 ? form[sectionName].map((item, key) => {
-                return <div className='flex flex-row items-center'>
+                return <div className='flex flex-row items-center mt-2' key={key}>
 
-                    <div className="flex flex-col w-full gap-2">
+                    <div className="flex flex-col w-full gap-1">
                     {/* Challenge */}
                         <input 
                             name={sectionName}
@@ -24,7 +25,7 @@ function DualInput({ handleAdd, handleClear, handleRemove, handleChange, section
                             id={item.id} 
                             className="border border-gray-400 px-3 py-2 rounded-lg" 
                             type="text" 
-                            data-type="challenge"
+                            data-type={dataTypes[0]}
                             value={item.challenge} 
                             placeholder="Challenge" 
                         />
@@ -36,7 +37,7 @@ function DualInput({ handleAdd, handleClear, handleRemove, handleChange, section
                             id={item.id} 
                             className="border border-gray-400 px-3 py-2 rounded-lg" 
                             type="text" 
-                            data-type="solution"
+                            data-type={dataTypes[1]}
                             value={item.solution} 
                             placeholder="Solution" 
                         ></textarea>

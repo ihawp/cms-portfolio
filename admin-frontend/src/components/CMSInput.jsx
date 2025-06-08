@@ -22,6 +22,7 @@ function CMSInput({ handleAdd, handleClear, handleRemove, handleChange, sectionT
                         value={item.value} // Bind to the value of the object in the array
                         onChange={handleChange} // Handle the change for this specific item
                         maxLength={255}
+                        data-type="value"
                     />
                     <button 
                         type="button"
