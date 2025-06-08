@@ -47,17 +47,18 @@ const portfolioValidate = [
         .withMessage('Must be an array'),
 
     body([
-        'challenges.*'
+        'challenges.*',
+        'timeline.*'
     ])
+        .optional()
         .custom(value => {
             if (typeof value !== 'object' || Array.isArray(value) || value === null) {
-            throw new Error('Each item must be a non-null object');
+                throw new Error('Each item must be a non-null object');
             }
             return true;
         }),
 
     body([
-        'timeline.*', 
         'toolsUsed.*', 
         'skillsApplied.*', 
         'keyTasks.*',
@@ -73,14 +74,7 @@ const portfolioValidate = [
         .isString()
         .isLength({ max: 1000 })
         .withMessage('Solution Summary must not be longer than 1000 characters.'),
-/*
-    body([
-        'challenges.*.challenge',
-        'challenges.*.solution'
-    ])
-        .isString()
-        .withMessage('Challenges content must be a string.')
-*/
+
 ];
 
 module.exports = portfolioValidate;

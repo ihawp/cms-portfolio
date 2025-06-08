@@ -1,4 +1,6 @@
-function DualInput({ handleAdd, handleClear, handleRemove, handleChange, sectionTitle, sectionName, form, dataTypes }) {
+import upperCaseFirst from "../../utils/upperCaseFirst";
+
+function MultiInput({ handleAdd, handleClear, handleRemove, handleChange, sectionTitle, sectionName, form, dataTypes }) {
     return <div className="flex flex-col rounded-[8px]">
         
         <div className="flex flex-row items-center justify-between">
@@ -18,29 +20,19 @@ function DualInput({ handleAdd, handleClear, handleRemove, handleChange, section
                 return <div className='flex flex-row items-center mt-2' key={key}>
 
                     <div className="flex flex-col w-full gap-1">
-                    {/* Challenge */}
-                        <input 
-                            name={sectionName}
-                            onChange={handleChange} 
-                            id={item.id} 
-                            className="border border-gray-400 px-3 py-2 rounded-lg" 
-                            type="text" 
-                            data-type={dataTypes[0]}
-                            value={item.challenge} 
-                            placeholder="Challenge" 
-                        />
-                        
-                        {/* Solution */}
-                        <textarea 
-                            name={sectionName} 
-                            onChange={handleChange} 
-                            id={item.id} 
-                            className="border border-gray-400 px-3 py-2 rounded-lg" 
-                            type="text" 
-                            data-type={dataTypes[1]}
-                            value={item.solution} 
-                            placeholder="Solution" 
-                        ></textarea>
+                        {dataTypes.map((type, i) => (
+                            <input
+                                key={type + i}
+                                name={sectionName}
+                                onChange={handleChange}
+                                id={item.id}
+                                className="border border-gray-400 px-3 py-2 rounded-lg"
+                                type="text"
+                                data-type={type}
+                                value={item[type] || ''}
+                                placeholder={upperCaseFirst(type)}
+                            />
+                        ))}
                     </div>
                     <button 
                         type="button"
@@ -57,4 +49,4 @@ function DualInput({ handleAdd, handleClear, handleRemove, handleChange, section
     </div>
 }
 
-export default DualInput;
+export default MultiInput;

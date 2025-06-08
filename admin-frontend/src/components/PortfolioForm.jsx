@@ -1,8 +1,7 @@
 import { useState, useContext } from 'react';
-import CMSInput from './CMSInput';
 import ToolsUsed from './toolsUsed';
 import { PortfolioContext } from '../providers/PortfolioProvider';
-import DualInput from './DualInput';
+import MultiInput from './MultiInput';
 
 /* For resetting the form upon submit or reset */
 const formOrig = {
@@ -221,7 +220,7 @@ function PortfolioForm() {
 
         <label htmlFor="solutionSummary" className="flex flex-col mb-8">
                 <span className='text-xs mb-2'>Solution Summary:</span>
-                <textarea name="solutionSummary" id="solutionSummary" placeholder="Solution Summary" value={form.solutionSummary} onChange={handleChange} maxLength={255} className="h-[140px] border-solid border border-gray-500 rounded-lg px-3 py-2" ></textarea>
+                <textarea name="solutionSummary" id="solutionSummary" placeholder="Solution Summary" value={form.solutionSummary} onChange={handleChange} maxLength={1000} className="h-[140px] border-solid border border-gray-500 rounded-lg px-3 py-2" ></textarea>
         </label>
 
         <label htmlFor="files" className="relative mb-8">
@@ -243,15 +242,15 @@ function PortfolioForm() {
         <ToolsUsed handleCheckboxUpdate={handleCheckboxUpdate} selectedTools={form.toolsUsed} />
 
         <div className="flex flex-col gap-4 mb-8">
-                <CMSInput handleAdd={(e) => handleAdd(e, { value: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Skills Applied" sectionTitleSingle="Skill Applied" sectionName="skillsApplied" form={form}/>
+                <MultiInput dataTypes={["value"]} handleAdd={(e) => handleAdd(e, { value: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Skills Applied" sectionTitleSingle="Skill Applied" sectionName="skillsApplied" form={form}/>
 
-                <CMSInput handleAdd={(e) => handleAdd(e, { value: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Key Tasks" sectionTitleSingle="Key Task" sectionName="keyTasks" form={form}/>
+                <MultiInput dataTypes={["value"]} handleAdd={(e) => handleAdd(e, { value: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Key Tasks" sectionTitleSingle="Key Task" sectionName="keyTasks" form={form}/>
 
-                <CMSInput handleAdd={(e) => handleAdd(e, { value: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Timeline" sectionName="timeline" form={form}/>
+                <MultiInput dataTypes={["date", "title", "descriptor"]} handleAdd={(e) => handleAdd(e, { date: '', title: '', descriptor: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Timeline" sectionName="timeline" form={form}/>
 
-                <DualInput dataTypes={["challenge", "solution"]} handleAdd={(e) => handleAdd(e, { challenge: '', solution: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Challenge and Solution" sectionName="challenges" form={form}/>
+                <MultiInput dataTypes={["challenge", "solution"]} handleAdd={(e) => handleAdd(e, { challenge: '', solution: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Challenge and Solution" sectionName="challenges" form={form}/>
 
-                <CMSInput handleAdd={(e) => handleAdd(e, { value: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Takeaways" sectionTitleSingle="Takeaway" sectionName="takeaways" form={form}/>
+                <MultiInput dataTypes={["value"]} handleAdd={(e) => handleAdd(e, { value: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Takeaways" sectionTitleSingle="Takeaway" sectionName="takeaways" form={form}/>
         </div>
 
         <div className="flex flex-row gap-2">
