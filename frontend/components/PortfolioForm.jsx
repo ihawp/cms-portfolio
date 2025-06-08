@@ -151,10 +151,46 @@ function PortfolioForm() {
 
 
 
-    return <form onSubmit={submitPortfolioEntry} encType="multipart/form-data" className='flex flex-col w-180'>
-            <input type="text" name="title" id="title" placeholder="Title" value={form.title} onChange={handleChange} required />
-            <input type="text" name="intro" id="intro" placeholder="Intro" value={form.intro} onChange={handleChange} required />
-            <input type="text" name="role" id="role" placeholder="Role" value={form.role} onChange={handleChange} />
+    return <form onSubmit={submitPortfolioEntry} encType="multipart/form-data" className='flex flex-col w-180 bg-[#222] p-8'>
+
+            <div className="flex flex-row flex-wrap gap-4">
+                <label htmlFor="title" className="flex flex-col flex-grow-1">
+                    <span>Title:</span>
+                    <input type="text" name="title" id="title" placeholder="Title" value={form.title} onChange={handleChange} required />
+                </label>     
+
+                <label htmlFor="role" className="flex flex-col flex-grow-1">
+                    <span>Role:</span>
+                    <input type="text" name="role" id="role" placeholder="Role" value={form.role} onChange={handleChange} required />
+                </label>
+
+                <label htmlFor="githubURL" className="flex flex-col flex-grow-1">
+                    <span>GitHub URL:</span>
+                    <input type="url" name="githubURL" id="githubURL" placeholder="GitHub URL" value={form.githubURL} onChange={handleChange} maxLength={1000} />
+                </label>  
+
+                <label htmlFor="projectSite" className="flex flex-col flex-grow-1">
+                    <span>Site URL (or YouTube video):</span>
+                    <input type="url" name="projectSite" id="projectSite" placeholder="Project Site" value={form.projectSite} onChange={handleChange} maxLength={1000} />
+                </label>  
+            </div>
+
+            <label htmlFor="files">
+                Files:
+                <input type="file" name="files" id="files" multiple onChange={handleFileChange} className='cursor-pointer' />
+            </label>
+
+            <label htmlFor="intro" className="flex flex-col">
+                <span>Intro:</span>
+                <textarea type="text" name="intro" id="intro" placeholder="Intro" value={form.intro} onChange={handleChange} required></textarea>
+            </label>
+
+            <label htmlFor="solutionSummary" className="flex flex-col">
+                <span>Solution Summary:</span>
+                <textarea name="solutionSummary" id="solutionSummary" placeholder="Solution Summary" value={form.solutionSummary} onChange={handleChange} maxLength={255} className="h-[80px]"></textarea>
+            </label>  
+
+            <ToolsUsed handleCheckboxUpdate={handleCheckboxUpdate} />
 
             <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Skills Applied" sectionName="skillsApplied" form={form}/>
 
@@ -166,15 +202,7 @@ function PortfolioForm() {
 
             <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Takeaways" sectionName="takeaways" form={form}/>
 
-            <ToolsUsed handleCheckboxUpdate={handleCheckboxUpdate} />
-
-            <textarea name="solutionSummary" id="solutionSummary" placeholder="Solution Summary" value={form.solutionSummary} onChange={handleChange}></textarea>
-            <input type="url" name="githubURL" id="githubURL" placeholder="GitHub URL" value={form.githubURL} onChange={handleChange} />
-            <input type="url" name="projectSite" id="projectSite" placeholder="Project Site" value={form.projectSite} onChange={handleChange} />
-
-            <input type="file" name="files" id="files" multiple onChange={handleFileChange} />
-
-            <input type="submit" value="Submit" className="cursor-pointer" />
+            <input type="submit" value="Submit" className="cursor-pointer bg-green-500 rounded-[8px]" />
         </form>
 }
 

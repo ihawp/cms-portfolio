@@ -1,5 +1,5 @@
 function CMSInput({ handleAdd, handleClear, handleRemove, handleChange, sectionTitle, sectionName, form }) {
-    return <div className="flex flex-col bg-[#222] bw-1 bs-solid my-1 p-4 rounded-[8px]">
+    return <div className="flex flex-col rounded-[8px]">
         <div className="flex flex-row items-center justify-between">
             <h2 className="text-xl">{sectionTitle}</h2>
             <div className="flex flex-row gap-2">
