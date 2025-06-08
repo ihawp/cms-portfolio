@@ -1,13 +1,31 @@
 import ToolsUsedItem from "./ToolsUsedItem";
 
-function ToolsUsed({ handleCheckboxUpdate }) {
+function ToolsUsed({ handleCheckboxUpdate, selectedTools }) {
+    const tools = [
+        'faReact', 
+        'faNodeJs', 
+        'faJSSquare', 
+        'faHtml5', 
+        'faCss3Alt',
+        'faWordpress',
+        'faPhp',
+    ];
 
-    return <>
-        <ToolsUsedItem name="faReact" handleCheckboxUpdate={handleCheckboxUpdate} />
-        <ToolsUsedItem name="faNodeJs" handleCheckboxUpdate={handleCheckboxUpdate} />
-        <ToolsUsedItem name="faJSSquare" handleCheckboxUpdate={handleCheckboxUpdate} />
-    </>
-
+    return (
+        <div className="flex flex-col mb-8 gap-4">
+            <h3>Tools Used:</h3>
+            <div className="flex flex-wrap gap-2">
+                {tools.map(tool => (
+                    <ToolsUsedItem
+                    key={tool}
+                    name={tool}
+                    selected={selectedTools.includes(tool)}
+                    handleCheckboxUpdate={handleCheckboxUpdate}
+                    />
+                ))}
+            </div>
+        </div>
+    );
 }
 
 export default ToolsUsed;

@@ -1,7 +1,7 @@
 function CMSInput({ handleAdd, handleClear, handleRemove, handleChange, sectionTitle, sectionName, form }) {
     return <div className="flex flex-col rounded-[8px]">
         <div className="flex flex-row items-center justify-between">
-            <h2 className="text-xl">{sectionTitle}</h2>
+            <h2 className="">{sectionTitle}</h2>
             <div className="flex flex-row gap-2">
                 <button className="w-max p-2 bg-green-700 cursor-pointer rounded" title={`Add a ${sectionTitle}`} type="button" onClick={handleAdd} name={sectionName} value={sectionName}>
                     + Add
@@ -12,7 +12,7 @@ function CMSInput({ handleAdd, handleClear, handleRemove, handleChange, sectionT
             </div>
         </div>
         
-        <div className="my-4">
+        <div>
             {form[sectionName].length > 0 ? form[sectionName].map((item, key) => {
                 return <div className="flex flex-row items-center mt-2" key={item.id}>
                     <textarea className='p-1 w-full h-[84px]'
@@ -27,7 +27,7 @@ function CMSInput({ handleAdd, handleClear, handleRemove, handleChange, sectionT
                         type="button"
                         name={sectionName}
                         onClick={(e) => handleRemove(e, item.id)}
-                        className="bg-red-600 cursor-pointer rounded-[8px] p-2 h-max w-[130px] ml-6"
+                        className="bg-red-600 cursor-pointer rounded-sm p-2 h-max w-[130px] ml-6"
                     >
                         - Remove
                     </button>
