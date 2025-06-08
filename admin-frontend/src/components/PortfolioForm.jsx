@@ -142,9 +142,9 @@ function PortfolioForm() {
         });
 
         // Append files individually
-        for (let i = 0; i < form.files.length; i++) {
-            formData.append('files', form.files[i]);
-        }
+        form.files.forEach(item => {
+            formData.append('files', item);
+        });
 
         // Debug print to verify final structure
         for (const [key, value] of formData.entries()) {
