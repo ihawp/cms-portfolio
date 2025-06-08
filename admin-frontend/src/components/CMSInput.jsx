@@ -1,4 +1,6 @@
-function CMSInput({ handleAdd, handleClear, handleRemove, handleChange, sectionTitle, sectionName, form }) {
+import { FaTrash } from 'react-icons/fa';
+
+function CMSInput({ handleAdd, handleClear, handleRemove, handleChange, sectionTitle, sectionTitleSingle, sectionName, form }) {
     return <div className="flex flex-col rounded-[8px]">
         <div className="flex flex-row items-center justify-between">
             <h2 className="">{sectionTitle}</h2>
@@ -6,8 +8,8 @@ function CMSInput({ handleAdd, handleClear, handleRemove, handleChange, sectionT
                 <button className="w-max p-2 bg-green-700 cursor-pointer rounded" title={`Add a ${sectionTitle}`} type="button" onClick={handleAdd} name={sectionName} value={sectionName}>
                     + Add
                 </button>
-                <button className="w-max p-2 bg-red-600 cursor-pointer rounded" type="button" onClick={handleClear} name={sectionName} value={sectionName}>
-                    X Clear All
+                <button className="w-max p-2 bg-red-500 cursor-pointer rounded flex gap-2" type="button" onClick={handleClear} name={sectionName} value={sectionName}>
+                    Clear All
                 </button>
             </div>
         </div>
@@ -15,21 +17,22 @@ function CMSInput({ handleAdd, handleClear, handleRemove, handleChange, sectionT
         <div>
             {form[sectionName].length > 0 ? form[sectionName].map((item, key) => {
                 return <div className="flex flex-row items-center mt-2" key={item.id}>
-                    <textarea className='p-1 w-full h-[84px]'
+                    <input className='p-1 w-full border border-gray-400 rounded-lg px-3 py-2'
                         name={sectionName}
                         id={item.id} // Unique id for each input
-                        placeholder={sectionTitle}
+                        placeholder={sectionTitleSingle || sectionTitle}
                         value={item.value} // Bind to the value of the object in the array
                         onChange={handleChange} // Handle the change for this specific item
                         maxLength={255}
-                    ></textarea>
+                    />
                     <button 
                         type="button"
                         name={sectionName}
                         onClick={(e) => handleRemove(e, item.id)}
-                        className="bg-red-600 cursor-pointer rounded-sm p-2 h-max w-[130px] ml-6"
+                        className="cursor-pointer rounded-lg p-2 ml-2 w-[40px] h-[40px] text-center hover:border-gray-400 border border-transparent"
+                        title="Remove"
                     >
-                        - Remove
+                        -
                     </button>
                 </div>
             }) : null}

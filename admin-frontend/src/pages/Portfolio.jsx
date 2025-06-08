@@ -11,7 +11,7 @@ function Portfolio() {
     return <main className='flex flex-col'>
         
         <header className="w-full my-4 px-3 flex items-center justify-between">
-            <h1 className="text-xl">Portfolio Table:</h1>
+            <h1 className="text-xl">{addVisible ? 'Add Portfolio Item:' : 'Portfolio Table:'}</h1>
 
             <nav aria-label="Portfolio Table Navigation">
                 <ul className='flex gap-3 justify-end'>

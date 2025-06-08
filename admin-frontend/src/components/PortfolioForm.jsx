@@ -234,19 +234,25 @@ function PortfolioForm() {
         <ToolsUsed handleCheckboxUpdate={handleCheckboxUpdate} selectedTools={form.toolsUsed} />
 
         <div className="flex flex-col gap-4 mb-8">
-                <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Skills Applied" sectionName="skillsApplied" form={form}/>
+                <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Skills Applied" sectionTitleSingle="Skill Applied" sectionName="skillsApplied" form={form}/>
 
-                <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Key Tasks" sectionName="keyTasks" form={form}/>
+                <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Key Tasks" sectionTitleSingle="Key Task" sectionName="keyTasks" form={form}/>
 
                 <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Timeline" sectionName="timeline" form={form}/>
 
                 <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Challenge and Solution" sectionName="challenges" form={form}/>
 
-                <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Takeaways" sectionName="takeaways" form={form}/>
+                <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Takeaways" sectionTitleSingle="Takeaway" sectionName="takeaways" form={form}/>
+        </div>
+
+        <div>
+            challenges
+
+            
         </div>
 
         <div className="flex flex-row gap-2">
-                <input type="button" value="Reset" onClick={resetForm} className="w-[200px] cursor-pointer hover:bg-red-600 rounded-lg h-[40px]" />
+                <input type="button" value="Reset" onClick={resetForm} className="w-[200px] cursor-pointer hover:bg-red-500 border-red-500 border rounded-lg h-[40px]" />
                 <input type="submit" value="Submit" className="w-full cursor-pointer bg-green-600 rounded-lg h-[40px]" />
         </div>
     </form>
