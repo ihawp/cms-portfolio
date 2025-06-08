@@ -1,4 +1,4 @@
-import upperCaseFirst from "../../utils/upperCaseFirst";
+import upperCaseFirst from "../utils/upperCaseFirst";
 
 function MultiInput({ handleAdd, handleClear, handleRemove, handleChange, sectionTitle, sectionName, form, dataTypes }) {
     return <div className="flex flex-col rounded-[8px]">

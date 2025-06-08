@@ -37,6 +37,12 @@ app.use('/auth', authRouter);
 app.use('/api/v1', apiRouter);
 
 /**
+ * @route /images
+ * @description Retrieve images from verified_images via URL.
+ */
+app.use('/images', express.static('verified_uploads'));
+
+/**
  * @route GET /
  * @description Serve the admin portal.
  */

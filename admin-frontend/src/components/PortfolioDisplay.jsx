@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { PortfolioContext } from '../providers/PortfolioProvider';
 import { FaTrash } from 'react-icons/fa';
 
-function PortfolioDisplay() {
+function PortfolioDisplay({ changeUpdateForm }) {
 
     const { portfolioItems, setPortfolioItems } = useContext(PortfolioContext);
 
@@ -64,7 +64,7 @@ function PortfolioDisplay() {
                 return <tr className={bcl} key={item.id}>
                     <td className={bcl}>{item.id}</td>
                     <td className={bcl}>
-                        <button className="flex gap-2 cursor-pointer hover:bg-green-600 rounded-lg p-2">Update</button>
+                        <button className="flex gap-2 cursor-pointer hover:bg-green-600 rounded-lg p-2" onClick={(e) => changeUpdateForm(e, item.id)}>Update</button>
                     </td>
                     <td className={bcl}>
                         <button className="flex gap-2 cursor-pointer hover:bg-red-600 rounded-lg p-2" onClick={(e) => deleteItem(e, item.id)}><FaTrash size={13} className='self-center' /> Delete</button>

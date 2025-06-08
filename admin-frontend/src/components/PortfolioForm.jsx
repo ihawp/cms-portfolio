@@ -3,23 +3,6 @@ import ToolsUsed from './toolsUsed';
 import { PortfolioContext } from '../providers/PortfolioProvider';
 import MultiInput from './MultiInput';
 
-/* For resetting the form upon submit or reset */
-const formOrig = {
-    title: '',
-    intro: '',
-    role: '',
-    timeline: [],
-    toolsUsed: [],
-    skillsApplied: [],
-    keyTasks: [],
-    challenges: [],
-    takeaways: [],
-    solutionSummary: '',
-    githubURL: '',
-    projectSite: '',
-    files: []
-}
-
 /*
 
     Okay so currently we use a data model to 'begin' our data
@@ -33,9 +16,9 @@ const formOrig = {
 
 */
 
-function PortfolioForm() {
+function PortfolioForm({ portfolioFormOrig }) {
 
-    const [form, setForm] = useState(formOrig);
+    const [form, setForm] = useState(portfolioFormOrig);
 
     const { portfolioItems, setPortfolioItems } = useContext(PortfolioContext);
 
@@ -125,6 +108,8 @@ function PortfolioForm() {
         Object.entries(form).forEach(([key, value]) => {
             if (key === 'files') return; // skip files for now
 
+            console.log(key, value);
+
             if (Array.isArray(value)) {
                 // Check if array items are objects with a `value` property
                 if (value.length > 0 && typeof value[0] === 'object' && 'value' in value[0]) {
@@ -160,7 +145,10 @@ function PortfolioForm() {
 
             const data = await res.json();
             console.log(data);
-            setForm(formOrig);
+            setForm(portfolioFormOrig);
+
+            // should add returned 'post' to portfolioItems with setPortfolioItems()
+            // so that it is immediatley visible in the portfolio table.
         } catch (error) {
             console.error('Submission error:', error);
         }
@@ -183,7 +171,7 @@ function PortfolioForm() {
 
     const resetForm = (e) => {
         e.preventDefault();
-        setForm(formOrig);
+        setForm(portfolioFormOrig);
     }
 
     return <form onSubmit={submitPortfolioEntry} encType="multipart/form-data" className='flex flex-col w-180 bg-[#222] p-8 rounded-[8px]'>

@@ -35,10 +35,10 @@ const portfolioValidate = [
         .withMessage('Should be a string with a maximum length of 255 characters.'),
 
     body([
-        'timeline', 
-        'toolsUsed', 
-        'skillsApplied', 
-        'keyTasks', 
+        'timeline',
+        'toolsUsed',
+        'skillsApplied',
+        'keyTasks',
         'challenges',
         'takeaways'
     ])
