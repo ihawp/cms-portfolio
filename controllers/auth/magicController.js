@@ -22,6 +22,10 @@ const magicController = async (req, res) => {
         return res.status(500).json({ data: null, error: 'Failed to retrieve authentication token from the database.' });
     }
 
+    if (!authToken.token) {
+        return res.status(400).json({ success: false, error: 'Token expired.', code: 'TOKEN_EXPIRED'});
+    }
+
     // Do comparison between auth_token_hash from DB and submitted `key`.
     const compareToken = await bcrypt.compare(key, authToken.token);
 

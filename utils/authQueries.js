@@ -28,7 +28,8 @@ const selectAuthById = async (id) => {
     const [response] = await pool.execute(`
         SELECT auth_token_hash 
         FROM accounts 
-        WHERE id = ?`,
+        WHERE id = ?
+        AND auth_token_created_at >= NOW() - INTERVAL 1 MINUTE`,
         [id]);
     return response;
 }
