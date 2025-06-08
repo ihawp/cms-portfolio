@@ -76,9 +76,18 @@ function PortfolioForm() {
     }
 
     const handleFileChange = (e) => {
-        setForm(prev => ({ 
-            ...prev, 
-            files: e.target.files 
+
+        const selectedFiles = Array.from(e.target.files);
+
+        const validFiles = selectedFiles.filter(file => file.type === 'image/webp');
+
+        if (validFiles.length === 0) {
+            return;
+        }
+
+        setForm(prev => ({
+            ...prev,
+            files: validFiles
         }));
     };
 
@@ -130,7 +139,6 @@ function PortfolioForm() {
             console.error('Submission error:', error);
         }
     }
-
 
     const handleCheckboxUpdate = (e) => {
         const { name, value, checked } = e.target;
