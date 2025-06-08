@@ -13,7 +13,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 import AuthProvider from './providers/AuthProvider';
-import PortfolioForm from './components/PortfolioForm';
+import PortfolioProvider from './providers/PortfolioProvider';
 
 function App() {
   const [form, setForm] = useState({
@@ -73,6 +73,7 @@ function App() {
 
   return <BrowserRouter>
     <AuthProvider>
+    <PortfolioProvider>
 
       <Header />
 
@@ -86,7 +87,8 @@ function App() {
       </Routes>
 
       <Footer />
-
+      
+    </PortfolioProvider>
     </AuthProvider>
   </BrowserRouter>
 }

@@ -169,17 +169,17 @@ function PortfolioForm() {
             <div className="flex flex-row flex-wrap mb-8 gap-8">
                 <label htmlFor="title" className="flex flex-col max-w-[50%] flex-grow-1">
                     <span className='text-xs mb-2'>Title:</span>
-                    <input type="text" name="title" id="title" placeholder="Title" value={form.title} onChange={handleChange} required className="border-solid border border-gray-500 rounded-lg px-3 py-2 text-md" />
+                    <input type="text" name="title" id="title" placeholder="Title" value={form.title} onChange={handleChange} required className="border-solid border border-gray-500 rounded-lg px-3 py-2" />
                 </label>     
 
                 <label htmlFor="role" className="flex flex-col max-w-[50%] flex-grow-1">
                     <span className='text-xs mb-2'>Role:</span>
-                    <input type="text" name="role" id="role" placeholder="Role" value={form.role} onChange={handleChange} required className="border-solid border border-gray-500 rounded-lg px-3 py-2 text-md" />
+                    <input type="text" name="role" id="role" placeholder="Role" value={form.role} onChange={handleChange} required className="border-solid border border-gray-500 rounded-lg px-3 py-2" />
                 </label>
 
                 <label htmlFor="githubURL" className="flex flex-col max-w-[50%] flex-grow-1">
                     <span className='text-xs mb-2'>GitHub URL:</span>
-                    <input type="url" name="githubURL" id="githubURL" placeholder="GitHub URL" value={form.githubURL} onChange={handleChange} maxLength={1000} className="border-solid border border-gray-500 rounded-lg px-3 py-2 text-md" />
+                    <input type="url" name="githubURL" id="githubURL" placeholder="GitHub URL" value={form.githubURL} onChange={handleChange} maxLength={1000} className="border-solid border border-gray-500 rounded-lg px-3 py-2" />
                 </label>  
 
                 <label htmlFor="projectSite" className="flex flex-col max-w-[50%] flex-grow-1">
@@ -191,12 +191,12 @@ function PortfolioForm() {
 
             <label htmlFor="intro" className="flex flex-col mb-8">
                 <span className='text-xs mb-2'>Intro:</span>
-                <textarea type="text" name="intro" id="intro" placeholder="Intro" value={form.intro} onChange={handleChange} maxLength={255} className="h-[140px] border-solid border border-gray-500 rounded-lg px-3 py-2 text-lg" required></textarea>
+                <textarea type="text" name="intro" id="intro" placeholder="Intro" value={form.intro} onChange={handleChange} maxLength={255} className="h-[140px] border-solid border border-gray-500 rounded-lg px-3 py-2" required></textarea>
             </label>
 
             <label htmlFor="solutionSummary" className="flex flex-col mb-8">
                 <span className='text-xs mb-2'>Solution Summary:</span>
-                <textarea name="solutionSummary" id="solutionSummary" placeholder="Solution Summary" value={form.solutionSummary} onChange={handleChange} maxLength={255} className="h-[140px] border-solid border border-gray-500 rounded-lg px-3 py-2 text-lg" ></textarea>
+                <textarea name="solutionSummary" id="solutionSummary" placeholder="Solution Summary" value={form.solutionSummary} onChange={handleChange} maxLength={255} className="h-[140px] border-solid border border-gray-500 rounded-lg px-3 py-2" ></textarea>
             </label>
 
             <label htmlFor="files" className="relative mb-8">
