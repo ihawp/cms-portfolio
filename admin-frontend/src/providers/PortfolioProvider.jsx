@@ -23,9 +23,8 @@ function PortfolioProvider({ children }) {
 
                 if (data.error) return false;
 
-                console.log(data.data.response);
-
                 return data.data.response;
+                
             } catch (error) {
                 return false;
             }
