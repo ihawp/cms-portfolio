@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { PortfolioContext } from '../providers/PortfolioProvider';
+import { FaTrash } from 'react-icons/fa';
 
 function PortfolioDisplay() {
 
@@ -40,6 +41,8 @@ function PortfolioDisplay() {
         <thead>
             <tr>
                 <th className={bcl}>ID</th>
+                <th className={bcl}>Update</th>
+                <th className={bcl}>Delete</th>
                 <th className={bcl}>Title</th>
                 <th className={bcl}>Intro</th>
                 <th className={bcl}>Role</th>
@@ -54,14 +57,18 @@ function PortfolioDisplay() {
                 <th className={bcl}>Site URL</th>
                 <th className={bcl}>Images</th>
                 <th className={bcl}>Date Created</th>
-                <th className={bcl}>Update</th>
-                <th className={bcl}>Delete</th>
             </tr>
         </thead>
         <tbody>
             {portfolioItems.map((item, key) => {
                 return <tr className={bcl} key={item.id}>
                     <td className={bcl}>{item.id}</td>
+                    <td className={bcl}>
+                        <button className="flex gap-2 cursor-pointer hover:bg-green-600 rounded-lg p-2">Update</button>
+                    </td>
+                    <td className={bcl}>
+                        <button className="flex gap-2 cursor-pointer hover:bg-red-600 rounded-lg p-2" onClick={(e) => deleteItem(e, item.id)}><FaTrash size={13} className='self-center' /> Delete</button>
+                    </td>
                     <td className={bcl}>{item.title}</td>
                     <td className={bcl}>{item.intro}</td>
                     <td className={bcl}>{item.role}</td>
@@ -76,12 +83,6 @@ function PortfolioDisplay() {
                     <td className={bcl}>{item.projectSite}</td>
                     <td className={bcl}>{item.images}</td>
                     <td className={bcl}>{item.date_created}</td>
-                    <td className={bcl}>
-                        <a>Update</a>
-                    </td>
-                    <td className={bcl}>
-                        <button onClick={(e) => deleteItem(e, item.id)}>Delete {item.id}</button>
-                    </td>
                 </tr>;
             })}
         </tbody>

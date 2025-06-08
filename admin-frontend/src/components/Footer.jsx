@@ -1,28 +1,10 @@
 function Footer() {
-    return <footer>
+    return <footer className="text-center flex flex-col justify-center items-center gap-4 my-10">
 
-        <div> 
-            <div>
-                logo
-            </div>
+        <img src="/ihawp-com-logo.svg" alt="ihawp.com Logo" title="ihawp.com Logo" />
 
-            <div>
-                address?
-            </div>
+        <p>&copy; ihawp.com {new Date().getFullYear()}</p>
 
-            <nav>
-                site map
-            </nav>
-        </div>
-
-        <div className="flex flex-col gap-1 md:gap-0 md:flex-row md:justify-between">
-            <p>this is some footer content</p>
-            <p>This is some other footer content</p>
-        </div>
-
-
-
-        <p>this is some footer content</p>
     </footer>
 }
 

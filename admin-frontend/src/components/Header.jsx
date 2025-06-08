@@ -19,17 +19,14 @@ function Header() {
                 <li><NavLink to="/" title="Home">Home</NavLink></li>
                 <li><NavLink to="/portfolio" title="Portfolio">Portfolio</NavLink></li>
                 <li><NavLink to="/blog" title="Blog">Blog</NavLink></li>
-                <li><a href="https://github.com/ihawp" target="_blank" rel="noreferrer" title="GitHub">GitHub</a></li>
-                <li><a title="LinkedIn" href="https://www.linkedin.com/in/warren-chemerika-628b15275/" target="_blank" rel="noreferrer">LinkedIn</a></li>
-                <li><a title="Logout" href="#" onClick={logout}>Logout</a></li>
-            </ul> : <ul className="flex flex-row">
+            </ul> : <ul className="flex flex-row gap-12">
                 <li><a href="https://github.com/ihawp" target="_blank" rel="noreferrer" title="GitHub">GitHub</a></li>
                 <li><a title="LinkedIn" href="https://www.linkedin.com/in/warren-chemerika-628b15275/" target="_blank" rel="noreferrer">LinkedIn</a></li>
             </ul>}
         </nav>
 
         <div>
-            other button
+            {auth ? <a title="Logout" href="#" onClick={logout}>Logout</a> : 'other button'}
         </div>
 
     </header>

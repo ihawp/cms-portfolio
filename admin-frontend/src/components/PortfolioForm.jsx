@@ -27,7 +27,9 @@ const formOrig = {
     or when the user clicks reset... but we cannot pass in a specific type of data yet,
     or a beginning set of data.
 
-    
+    I want to pass a post as a beginning set so that it can fill the form fields
+    and be updated via the put route on the server. A route that is currently untested,
+    just set up and ready!
 
 */
 
@@ -59,11 +61,6 @@ function PortfolioForm() {
 
         const lengthOfArray = form[name].length;
         const newId = `${name}${lengthOfArray}`;
-
-        console.log(portfolioItems);
-        // setPortfolioItems();
-        // set the newly added item as a member of 
-        // the PortfolioProvider portfolioItems object.
 
         setForm(prev => ({
             ...prev,
@@ -183,18 +180,18 @@ function PortfolioForm() {
 
     return <form onSubmit={submitPortfolioEntry} encType="multipart/form-data" className='flex flex-col w-180 bg-[#222] p-8 rounded-[8px]'>
 
-        <h3 className="mb-12 text-2xl text-center">{form.title || "New Portfolio Entry"}</h3>
+        <h3 className="mb-12 text-2xl text-center max-w-200">{form.title || "Title"}</h3>
 
         <div className="flex flex-row flex-wrap mb-8 gap-8">
 
                 <label htmlFor="title" className="flex flex-col max-w-[50%] flex-grow-1">
                     <span className='text-xs mb-2'>Title:</span>
-                    <input type="text" name="title" id="title" placeholder="Title" value={form.title} onChange={handleChange} required className="border-solid border border-gray-500 rounded-lg px-3 py-2" />
+                    <input type="text" name="title" id="title" placeholder="Title" value={form.title} onChange={handleChange} maxLength={255} required className="border-solid border border-gray-500 rounded-lg px-3 py-2" />
                 </label>
 
                 <label htmlFor="role" className="flex flex-col max-w-[50%] flex-grow-1">
                     <span className='text-xs mb-2'>Role:</span>
-                    <input type="text" name="role" id="role" placeholder="Role" value={form.role} onChange={handleChange} required className="border-solid border border-gray-500 rounded-lg px-3 py-2" />
+                    <input type="text" name="role" id="role" placeholder="Role" value={form.role} onChange={handleChange} maxLength={255}required className="border-solid border border-gray-500 rounded-lg px-3 py-2" />
                 </label>
 
                 <label htmlFor="githubURL" className="flex flex-col max-w-[50%] flex-grow-1">
@@ -249,7 +246,7 @@ function PortfolioForm() {
         </div>
 
         <div className="flex flex-row gap-2">
-                <input type="button" value="Reset" onClick={resetForm} className="w-[200px] cursor-pointer bg-red-600 rounded-lg h-[40px]" />
+                <input type="button" value="Reset" onClick={resetForm} className="w-[200px] cursor-pointer hover:bg-red-600 rounded-lg h-[40px]" />
                 <input type="submit" value="Submit" className="w-full cursor-pointer bg-green-600 rounded-lg h-[40px]" />
         </div>
     </form>

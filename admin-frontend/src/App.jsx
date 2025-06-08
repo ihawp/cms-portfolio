@@ -9,7 +9,7 @@ import PortfolioProvider from './providers/PortfolioProvider';
 import Routing from './Routing';
 
 function App() {
-  return <BrowserRouter>
+  return <BrowserRouter basename='/admin/ihawp'>
     <AuthProvider>
     <PortfolioProvider>
 

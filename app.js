@@ -38,6 +38,15 @@ app.use('/api/v1', apiRouter);
 
 /**
  * @route GET /
+ * @description Serve the admin portal.
+ */
+app.use('/admin/ihawp', express.static(path.join(__dirname, 'admin-frontend', 'dist')));
+app.get('/admin/ihawp', (req, res) => {
+    res.sendFile(path.join(__dirname, 'admin-frontend', 'dist', 'index.html'));
+});
+
+/**
+ * @route GET /
  * @description Serve the frontend of the site.
  */
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
