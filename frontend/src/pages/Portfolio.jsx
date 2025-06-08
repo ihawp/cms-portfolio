@@ -14,7 +14,7 @@ function Portfolio() {
         <header>
             <nav>
                 <ul>
-                    <li><NavLink to="/portfolio/form">Add Form</NavLink></li>
+                    <li><NavLink to="/portfolio/add">Add A Portfolio Item</NavLink></li>
                 </ul>
             </nav>
         </header>
@@ -22,7 +22,6 @@ function Portfolio() {
         <section>
             <Outlet />
         </section>
-        <PortfolioForm />
 
         <PortfolioDisplay />
     </main>

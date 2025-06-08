@@ -20,11 +20,7 @@ function AuthProvider({ children }) {
 
                 const result = await response.json();
 
-                console.log(result);
-
                 if (result?.error) return false;
-
-                console.log(result);
 
                 setAuth(true);
 
