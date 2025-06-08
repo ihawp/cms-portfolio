@@ -20,7 +20,11 @@ const portfolioInsertController = async (req, res) => {
     
     try {
         // Pass req.body to avoid making redundant const variable for each form item
+        
+        // const response = 
+        // get response and return the post insert id + the data
         await insertPortfolioPost(req.body);
+
     } catch (error) {
         return res.status(400).json({ success: false, error: 'Database error when uploading portfolio post.', code: 'DATABASE_ERROR' });
     }

@@ -1,10 +1,28 @@
 import { useState, useEffect, createContext } from 'react';
 
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 
 function AuthProvider({ children }) {
 
     const [auth, setAuth] = useState(false);
+
+    const logout = async (event) => {
+        event.preventDefault();
+
+        if (!window.confirm("Are you sure you want to logout?")) return;
+
+        try {
+            const response = await fetch('http://localhost:3000/auth/logout', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            })
+        } catch (error) {
+            return false;
+        }
+    }
 
     useEffect(() => {
 
@@ -38,7 +56,7 @@ function AuthProvider({ children }) {
 
     }, []);
 
-    return <AuthContext.Provider value={ auth }>
+    return <AuthContext.Provider value={{ auth, logout }}>
         { children }
     </AuthContext.Provider>
 

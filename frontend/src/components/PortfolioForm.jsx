@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import CMSInput from './CMSInput';
 import ToolsUsed from './toolsUsed';
+import { PortfolioContext } from '../providers/PortfolioProvider';
 
 /* For resetting the form upon submit or reset */
 const formOrig = {
@@ -19,9 +20,22 @@ const formOrig = {
     files: []
 }
 
+/*
+
+    Okay so currently we use a data model to 'begin' our data
+    and to reset our data when the portfolio item is submitted successfully
+    or when the user clicks reset... but we cannot pass in a specific type of data yet,
+    or a beginning set of data.
+
+    
+
+*/
+
 function PortfolioForm() {
 
     const [form, setForm] = useState(formOrig);
+
+    const { portfolioItems, setPortfolioItems } = useContext(PortfolioContext);
 
     const handleChange = (e) => {
         const { name, value, id } = e.target;
@@ -46,12 +60,17 @@ function PortfolioForm() {
         const lengthOfArray = form[name].length;
         const newId = `${name}${lengthOfArray}`;
 
+        console.log(portfolioItems);
+        // setPortfolioItems();
+        // set the newly added item as a member of 
+        // the PortfolioProvider portfolioItems object.
+
         setForm(prev => ({
-        ...prev,
-        [name]: [
-            ...prev[name],
-            { id: newId, value: '' }
-        ]
+            ...prev,
+            [name]: [
+                ...prev[name],
+                { id: newId, value: '' }
+            ]
         }));
     };
 
@@ -164,9 +183,9 @@ function PortfolioForm() {
 
     return <form onSubmit={submitPortfolioEntry} encType="multipart/form-data" className='flex flex-col w-180 bg-[#222] p-8 rounded-[8px]'>
 
-            <h3 className="mb-8 text-2xl text-center">Add a Portfolio Entry</h3>
+        <h3 className="mb-8 text-2xl text-center">Add a Portfolio Entry</h3>
 
-            <div className="flex flex-row flex-wrap mb-8 gap-8">
+        <div className="flex flex-row flex-wrap mb-8 gap-8">
                 <label htmlFor="title" className="flex flex-col max-w-[50%] flex-grow-1">
                     <span className='text-xs mb-2'>Title:</span>
                     <input type="text" name="title" id="title" placeholder="Title" value={form.title} onChange={handleChange} required className="border-solid border border-gray-500 rounded-lg px-3 py-2" />
@@ -187,19 +206,19 @@ function PortfolioForm() {
                     <input type="url" name="projectSite" id="projectSite" placeholder="Project Site" value={form.projectSite} onChange={handleChange} maxLength={1000} className="border-solid border border-gray-500 rounded-lg px-3 py-2" />
                 </label>
 
-            </div>
+        </div>
 
-            <label htmlFor="intro" className="flex flex-col mb-8">
+        <label htmlFor="intro" className="flex flex-col mb-8">
                 <span className='text-xs mb-2'>Intro:</span>
                 <textarea type="text" name="intro" id="intro" placeholder="Intro" value={form.intro} onChange={handleChange} maxLength={255} className="h-[140px] border-solid border border-gray-500 rounded-lg px-3 py-2" required></textarea>
-            </label>
+        </label>
 
-            <label htmlFor="solutionSummary" className="flex flex-col mb-8">
+        <label htmlFor="solutionSummary" className="flex flex-col mb-8">
                 <span className='text-xs mb-2'>Solution Summary:</span>
                 <textarea name="solutionSummary" id="solutionSummary" placeholder="Solution Summary" value={form.solutionSummary} onChange={handleChange} maxLength={255} className="h-[140px] border-solid border border-gray-500 rounded-lg px-3 py-2" ></textarea>
-            </label>
+        </label>
 
-            <label htmlFor="files" className="relative mb-8">
+        <label htmlFor="files" className="relative mb-8">
                 <span hidden>Files:</span>
                 <input type="file" name="files" id="files" multiple onChange={handleFileChange} className='w-full h-[100px]' />
                 <div className="absolute top-0 left-0 w-full h-full cursor-pointer flex justify-center items-center rounded-lg gap-4 bg-[#222] border-dashed border-gray-500 border text-white">
@@ -212,12 +231,12 @@ function PortfolioForm() {
                         <span>Press anywhere to change the uploaded files.</span>
                     </div> }
                 </div>
-            </label>
+        </label>
 
-            {/* has `mb-8` in its wrapper */}
-            <ToolsUsed handleCheckboxUpdate={handleCheckboxUpdate} selectedTools={form.toolsUsed} />
+        {/* has `mb-8` in its wrapper */}
+        <ToolsUsed handleCheckboxUpdate={handleCheckboxUpdate} selectedTools={form.toolsUsed} />
 
-            <div className="flex flex-col gap-4 mb-8">
+        <div className="flex flex-col gap-4 mb-8">
                 <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Skills Applied" sectionName="skillsApplied" form={form}/>
 
                 <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Key Tasks" sectionName="keyTasks" form={form}/>
@@ -227,13 +246,13 @@ function PortfolioForm() {
                 <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Challenge and Solution" sectionName="challenges" form={form}/>
 
                 <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Takeaways" sectionName="takeaways" form={form}/>
-            </div>
+        </div>
 
-            <div className="flex flex-row gap-2">
+        <div className="flex flex-row gap-2">
                 <input type="button" value="Reset" onClick={resetForm} className="w-[200px] cursor-pointer bg-red-600 rounded-lg h-[40px]" />
                 <input type="submit" value="Submit" className="w-full cursor-pointer bg-green-600 rounded-lg h-[40px]" />
-            </div>
-        </form>
+        </div>
+    </form>
 }
 
 export default PortfolioForm;
