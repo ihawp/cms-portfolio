@@ -13,7 +13,7 @@ function PortfolioDisplay() {
         if (!window.confirm(`Do you want to delete Portfolio Item #${id}?`)) return;
 
         try {
-            const response = await fetch(`http://localhost:3000/api/v1/portfolio/${id}`, {
+            const response = await fetch(import.meta.env.VITE_SERVER_URL + `api/v1/portfolio/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -60,7 +60,7 @@ function PortfolioDisplay() {
         </thead>
         <tbody>
             {portfolioItems.map((item, key) => {
-                return <tr className={bcl}>
+                return <tr className={bcl} key={item.id}>
                     <td className={bcl}>{item.id}</td>
                     <td className={bcl}>{item.title}</td>
                     <td className={bcl}>{item.intro}</td>

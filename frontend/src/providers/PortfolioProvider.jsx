@@ -10,7 +10,7 @@ function PortfolioProvider({ children }) {
     
         const makeFetch = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/v1/portfolio', {
+                const response = await fetch(import.meta.env.VITE_SERVER_URL + 'api/v1/portfolio', {
                     method: 'GET',
                     headers: {
                             'Content-Type': 'application/json',

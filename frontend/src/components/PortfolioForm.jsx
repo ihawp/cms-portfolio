@@ -145,7 +145,7 @@ function PortfolioForm() {
         }
 
         try {
-            const res = await fetch('http://localhost:3000/api/v1/portfolio/', {
+            const res = await fetch(import.meta.env.VITE_SERVER_URL + 'api/v1/portfolio/', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'
@@ -183,13 +183,14 @@ function PortfolioForm() {
 
     return <form onSubmit={submitPortfolioEntry} encType="multipart/form-data" className='flex flex-col w-180 bg-[#222] p-8 rounded-[8px]'>
 
-        <h3 className="mb-8 text-2xl text-center">Add a Portfolio Entry</h3>
+        <h3 className="mb-12 text-2xl text-center">{form.title || "New Portfolio Entry"}</h3>
 
         <div className="flex flex-row flex-wrap mb-8 gap-8">
+
                 <label htmlFor="title" className="flex flex-col max-w-[50%] flex-grow-1">
                     <span className='text-xs mb-2'>Title:</span>
                     <input type="text" name="title" id="title" placeholder="Title" value={form.title} onChange={handleChange} required className="border-solid border border-gray-500 rounded-lg px-3 py-2" />
-                </label>     
+                </label>
 
                 <label htmlFor="role" className="flex flex-col max-w-[50%] flex-grow-1">
                     <span className='text-xs mb-2'>Role:</span>
@@ -199,13 +200,12 @@ function PortfolioForm() {
                 <label htmlFor="githubURL" className="flex flex-col max-w-[50%] flex-grow-1">
                     <span className='text-xs mb-2'>GitHub URL:</span>
                     <input type="url" name="githubURL" id="githubURL" placeholder="GitHub URL" value={form.githubURL} onChange={handleChange} maxLength={1000} className="border-solid border border-gray-500 rounded-lg px-3 py-2" />
-                </label>  
+                </label>
 
                 <label htmlFor="projectSite" className="flex flex-col max-w-[50%] flex-grow-1">
                     <span className='text-xs mb-2'>Site URL (or YouTube video):</span>
                     <input type="url" name="projectSite" id="projectSite" placeholder="Project Site" value={form.projectSite} onChange={handleChange} maxLength={1000} className="border-solid border border-gray-500 rounded-lg px-3 py-2" />
                 </label>
-
         </div>
 
         <label htmlFor="intro" className="flex flex-col mb-8">

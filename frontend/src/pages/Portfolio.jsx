@@ -27,7 +27,7 @@ function Portfolio() {
             <PortfolioForm />
         </section> : null}
 
-        {addVisible ? null : <section className='w-[90%] overflow-x-auto overflow-y-hidden'>
+        {addVisible ? null : <section className='w-full overflow-x-auto overflow-y-hidden'>
             <PortfolioDisplay />
         </section>}
 

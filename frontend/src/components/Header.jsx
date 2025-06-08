@@ -4,19 +4,37 @@ import { AuthContext } from '../providers/AuthProvider';
 
 function Header() {
 
-    const { logout } = useContext(AuthContext);
+    const { auth, logout } = useContext(AuthContext);
 
-    return <header>
+    return <header className="
+        flex flex-row justify-between
+    ">
+
+        <div>
+            logo
+        </div>
+
         <nav>
-            <ul className="flex flex-row">
+            {auth ? <ul className="flex flex-row gap-12">
                 <li><NavLink to="/" title="Home">Home</NavLink></li>
                 <li><NavLink to="/portfolio" title="Portfolio">Portfolio</NavLink></li>
                 <li><NavLink to="/blog" title="Blog">Blog</NavLink></li>
                 <li><a href="https://github.com/ihawp" target="_blank" rel="noreferrer" title="GitHub">GitHub</a></li>
                 <li><a title="LinkedIn" href="https://www.linkedin.com/in/warren-chemerika-628b15275/" target="_blank" rel="noreferrer">LinkedIn</a></li>
-                <li><a title="Logout" onClick={logout}>Logout</a></li>
-            </ul>
+                <li><a title="Logout" href="#" onClick={logout}>Logout</a></li>
+            </ul> : <ul className="flex flex-row">
+                <li><NavLink to="/" title="Home">Home</NavLink></li>
+                <li><NavLink to="/portfolio" title="Portfolio">Portfolio</NavLink></li>
+                <li><NavLink to="/blog" title="Blog">Blog</NavLink></li>
+                <li><a href="https://github.com/ihawp" target="_blank" rel="noreferrer" title="GitHub">GitHub</a></li>
+                <li><a title="LinkedIn" href="https://www.linkedin.com/in/warren-chemerika-628b15275/" target="_blank" rel="noreferrer">LinkedIn</a></li>
+            </ul>}
         </nav>
+
+        <div>
+            other button
+        </div>
+
     </header>
 }
 
