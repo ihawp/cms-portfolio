@@ -1,5 +1,3 @@
-import { FaTrash } from 'react-icons/fa';
-
 function CMSInput({ handleAdd, handleClear, handleRemove, handleChange, sectionTitle, sectionTitleSingle, sectionName, form }) {
     return <div className="flex flex-col rounded-[8px]">
         <div className="flex flex-row items-center justify-between">

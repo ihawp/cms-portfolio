@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import CMSInput from './CMSInput';
 import ToolsUsed from './toolsUsed';
 import { PortfolioContext } from '../providers/PortfolioProvider';
+import DualInput from './DualInput';
 
 /* For resetting the form upon submit or reset */
 const formOrig = {
@@ -42,16 +43,16 @@ function PortfolioForm() {
     const handleChange = (e) => {
         const { name, value, id } = e.target;
         setForm(prev => {
-        if (Array.isArray(prev[name])) {
-            return {
-            ...prev,
-            [name]: prev[name].map(item =>
-                item.id === id ? { ...item, value } : item
-            )
-            };
-        } else {
-            return { ...prev, [name]: value };
-        }
+            if (Array.isArray(prev[name])) {
+                return {
+                ...prev,
+                [name]: prev[name].map(item =>
+                    item.id === id ? { ...item, value } : item
+                )
+                };
+            } else {
+                return { ...prev, [name]: value };
+            }
         });
     };
 
@@ -70,6 +71,22 @@ function PortfolioForm() {
             ]
         }));
     };
+
+    const challengeAdd = (e) => {
+        e.preventDefault();
+        const { name } = e.target;
+
+        const lengthOfArray = form[name].length;
+        const newId = `${name}${lengthOfArray}`;
+
+        setForm(prev => ({
+            ...prev,
+            [name]: [
+                ...prev[name],
+                { id: newId, challenge: '', solution: '' }
+            ]
+        }));
+    }
 
     const handleRemove = (e, id) => {
         e.preventDefault();
@@ -178,6 +195,28 @@ function PortfolioForm() {
         setForm(formOrig);
     }
 
+    const challengeChange = (e) => {
+
+        const { name, value, id } = e.target;
+        const dataType = e.target.dataset.type;
+
+        setForm(prev => {
+            if (Array.isArray(prev[name])) {
+                return {
+                ...prev,
+                [name]: prev[name].map(item =>
+                    item.id === id ? { ...item, [dataType]: value } : item
+                )
+                };
+            } else {
+                return { ...prev, [name]: { ...prev[name], [dataType]: value } };
+            }
+        });
+
+        console.log(form);
+
+    }
+
     return <form onSubmit={submitPortfolioEntry} encType="multipart/form-data" className='flex flex-col w-180 bg-[#222] p-8 rounded-[8px]'>
 
         <h3 className="mb-12 text-2xl text-center max-w-200">{form.title || "Title"}</h3>
@@ -240,15 +279,9 @@ function PortfolioForm() {
 
                 <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Timeline" sectionName="timeline" form={form}/>
 
-                <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Challenge and Solution" sectionName="challenges" form={form}/>
+                <DualInput handleAdd={challengeAdd} handleChange={challengeChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Challenge and Solution" sectionName="challenges" form={form}/>
 
                 <CMSInput handleAdd={handleAdd} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Takeaways" sectionTitleSingle="Takeaway" sectionName="takeaways" form={form}/>
-        </div>
-
-        <div>
-            challenges
-
-            
         </div>
 
         <div className="flex flex-row gap-2">

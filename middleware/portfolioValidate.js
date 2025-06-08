@@ -29,6 +29,7 @@ const portfolioValidate = [
         'intro', 
         'role'
     ])
+        .trim()
         .isString()
         .isLength({ max: 255 })
         .withMessage('Should be a string with a maximum length of 255 characters.'),
@@ -41,8 +42,19 @@ const portfolioValidate = [
         'challenges',
         'takeaways'
     ])
+        .optional()
         .isArray()
         .withMessage('Must be an array'),
+
+    body([
+        'challenges.*'
+    ])
+        .custom(value => {
+            if (typeof value !== 'object' || Array.isArray(value) || value === null) {
+            throw new Error('Each item must be a non-null object');
+            }
+            return true;
+        }),
 
     body([
         'timeline.*', 
@@ -50,21 +62,21 @@ const portfolioValidate = [
         'skillsApplied.*', 
         'keyTasks.*',
         'takeaways.*'
-
-        , 'challenges.*'
     ])
+        .optional() // Optional call not required because .* is empty if not filled!
         .isString()
         .isLength({ min: 1, max: 255 })
         .withMessage('Array items must be of string format.'),
 
     body(['solutionSummary', 'githubURL', 'projectSite'])
+        .optional()
         .isString()
         .isLength({ max: 1000 })
         .withMessage('Solution Summary must not be longer than 1000 characters.'),
 /*
     body([
         'challenges.*.challenge',
-        'challenges.*.solve'
+        'challenges.*.solution'
     ])
         .isString()
         .withMessage('Challenges content must be a string.')
