@@ -2,18 +2,18 @@ import { useState } from 'react';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Home from '../pages/Home';
-import Blog from '../pages/Blog';
-import Portfolio from '../pages/Portfolio';
-import Login from '../pages/Login';
-import Register from '../pages/Register';
-import Error from '../pages/Error';
+import Home from './pages/Home';
+import Blog from './pages/Blog';
+import Portfolio from './pages/Portfolio';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Error from './pages/Error';
 
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
-import AuthProvider from '../providers/AuthProvider';
-import PortfolioForm from '../components/PortfolioForm';
+import AuthProvider from './providers/AuthProvider';
+import PortfolioForm from './components/PortfolioForm';
 
 function App() {
   const [form, setForm] = useState({
