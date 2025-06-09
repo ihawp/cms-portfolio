@@ -5,7 +5,6 @@ const portfolioSelectController = async (req, res) => {
     try {
         const response = await selectPortfolioPosts();
 
-        console.log(response);
         if (response.length > 0) {
             return res.status(200).json({ success: true, data: { response }, message: 'Data selected successfully!' });
         }

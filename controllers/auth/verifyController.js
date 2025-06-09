@@ -7,8 +7,6 @@ const verifyController = async (req, res) => {
     try {
         const response = await selectFrontendUserById(id);
 
-        console.log(response);
-
         if (response.length === 0) {
             return res.status(500).json({ success: false, data: { verified: false }, error: 'User does not exist', code: 'ACCOUNT_DOESNT_EXIST' })
         }

@@ -104,7 +104,6 @@ function PortfolioForm({ formOrig, isUpdate }) {
                     const simplifiedArray = value.map(item => item.value);
                     formData.append(key, JSON.stringify(simplifiedArray));
                 } else {
-                    // Already flat array of strings/numbers
                     formData.append(key, JSON.stringify(value));
                 }
             } else if (typeof value === 'object' && value !== null) {
@@ -121,14 +120,17 @@ function PortfolioForm({ formOrig, isUpdate }) {
                 formData.append('files', item);
             });
         } else {
-            formOrig.files.forEach(item => {
+            form.files.forEach(item => {
                 formData.append('files', item.value);
             });
         }
+
+        console.log(formData);
         
 
         // Debug print to verify final structure
         for (const [key, value] of formData.entries()) {
+            console.log(key, value);
         }
 
         if (isUpdate) {
@@ -170,7 +172,7 @@ function PortfolioForm({ formOrig, isUpdate }) {
 
     const resetForm = (e) => {
         e.preventDefault();
-        setForm(portfolioFormOrig);
+        setForm(formOrig);
     }
 
     return <form onSubmit={submitPortfolioEntry} encType="multipart/form-data" className='flex flex-col w-180 bg-[#222] p-8 rounded-[8px]'>

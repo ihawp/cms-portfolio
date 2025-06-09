@@ -6,20 +6,29 @@ const portfolioUpdateController = async (req, res) => {
 
     const fileLocations = [];
 
-    console.log(req.files);
-
-    if (!req.files) {
-        console.log('no files');
+    // for when files are not updated
+    // but a SINGLE IMAGE is a part of the
+    // images column (from another update or the original post)
+    // it will just not work, so this checks for that case
+    // and handles it.
+    if (typeof req.body?.files === 'string') {
+        req.body.files = [req.body.files];
     }
 
-    if (req.files.length === 0) {
+    
+    if (req.files.length > 0) {
 
-    } else {
+        // delete the old files.
+        // Or maybe build media library thing where I can delete images?
+        // And then eventually maybe update images for blog or portfolio from the
+        // media library
+
         req.files.forEach(item => {
             fileLocations.push(item.filename);
         });
 
         req.body.files = fileLocations || [];
+
     }
 
     if (!id) {
@@ -28,13 +37,11 @@ const portfolioUpdateController = async (req, res) => {
 
     try {
         const response = await updatePortfolioPost(req.body, id);
-        console.log(response);
     } catch (error) {
-        console.log(error);
         return res.status(400).json({ success: false, error: 'Failed to update portfolio post.', code: 'UPDATE_FAILED' });
     }
 
-    res.status(200).json({ success: true, data: {}, message: 'Portfolio item updated successfully!' });
+    res.status(200).json({ success: true, data: {  }, message: 'Portfolio item updated successfully!' });
 
 }
 
