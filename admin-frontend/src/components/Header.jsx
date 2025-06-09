@@ -11,7 +11,7 @@ function Header() {
     ">
 
         <Link to="/">
-            <img src="/ihawp-com-logo.svg" alt="ihawp.com Logo" title="ihawp.com Logo" />
+            <img draggable="false" src="/ihawp-com-logo.svg" alt="ihawp.com Logo" title="ihawp.com Logo" />
         </Link>
 
         <nav>

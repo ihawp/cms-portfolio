@@ -49,13 +49,17 @@ portfolioRouter.post('/',
  * @middleware 
  * @controller portfolioUpdateController
  */
-portfolioRouter.put('/:id', 
+portfolioRouter.put('/', 
     verifyJWT,
+
     upload.array('files', 5),
     verifyAndMoveUploads,
+
     parseJSONFields,
+
     portfolioValidate,
     validate,
+    
     portfolioUpdateController
 );
 

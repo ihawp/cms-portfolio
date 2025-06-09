@@ -2,23 +2,11 @@ import { useState, useContext } from 'react';
 import ToolsUsed from './toolsUsed';
 import { PortfolioContext } from '../providers/PortfolioProvider';
 import MultiInput from './MultiInput';
+import portfolioFormOrig from '../utils/portfolioFormOrig';
 
-/*
+function PortfolioForm({ formOrig, isUpdate }) {
 
-    Okay so currently we use a data model to 'begin' our data
-    and to reset our data when the portfolio item is submitted successfully
-    or when the user clicks reset... but we cannot pass in a specific type of data yet,
-    or a beginning set of data.
-
-    I want to pass a post as a beginning set so that it can fill the form fields
-    and be updated via the put route on the server. A route that is currently untested,
-    just set up and ready!
-
-*/
-
-function PortfolioForm({ portfolioFormOrig }) {
-
-    const [form, setForm] = useState(portfolioFormOrig);
+    const [form, setForm] = useState(formOrig);
 
     const { portfolioItems, setPortfolioItems } = useContext(PortfolioContext);
 
@@ -128,6 +116,7 @@ function PortfolioForm({ portfolioFormOrig }) {
 
         // Append files individually
         form.files.forEach(item => {
+            console.log(item);
             formData.append('files', item);
         });
 
@@ -136,16 +125,20 @@ function PortfolioForm({ portfolioFormOrig }) {
             console.log(key, value);
         }
 
+        if (isUpdate) {
+            formData.append('id', isUpdate);
+        }
+
         try {
             const res = await fetch(import.meta.env.VITE_SERVER_URL + 'api/v1/portfolio/', {
-                method: 'POST',
+                method: isUpdate ? 'PUT' : 'POST',
                 body: formData,
                 credentials: 'include'
             });
 
             const data = await res.json();
             console.log(data);
-            setForm(portfolioFormOrig);
+            setForm(formOrig);
 
             // should add returned 'post' to portfolioItems with setPortfolioItems()
             // so that it is immediatley visible in the portfolio table.

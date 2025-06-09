@@ -97,27 +97,39 @@ const insertPortfolioPost = async (d) => {
  * Will not be used in a transactional manor.
  */
 const updatePortfolioPost = async (d, portfolioPostId) => {
-    await pool.execute(`
-        UPDATE portfolio SET (
-        title, intro, role,
-        timeline, toolsUsed,
-        skillsApplied, keyTasks,
-        challenges, takeaways,
-        solutionSummary, githubURL,
-        projectSite, images) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, 
-                ?, ?, ?, ?, ?, ?)
-        WHERE id = ?
+    const [response] = await pool.execute(`
+            UPDATE portfolio SET
+                title = ?,
+                intro = ?,
+                role = ?,
+                timeline = ?,
+                toolsUsed = ?,
+                skillsApplied = ?,
+                keyTasks = ?,
+                challenges = ?,
+                takeaways = ?,
+                solutionSummary = ?,
+                githubURL = ?,
+                projectSite = ?,
+                images = ?
+            WHERE id = ?
         `,
         [
-            d.title, d.intro, d.role, d.timeline, 
-            d.toolsUsed, d.skillsApplied, 
-            d.keyTasks, d.challenges, 
-            d.takeaways, d.solutionSummary, 
-            d.githubURL, d.projectSite, d.images,
+            d.title, d.intro, d.role, 
+            JSON.stringify(d.timeline), 
+            JSON.stringify(d.toolsUsed), 
+            JSON.stringify(d.skillsApplied), 
+            JSON.stringify(d.keyTasks), 
+            JSON.stringify(d.challenges), 
+            JSON.stringify(d.takeaways), 
+            d.solutionSummary, 
+            d.githubURL, d.projectSite, 
+            JSON.stringify(d.files),
             portfolioPostId
         ]
-    )
+    );
+    console.log(response); 
+    return response;
 }
 
 // #######################################################################

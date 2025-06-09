@@ -75,6 +75,11 @@ const portfolioValidate = [
         .isLength({ max: 1000 })
         .withMessage('Solution Summary must not be longer than 1000 characters.'),
 
+    body(['id'])
+        .optional()
+        .isNumeric()
+        .withMessage('Send an numeric ID next time.')
+
 ];
 
 module.exports = portfolioValidate;
