@@ -4,6 +4,24 @@ const portfolioUpdateController = async (req, res) => {
 
     const { id } = req.body;
 
+    const fileLocations = [];
+
+    console.log(req.files);
+
+    if (!req.files) {
+        console.log('no files');
+    }
+
+    if (req.files.length === 0) {
+
+    } else {
+        req.files.forEach(item => {
+            fileLocations.push(item.filename);
+        });
+
+        req.body.files = fileLocations || [];
+    }
+
     if (!id) {
         return res.status(400).json({ success: false, error: '', code: '' });
     }

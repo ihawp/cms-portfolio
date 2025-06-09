@@ -79,9 +79,7 @@ function Portfolio() {
 
         {addVisible ? <section className='overflow-x-visible overflow-y-hidden flex flex-col items-center'>
             <PortfolioForm formOrig={updateForm} isUpdate={isUpdate} />
-        </section> : null}
-
-        {addVisible ? null : <section className='w-full overflow-x-auto overflow-y-hidden'>
+        </section> : <section className='w-full overflow-x-auto overflow-y-hidden'>
             <PortfolioDisplay changeUpdateForm={changeUpdateForm} />
         </section>}
 

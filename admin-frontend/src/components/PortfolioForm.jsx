@@ -115,14 +115,20 @@ function PortfolioForm({ formOrig, isUpdate }) {
         });
 
         // Append files individually
-        form.files.forEach(item => {
-            console.log(item);
-            formData.append('files', item);
-        });
+        if (formOrig.files !== form.files) {
+            console.log('files submitted');
+            form.files.forEach(item => {
+                formData.append('files', item);
+            });
+        } else {
+            formOrig.files.forEach(item => {
+                formData.append('files', item.value);
+            });
+        }
+        
 
         // Debug print to verify final structure
         for (const [key, value] of formData.entries()) {
-            console.log(key, value);
         }
 
         if (isUpdate) {
