@@ -38,6 +38,7 @@ function Portfolio() {
                 : [];
 
         return {
+            date_created: item.date_created || '',
             title: item.title || '',
             intro: item.intro || '',
             role: item.role || '',
