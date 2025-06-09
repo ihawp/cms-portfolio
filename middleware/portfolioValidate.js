@@ -48,7 +48,10 @@ const portfolioValidate = [
 
     body([
         'challenges.*',
-        'timeline.*'
+        'timeline.*',
+        'skillsApplied.*', 
+        'keyTasks.*',
+        'takeaways.*'
     ])
         .optional()
         .custom(value => {
@@ -57,6 +60,14 @@ const portfolioValidate = [
             }
             return true;
         }),
+
+    body([
+        'toolsUsed.*', 
+    ])
+        .optional() // Optional call not required because .* is empty if not filled!
+        .isString()
+        .isLength({ min: 1, max: 255 })
+        .withMessage('Array items must be of string format.'),
 
     body(['solutionSummary', 'githubURL', 'projectSite'])
         .optional()
