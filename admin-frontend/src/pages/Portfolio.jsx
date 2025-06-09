@@ -73,7 +73,7 @@ function Portfolio() {
             <nav aria-label="Portfolio Table Navigation">
                 <ul className='flex gap-3 justify-end'>
                     <li>
-                        <a className="border border-blue-500 text-blue-500 w-max p-2 rounded-lg cursor-pointer flex gap-2" href={import.meta.env.VITE_SERVER_URL} title="View the live site (ihawp.com/portfolio)."><FaExternalLinkAlt size={14} className='self-center' /> View Page</a>
+                        <a className="border border-blue-500 text-blue-500 w-max p-2 rounded-lg cursor-pointer flex gap-2" href={import.meta.env.VITE_SERVER_URL} title="View the live site (ihawp.com/portfolio)." target='_blank' rel='noreferrer'><FaExternalLinkAlt size={14} className='self-center' /> View Page</a>
                     </li>
                     <li>
                         <button className={`${addVisible ? 'bg-red-600' : 'bg-green-600'} w-max p-2 rounded-lg cursor-pointer`} onClick={handleAddButton}>{addVisible ? '- Discard' : '+ Add'}</button>
