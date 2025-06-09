@@ -1,7 +1,12 @@
-import { NavLink } from 'react-router';
+import { NavLink, Link } from 'react-router';
 
 function Header() {
     return <header>
+
+        <Link to="/" title="ihawp.com Home Page">
+            <img src="/ihawp-com-logo.svg" alt="ihawp.com Logo" title="ihawp.com Logo" draggable="false" />
+        </Link>
+
         <nav>
             <ul>
                 <li><NavLink to="/">Home</NavLink></li>

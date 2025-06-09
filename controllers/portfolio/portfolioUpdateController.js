@@ -16,7 +16,7 @@ const portfolioUpdateController = async (req, res) => {
 
     if (typeof req.body?.files === 'string') {
         req.body.files = [req.body.files];
-    } else {
+    } else if (typeof req.body?.files !== 'object') {
         req.body.files = [];
     }
 
