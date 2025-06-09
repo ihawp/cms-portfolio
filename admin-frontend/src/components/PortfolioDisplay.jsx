@@ -81,7 +81,7 @@ function PortfolioDisplay({ changeUpdateForm }) {
                     <td className={bcl}>{item.solutionSummary}</td>
                     <td className={bcl}>{item.githubURL}</td>
                     <td className={bcl}>{item.projectSite}</td>
-                    <td className={bcl}>{item.images}</td>
+                    <td className={bcl}>{item.images || item.files}</td>
                     <td className={bcl}>{item.date_created}</td>
                 </tr>;
             })}

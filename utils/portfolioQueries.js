@@ -43,23 +43,7 @@ const selectPortfolioPosts = async () => {
  * @param {Object} d - Data; Shortened name for simplicity.
  */
 const insertPortfolioPost = async (d) => {
-
-    console.log(d);
-
-    console.log(        [
-            d.title, d.intro, d.role, 
-            JSON.stringify(d.timeline), 
-            JSON.stringify(d.toolsUsed), 
-            JSON.stringify(d.skillsApplied), 
-            JSON.stringify(d.keyTasks), 
-            JSON.stringify(d.challenges), 
-            JSON.stringify(d.takeaways), 
-            d.solutionSummary, 
-            d.githubURL, d.projectSite, 
-            JSON.stringify(d.files)
-        ])
-
-    await pool.execute(`
+    const response = await pool.execute(`
         INSERT INTO portfolio
         (title, intro, role,
         timeline, toolsUsed,
@@ -83,6 +67,7 @@ const insertPortfolioPost = async (d) => {
             JSON.stringify(d.files)
         ]
     );
+    return response;
 }
 
 // #######################################################################

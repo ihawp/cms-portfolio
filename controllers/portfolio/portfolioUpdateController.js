@@ -4,6 +4,8 @@ const portfolioUpdateController = async (req, res) => {
 
     const { id } = req.body;
 
+    console.log(req.body);
+
     const fileLocations = [];
 
     // for when files are not updated
@@ -11,11 +13,13 @@ const portfolioUpdateController = async (req, res) => {
     // images column (from another update or the original post)
     // it will just not work, so this checks for that case
     // and handles it.
+
     if (typeof req.body?.files === 'string') {
         req.body.files = [req.body.files];
+    } else {
+        req.body.files = [];
     }
 
-    
     if (req.files.length > 0) {
 
         // delete the old files.
@@ -27,7 +31,7 @@ const portfolioUpdateController = async (req, res) => {
             fileLocations.push(item.filename);
         });
 
-        req.body.files = fileLocations || [];
+        req.body.files = req.body.images = fileLocations || [];
 
     }
 
@@ -36,12 +40,14 @@ const portfolioUpdateController = async (req, res) => {
     }
 
     try {
-        const response = await updatePortfolioPost(req.body, id);
+        await updatePortfolioPost(req.body, id);
     } catch (error) {
         return res.status(400).json({ success: false, error: 'Failed to update portfolio post.', code: 'UPDATE_FAILED' });
     }
 
-    res.status(200).json({ success: true, data: {  }, message: 'Portfolio item updated successfully!' });
+    req.body.id = id;
+
+    res.status(200).json({ success: true, data: req.body, message: 'Portfolio item updated successfully!' });
 
 }
 

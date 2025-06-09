@@ -2,9 +2,8 @@ import { useState, useContext } from 'react';
 import ToolsUsed from './toolsUsed';
 import { PortfolioContext } from '../providers/PortfolioProvider';
 import MultiInput from './MultiInput';
-import portfolioFormOrig from '../utils/portfolioFormOrig';
 
-function PortfolioForm({ formOrig, isUpdate }) {
+function PortfolioForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
 
     const [form, setForm] = useState(formOrig);
 
@@ -18,14 +17,14 @@ function PortfolioForm({ formOrig, isUpdate }) {
             const currentField = prevForm[name];
 
             if (Array.isArray(currentField)) {
-            return {
-                ...prevForm,
-                [name]: currentField.map((item) =>
-                item.id === id
-                    ? { ...item, [field || "value"]: value }
-                    : item
-                ),
-            };
+                return {
+                    ...prevForm,
+                    [name]: currentField.map((item) =>
+                    item.id === id
+                        ? { ...item, [field || "value"]: value }
+                        : item
+                    ),
+                };
             }
 
             return {
@@ -40,8 +39,8 @@ function PortfolioForm({ formOrig, isUpdate }) {
         e.preventDefault();
         const { name } = e.target;
 
-        const lengthOfArray = form[name].length;
-        const newId = `${name}${lengthOfArray}`;
+        const dateNow = new Date().getTime();
+        const newId = `${name}${dateNow}`;
 
         setForm(prev => ({
             ...prev,
@@ -94,9 +93,7 @@ function PortfolioForm({ formOrig, isUpdate }) {
         const formData = new FormData();
 
         Object.entries(form).forEach(([key, value]) => {
-            if (key === 'files') return; // skip files for now
-
-            console.log(key, value);
+            if (key === 'files' || key === 'images') return; // skip files for now
 
             if (Array.isArray(value)) {
                 // Check if array items are objects with a `value` property
@@ -115,7 +112,6 @@ function PortfolioForm({ formOrig, isUpdate }) {
 
         // Append files individually
         if (formOrig.files !== form.files) {
-            console.log('files submitted');
             form.files.forEach(item => {
                 formData.append('files', item);
             });
@@ -124,9 +120,6 @@ function PortfolioForm({ formOrig, isUpdate }) {
                 formData.append('files', item.value);
             });
         }
-
-        console.log(formData);
-        
 
         // Debug print to verify final structure
         for (const [key, value] of formData.entries()) {
@@ -145,8 +138,50 @@ function PortfolioForm({ formOrig, isUpdate }) {
             });
 
             const data = await res.json();
+
             console.log(data);
-            setForm(formOrig);
+            console.log(isUpdate ? 'PUT' : 'POST');
+
+            if (data.error) return false;
+
+            console.log(data.data);
+
+            setUpdateForm(data.data);
+
+            const jsonFields = [
+                'challenges',
+                'images',
+                'keyTasks',
+                'skillsApplied',
+                'takeaways',
+                'timeline',
+                'toolsUsed',
+                'files'
+            ];
+
+            const stringifiedData = { ...data.data };
+
+            jsonFields.forEach((field) => {
+                if (Array.isArray(stringifiedData[field]) || typeof stringifiedData[field] === 'object') {
+                    stringifiedData[field] = JSON.stringify(stringifiedData[field]);
+                }
+            });
+
+            console.log(stringifiedData);
+
+            setPortfolioItems(prev => {
+                const index = prev.findIndex(item => item.id == stringifiedData.id);
+
+                if (index !== -1) {
+                    const updated = [...prev];
+                    updated[index] = stringifiedData;
+                    return updated;
+                } else {
+                    return [...prev, stringifiedData];
+                }
+            });
+
+            setIsUpdate(stringifiedData.id);
 
             // should add returned 'post' to portfolioItems with setPortfolioItems()
             // so that it is immediatley visible in the portfolio table.
@@ -231,15 +266,15 @@ function PortfolioForm({ formOrig, isUpdate }) {
         <ToolsUsed handleCheckboxUpdate={handleCheckboxUpdate} selectedTools={form.toolsUsed} />
 
         <div className="flex flex-col gap-4 mb-8">
-                <MultiInput dataTypes={["value"]} handleAdd={(e) => handleAdd(e, { value: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Skills Applied" sectionTitleSingle="Skill Applied" sectionName="skillsApplied" form={form}/>
+                <MultiInput dataTypes={["skill"]} handleAdd={(e) => handleAdd(e, { skill: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Skills Applied" sectionTitleSingle="Skill Applied" sectionName="skillsApplied" form={form}/>
 
-                <MultiInput dataTypes={["value"]} handleAdd={(e) => handleAdd(e, { value: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Key Tasks" sectionTitleSingle="Key Task" sectionName="keyTasks" form={form}/>
+                <MultiInput dataTypes={["task"]} handleAdd={(e) => handleAdd(e, { task: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Key Tasks" sectionTitleSingle="Key Task" sectionName="keyTasks" form={form}/>
 
                 <MultiInput dataTypes={["date", "title", "descriptor"]} handleAdd={(e) => handleAdd(e, { date: '', title: '', descriptor: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Timeline" sectionName="timeline" form={form}/>
 
                 <MultiInput dataTypes={["challenge", "solution"]} handleAdd={(e) => handleAdd(e, { challenge: '', solution: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Challenge and Solution" sectionName="challenges" form={form}/>
 
-                <MultiInput dataTypes={["value"]} handleAdd={(e) => handleAdd(e, { value: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Takeaways" sectionTitleSingle="Takeaway" sectionName="takeaways" form={form}/>
+                <MultiInput dataTypes={["takeaway"]} handleAdd={(e) => handleAdd(e, { takeaway: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Takeaways" sectionTitleSingle="Takeaway" sectionName="takeaways" form={form}/>
         </div>
 
         <div className="flex flex-row gap-2">

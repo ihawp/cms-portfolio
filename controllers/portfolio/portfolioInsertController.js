@@ -13,20 +13,21 @@ const portfolioInsertController = async (req, res) => {
         fileLocations.push(item.filename);
     });
 
-    req.body.files = fileLocations || [];
+    req.body.files = req.body.images = fileLocations || [];
     
     try {
         // Pass req.body to avoid making redundant const variable for each form item
         
-        // const response = 
-        // get response and return the post insert id + the data
-        await insertPortfolioPost(req.body);
+        const response = await insertPortfolioPost(req.body);
+
+        req.body.id = response[0].insertId;
+        req.body.date_created = new Date().toISOString();
 
     } catch (error) {
         return res.status(400).json({ success: false, error: 'Database error when uploading portfolio post.', code: 'DATABASE_ERROR' });
     }
 
-    res.status(200).json({ success: true, data: {}, message: 'Portfolio item inserted successfully!' });
+    res.status(200).json({ success: true, data: req.body, message: 'Portfolio item inserted successfully!' });
 
 }
 
