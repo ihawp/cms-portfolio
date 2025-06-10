@@ -33,6 +33,27 @@ function PortfolioForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
         setIsUpdate
     });
 
+    const { 
+        form,
+        handleChange,
+        handleFileChange,
+        handleCheckboxUpdate,
+        handleAdd,
+        handleRemove,
+        handleClear,
+        resetForm
+    } = useFormState(formOrig);
+
+    // even all this below could be reused!
+    // Could create global form object that data is passed too, but I want the form to stay kind of seperate, I just wanted to logic to be reusable
+    // And I want the custom layout for the specific forms... I suppose I could create data structure that is read by the component to display inputs
+    // in a certain manor... I will try this later when I have more time.
+
+    // So now I will move to adding a blog table / form with this current structure
+    // but before that I need to create a blog table in the DB
+    // insert some example content
+    // finish the Express routes.
+
     const submitPortfolioEntry = async (e) => {
         e.preventDefault();
         
@@ -44,17 +65,6 @@ function PortfolioForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
 
         updateRecord(data);
     }
-
-    const { 
-        form,
-        handleChange,
-        handleFileChange,
-        handleCheckboxUpdate,
-        handleAdd,
-        handleRemove,
-        handleClear,
-        resetForm
-    } = useFormState(formOrig);
 
     return <form onSubmit={submitPortfolioEntry} encType="multipart/form-data" className='flex flex-col w-180 bg-[#222] p-8 rounded-[8px]'>
 

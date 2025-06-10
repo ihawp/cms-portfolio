@@ -12,7 +12,7 @@ function BlogProvider({ children }) {
         // I would rather undo that.
 
         const makeFetch = async () => {
-            const response = await fetch(import.meta.env.VITE_SERVER_URL + '', {
+            const response = await fetch(import.meta.env.VITE_SERVER_URL + 'api/v1/blog', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -30,6 +30,9 @@ function BlogProvider({ children }) {
 
         const doFetch = async () => {
             const response = await makeFetch();
+
+            console.log(response);
+
             setBlogItems(response);
         }
 

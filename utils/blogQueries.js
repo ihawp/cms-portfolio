@@ -4,8 +4,20 @@ const pool = require('../utils/pool');
 // SELECT
 
 const selectBlogPostById = async (postId) => {
-    const [response] = await pool.execute(
-        ``,
+    const [response] = await pool.execute(`
+        SELECT * FROM blog 
+        WHERE id = ?
+        `,
+        [postId]
+    );
+    return response;
+}
+
+const selectBlogPosts = async () => {
+    const [response] = await pool.execute(`
+        SELECT * FROM blog
+        LIMIT 25    
+        `,
         []
     );
     return response;
@@ -34,6 +46,7 @@ const deleteBlogPostById = async (postId) => {
 
 module.exports = {
     selectBlogPostById,
+    selectBlogPosts,
 
     insertBlogPost,
 
