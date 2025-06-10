@@ -30,7 +30,8 @@ function useSubmitForm({ url, isUpdate, setIsUpdate }) {
         // We check for 'images' above because I thought for a while that maybe...just maybe, we were getting images as our key in random cases
         // I don't believe this is still true so I'm going to remove it and see what happens.
         // Great no difference in functionality!
-        if (formOrig?.files !== form.files) {
+
+        if (!form.files[0].value) {
             form.files.forEach(item => formData.append('files', item));
         } else {
             form.files.forEach(item => formData.append('files', item.value));
@@ -55,10 +56,10 @@ function useSubmitForm({ url, isUpdate, setIsUpdate }) {
                 return false;
             }
 
+            console.log(data);
+
             setLoading(false);
             setIsUpdate(data.data.id || false);
-
-            console.log(data);
 
             return data.data;
         } catch (err) {

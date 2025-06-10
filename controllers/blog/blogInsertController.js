@@ -11,6 +11,7 @@ const blogInsertController = async (req, res) => {
     req.body.files = fileLocations || [];
 
     try {
+
         const response = await insertBlogPost(req.body);
 
         if (!response.insertId) {

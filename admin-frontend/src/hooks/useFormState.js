@@ -28,7 +28,6 @@ export const useFormState = (initialForm) => {
             };
         });
 
-        console.log(form);
     };
 
     const handleFileChange = (e) => {

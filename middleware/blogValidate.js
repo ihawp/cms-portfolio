@@ -16,19 +16,26 @@ const blogValidate = [
         .isString()
         .isLength({ min: 1, max: 255 })
         .withMessage('Value must not be empty.'),
+
     body('id')
         .optional()
         .isNumeric()
         .withMessage('ID must be a number.'),
+
     body(['content', 'tags'])
         .optional()
         .isArray()
-        .isLength({ min: 1 })
         .withMessage('Content must be in array format.'),
+
     body(['content.*', 'tags.*'])
+        .optional()
+        .isObject()
+        .withMessage('Array contents must be an object.'),
+    
+    body(['content.*.*', 'tags.*.*'])
         .isString()
         .isLength({ min: 1, max: 500 })
-        .withMessage('Array contents must be in string format.'),
+        .withMessage('Content or tags must be a string.')
 ];
 
 module.exports = blogValidate;
