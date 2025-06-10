@@ -47,7 +47,8 @@ app.use('/images', express.static('verified_uploads'));
  * @description Serve the admin portal.
  */
 app.use('/admin/ihawp', express.static(path.join(__dirname, 'admin-frontend', 'dist')));
-app.get('/admin/ihawp', (req, res) => {
+app.get('/admin/ihawp/*splat', (req, res) => {
+    console.log(req.params.splat);
     res.sendFile(path.join(__dirname, 'admin-frontend', 'dist', 'index.html'));
 });
 
@@ -56,7 +57,8 @@ app.get('/admin/ihawp', (req, res) => {
  * @description Serve the frontend of the site.
  */
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
-app.get(/.*/, (req, res) => {
+app.get('/*splat', (req, res) => {
+    console.log(req.params.splat);
     res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });
 

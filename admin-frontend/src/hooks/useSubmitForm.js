@@ -15,9 +15,9 @@ function useSubmitForm({ url, isUpdate, setIsUpdate }) {
 
         if (Array.isArray(value)) {
             if (value.length > 0 && typeof value[0] === 'object' && 'value' in value[0]) {
-            formData.append(key, JSON.stringify(value.map(item => item.value)));
+                formData.append(key, JSON.stringify(value.map(item => item.value)));
             } else {
-            formData.append(key, JSON.stringify(value));
+                formData.append(key, JSON.stringify(value));
             }
         } else if (typeof value === 'object' && value !== null) {
             formData.append(key, JSON.stringify(value));
@@ -31,6 +31,7 @@ function useSubmitForm({ url, isUpdate, setIsUpdate }) {
         // I don't believe this is still true so I'm going to remove it and see what happens.
         // Great no difference in functionality!
 
+        // If it doesnt exist then no new files were added 
         if (!form.files[0].value) {
             form.files.forEach(item => formData.append('files', item));
         } else {
@@ -55,8 +56,6 @@ function useSubmitForm({ url, isUpdate, setIsUpdate }) {
                 setLoading(false);
                 return false;
             }
-
-            console.log(data);
 
             setLoading(false);
             setIsUpdate(data.data.id || false);

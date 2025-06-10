@@ -6,8 +6,6 @@ const blogUpdateController = async (req, res) => {
 
     const fileLocations = [];
 
-    console.log('req.body.files', req.body.files);
-
     // for when files are not updated
     // but a SINGLE IMAGE is a part of the
     // images column (from another update or the original post)
@@ -27,13 +25,9 @@ const blogUpdateController = async (req, res) => {
         // And then eventually maybe update images for blog or portfolio from the
         // media library
 
-
-
         req.files.forEach(item => {
             fileLocations.push(item.filename);
         });
-
-        console.log('fileLocations', fileLocations);
 
         req.body.files = fileLocations || [];
 

@@ -13,21 +13,13 @@ const useReturnedData = ({ jsonFields, setItems, setIsUpdate }) => {
             // Replace or add data depending on if it was a post update or not.
             const stringifiedData = { ...data };
 
-            console.log(stringifiedData);
-
             jsonFields.forEach((field) => {
-
-                console.log(field);
-
-                console.log(stringifiedData[field]);
 
                 if (Array.isArray(stringifiedData[field]) || typeof stringifiedData[field] === 'object') {
                     
                     stringifiedData[field] = JSON.stringify(stringifiedData[field]);
                 }
             });
-
-            console.log(stringifiedData);
 
             setItems(prev => {
                 const index = prev.findIndex(item => item.id == stringifiedData.id);
@@ -44,7 +36,6 @@ const useReturnedData = ({ jsonFields, setItems, setIsUpdate }) => {
             setLoading(false);
             return true;
         } catch (error) {
-            console.log(error);
             setError('Unknown error when formatting post data.');
             setLoading(false);
             return false;

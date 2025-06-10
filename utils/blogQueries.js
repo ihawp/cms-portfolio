@@ -27,7 +27,6 @@ const selectBlogPosts = async () => {
 // UPDATE
 
 const updateBlogPostById = async (d, postId) => {
-    console.log('d.files', d.files);
     const [response] = await pool.execute(`
         UPDATE blog SET
             title = ?,
