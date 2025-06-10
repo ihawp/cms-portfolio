@@ -12,6 +12,9 @@ const blogDeleteController = require('../controllers/blog/blogDeleteController')
 const verifyJWT = require('../middleware/verifyJWT');
 const blogValidate = require('../middleware/blogValidate');
 const validate = require('../middleware/validate');
+const upload = require('../middleware/useMulter');
+const verifyAndMoveUploads = require('../middleware/verifyUploadedFiles');
+const createJSONFieldParser = require('../middleware/createJSONFieldParser');
 
 /**
  * @route GET /blog
@@ -30,9 +33,9 @@ blogRouter.get('/',
  */
 blogRouter.post('/',
     verifyJWT,
-    (req, res, next) => {
-        console.log(req.body);
-    },
+    upload.array('files', 5),
+    verifyAndMoveUploads,
+    createJSONFieldParser(['content', 'tags']),
     blogValidate,
     validate,
     blogInsertController

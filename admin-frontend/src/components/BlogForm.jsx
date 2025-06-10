@@ -37,16 +37,6 @@ function BlogForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
         resetForm
     } = useFormState(formOrig);
 
-    // even all this below could be reused!
-    // Could create global form object that data is passed too, but I want the form to stay kind of seperate, I just wanted to logic to be reusable
-    // And I want the custom layout for the specific forms... I suppose I could create data structure that is read by the component to display inputs
-    // in a certain manor... I will try this later when I have more time.
-
-    // So now I will move to adding a blog table / form with this current structure
-    // but before that I need to create a blog table in the DB
-    // insert some example content
-    // finish the Express routes.
-
     const submitBlogEntry = async (e) => {
         e.preventDefault();
         
@@ -72,7 +62,7 @@ function BlogForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
 
                 <label htmlFor="author" className="flex flex-col max-w-[50%] flex-grow-1">
                     <span className='text-xs mb-2'>Author:</span>
-                    <input type="text" name="author" id="author" placeholder="Author" value={form.author} onChange={handleChange} maxLength={255}required className="border-solid border border-gray-500 rounded-lg px-3 py-2" />
+                    <input type="text" name="author" id="author" placeholder="Author" value={form.author} onChange={handleChange} maxLength={255} required className="border-solid border border-gray-500 rounded-lg px-3 py-2" />
                 </label>
 
         </div>
@@ -92,7 +82,6 @@ function BlogForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
                 </div>
         </label>
 
-        {/* has `mb-8` in its wrapper */}
         <div className="flex flex-col gap-4 mb-8">
                 <MultiInput dataTypes={["content"]} handleAdd={(e) => handleAdd(e, { content: '' })} handleChange={handleChange} handleClear={handleClear} handleRemove={handleRemove} sectionTitle="Contents" sectionTitleSingle="Content" sectionName="content" form={form}/>
 

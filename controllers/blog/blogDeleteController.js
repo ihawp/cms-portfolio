@@ -5,7 +5,7 @@ const validator = require('validator');
 
 const blogDeleteController = async (req, res) => {
 
-    const { id } = req.body;
+    const { id } = req.params;
 
     if (!validator.isNumeric(id)) {
         return res.status(400).json({ success: false, error: '', code: '' });

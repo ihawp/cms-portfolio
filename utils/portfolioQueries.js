@@ -43,7 +43,7 @@ const selectPortfolioPosts = async () => {
  * @param {Object} d - Data; Shortened name for simplicity.
  */
 const insertPortfolioPost = async (d) => {
-    const response = await pool.execute(`
+    const [response] = await pool.execute(`
         INSERT INTO portfolio
         (title, intro, role,
         timeline, toolsUsed,

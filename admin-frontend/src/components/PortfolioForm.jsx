@@ -33,6 +33,7 @@ function PortfolioForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
         setIsUpdate
     });
 
+    // This could get loaded once
     const { 
         form,
         handleChange,

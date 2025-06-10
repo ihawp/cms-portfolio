@@ -13,7 +13,7 @@ const verifyJWT = require('../middleware/verifyJWT');
 const portfolioValidate = require('../middleware/portfolioValidate');
 const validate = require('../middleware/validate');
 const upload = require('../middleware/useMulter');
-const parseJSONFields = require('../middleware/parseJSONFields');
+const createJSONFieldParser = require('../middleware/createJSONFieldParser');
 const verifyAndMoveUploads = require('../middleware/verifyUploadedFiles');
 
 /**
@@ -37,7 +37,7 @@ portfolioRouter.post('/',
     verifyJWT,
     upload.array('files', 5),
     verifyAndMoveUploads,
-    parseJSONFields,
+    createJSONFieldParser(['timeline', 'toolsUsed', 'skillsApplied', 'keyTasks', 'challenges', 'takeaways']),
     portfolioValidate,
     validate,
     portfolioInsertController
@@ -55,7 +55,7 @@ portfolioRouter.put('/',
     upload.array('files', 5),
     verifyAndMoveUploads,
 
-    parseJSONFields,
+    createJSONFieldParser(['timeline', 'toolsUsed', 'skillsApplied', 'keyTasks', 'challenges', 'takeaways']),
 
     portfolioValidate,
     validate,

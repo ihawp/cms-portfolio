@@ -20,7 +20,11 @@ const portfolioInsertController = async (req, res) => {
         
         const response = await insertPortfolioPost(req.body);
 
-        req.body.id = response[0].insertId;
+        if (!response.insertId) {
+            return res.status(500).json({ success: false, error: 'Database error.', code: 'DATABASE_ERROR' });
+        }
+
+        req.body.id = response.insertId;
         req.body.date_created = new Date().toISOString();
 
     } catch (error) {

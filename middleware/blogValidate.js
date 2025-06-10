@@ -17,6 +17,7 @@ const blogValidate = [
         .isLength({ min: 1, max: 255 })
         .withMessage('Value must not be empty.'),
     body(['content', 'tags'])
+        .optional()
         .isArray()
         .isLength({ min: 1 })
         .withMessage('Content must be in array format.'),

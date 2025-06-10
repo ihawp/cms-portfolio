@@ -27,6 +27,8 @@ export const useFormState = (initialForm) => {
                 [name]: value,
             };
         });
+
+        console.log(form);
     };
 
     const handleFileChange = (e) => {
