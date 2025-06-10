@@ -11,7 +11,7 @@ function useSubmitForm({ url, isUpdate, setIsUpdate }) {
     const formData = new FormData();
 
     Object.entries(form).forEach(([key, value]) => {
-      if (key === 'files' || key === 'images') return;
+      if (key === 'files') return;
 
       if (Array.isArray(value)) {
         if (value.length > 0 && typeof value[0] === 'object' && 'value' in value[0]) {
@@ -27,6 +27,8 @@ function useSubmitForm({ url, isUpdate, setIsUpdate }) {
     });
 
     // Append files
+    // We check for 'images' above because I thought for a while that maybe...just maybe, we were getting images as our key in random cases
+    // I don't believe this is still true so I'm going to remove it and see what happens.
     if (formOrig?.files !== form.files) {
       form.files.forEach(item => formData.append('files', item));
     } else {
