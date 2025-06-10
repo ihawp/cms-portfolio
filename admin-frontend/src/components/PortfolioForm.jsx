@@ -4,14 +4,32 @@ import { PortfolioContext } from '../providers/PortfolioProvider';
 import MultiInput from './MultiInput';
 import { useFormState } from '../hooks/useFormState';
 import useSubmitForm from '../hooks/useSubmitForm';
+import useReturnedData from '../hooks/useReturnedData';
 
 function PortfolioForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
+
+    const jsonFields = [
+        'challenges',
+        'images',
+        'keyTasks',
+        'skillsApplied',
+        'takeaways',
+        'timeline',
+        'toolsUsed',
+        'files'
+    ];
 
     const { setPortfolioItems } = useContext(PortfolioContext);
 
     const { submitForm, loading, error } = useSubmitForm({
         url: import.meta.env.VITE_SERVER_URL + 'api/v1/portfolio/',
         isUpdate,
+        setIsUpdate
+    });
+
+    const { updateRecord } = useReturnedData({
+        jsonFields,
+        setPortfolioItems,
         setIsUpdate
     });
 
@@ -24,50 +42,7 @@ function PortfolioForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
 
         setUpdateForm(data);
 
-        try {
-            const jsonFields = [
-                'challenges',
-                'images',
-                'keyTasks',
-                'skillsApplied',
-                'takeaways',
-                'timeline',
-                'toolsUsed',
-                'files'
-            ];
-
-            // replace or add data depending on if it was a post update
-            // or not.
-
-            const stringifiedData = { ...data };
-
-            jsonFields.forEach((field) => {
-                if (Array.isArray(stringifiedData[field]) || typeof stringifiedData[field] === 'object') {
-                    stringifiedData[field] = JSON.stringify(stringifiedData[field]);
-                }
-            });
-
-            console.log(stringifiedData);
-
-            setPortfolioItems(prev => {
-                const index = prev.findIndex(item => item.id == stringifiedData.id);
-
-                if (index !== -1) {
-                    const updated = [...prev];
-                    updated[index] = stringifiedData;
-                    return updated;
-                } else {
-                    return [...prev, stringifiedData];
-                }
-            });
-
-            setIsUpdate(stringifiedData.id);
-
-            // should add returned 'post' to portfolioItems with setPortfolioItems()
-            // so that it is immediatley visible in the portfolio table.
-        } catch (error) {
-            console.error('Submission error:', error);
-        }
+        updateRecord(data);
     }
 
     const { 
