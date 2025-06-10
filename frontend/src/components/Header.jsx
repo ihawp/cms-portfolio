@@ -10,7 +10,7 @@ function Header() {
 
     return <header className='flex flex-col items-center w-full md:my-4'>
 
-        <div className={`${navState ? 'w-[50%] opacity' : 'w-0 opacity-0 invisible' } transition-all flex flex-col bg-[#333] border-l border-l-[5px] border-[#444] h-screen fixed top-0 right-0 items-center
+        <div className={`${width < 768 ? navState ? 'w-[50%] opacity' : 'w-0 opacity-0 invisible' : null } transition-all flex flex-col bg-[#333] border-l border-l-[5px] border-[#444] h-screen fixed top-0 right-0 items-center
                         md:flex-row md:w-190 md:bg-transparent md:relative md:h-min md:justify-between md:border-none
                         xl:w-300
             `}

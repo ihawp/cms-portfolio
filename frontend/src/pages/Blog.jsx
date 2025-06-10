@@ -1,30 +1,22 @@
 import { useContext } from "react";
 import { BlogContext } from "../providers/BlogProvider";
+import BlogItem from '../components/BlogItem';
 
 function Blog() {
 
     const { blogPosts } = useContext(BlogContext);
 
-    return <>
+    return <div className="w-full md:w-190 xl:w-300">
     
         <header>
             <h1>Blog</h1>
         </header>
 
         {blogPosts ? blogPosts.map((item, key) => {
-            return <div key={key}>
-
-                <p>{item.id}</p>
-
-                <h2>{item.title}</h2>
-
-                {JSON.parse(item.files).map((item, key) => {
-                    return <img src={import.meta.env.VITE_SERVER_URL + 'images/' + item} key={key} alt="ihawp.com Image" draggable="false" />
-                })}
-            </div>
+            return <BlogItem item={ item } />
         }) : null}
     
-    </>
+    </div>
 }
 
 export default Blog;

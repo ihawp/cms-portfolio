@@ -40,7 +40,10 @@ app.use('/api/v1', apiRouter);
  * @route /images
  * @description Retrieve images from verified_images via URL.
  */
-app.use('/images', express.static('verified_uploads'));
+app.use('/images', express.static('verified_uploads', {
+    maxAge: '30d',
+    immutable: true
+}));
 
 /**
  * @route GET /

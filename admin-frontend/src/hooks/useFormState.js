@@ -77,7 +77,7 @@ export const useFormState = (initialForm) => {
     };
 
     const resetForm = () => {
-        setForm(formOrig);
+        setForm(initialForm);
     }
 
     const handleRemove = (e, id) => {
