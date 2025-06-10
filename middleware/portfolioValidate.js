@@ -34,6 +34,11 @@ const portfolioValidate = [
         .isLength({ max: 255 })
         .withMessage('Should be a string with a maximum length of 255 characters.'),
 
+    body('id')
+        .optional()
+        .isNumeric()
+        .withMessage('ID must be a number.'),
+
     body([
         'timeline',
         'toolsUsed',

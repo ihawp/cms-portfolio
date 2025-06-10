@@ -1,6 +1,56 @@
-const blogUpdateController = (req, res) => {
+const { updateBlogPostById } = require('../../utils/blogQueries');
 
-    res.status(200).json({ success: true, data: {}, message: 'Blog post updated successfully!' });
+const blogUpdateController = async (req, res) => {
+
+    const { id } = req.body;
+
+    const fileLocations = [];
+
+    // for when files are not updated
+    // but a SINGLE IMAGE is a part of the
+    // images column (from another update or the original post)
+    // it will just not work, so this checks for that case
+    // and handles it.
+
+    if (typeof req.body?.files === 'string') {
+        req.body.files = [req.body.files];
+    } else if (typeof req.body?.files !== 'object') {
+        req.body.files = [];
+    }
+
+    if (req.files.length > 0) {
+
+        // delete the old files.
+        // Or maybe build media library thing where I can delete images?
+        // And then eventually maybe update images for blog or portfolio from the
+        // media library
+
+        req.files.forEach(item => {
+            fileLocations.push(item.filename);
+        });
+
+        req.body.files = fileLocations || [];
+
+    }
+
+    if (!id) {
+        return res.status(400).json({ success: false, error: '', code: '' });
+    }
+
+    console.log('1',req.body);
+
+    try {
+        await updateBlogPostById(req.body, id);
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ success: false, error: 'Failed to update blog post.', code: 'UPDATE_FAILED' });
+    }
+
+    console.log('2',req.body);
+
+    req.body.id = id;
+
+    res.status(200).json({ success: true, data: req.body, message: 'Blog post updated successfully!' });
 
 }
 

@@ -42,13 +42,16 @@ blogRouter.post('/',
 );
 
 /**
- * @route PUT /blog/:id
+ * @route PUT /blog/
  * @description
  * @middleware verifyJWT
  * @controller blogUpdateController
  */
-blogRouter.put('/:id',
+blogRouter.put('/',
     verifyJWT,
+    upload.array('files', 5),
+    verifyAndMoveUploads,
+    createJSONFieldParser(['content', 'tags']),
     blogValidate,
     validate,
     blogUpdateController

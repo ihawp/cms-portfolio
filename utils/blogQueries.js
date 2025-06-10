@@ -27,7 +27,22 @@ const selectBlogPosts = async () => {
 // UPDATE
 
 const updateBlogPostById = async (d, postId) => {
-    const [response] = pool.execute('', []);
+    const [response] = await pool.execute(`
+        UPDATE blog SET
+            title = ?,
+            author = ?,
+            content = ?,
+            tags = ?,
+            files = ?
+        WHERE id = ?
+        `, [
+            d.title,
+            d.author,
+            JSON.stringify(d.content),
+            JSON.stringify(d.tags),
+            JSON.stringify(d.files),
+            postId
+        ]);
     return response;
 }
 
@@ -62,6 +77,8 @@ const deleteBlogPostById = async (postId) => {
 module.exports = {
     selectBlogPostById,
     selectBlogPosts,
+
+    updateBlogPostById,
 
     insertBlogPost,
 
