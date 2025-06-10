@@ -1,10 +1,13 @@
 import { useState } from 'react';
 
-const useReturnedData = ({ jsonFields, setPortfolioItems, setIsUpdate }) => {
+const useReturnedData = ({ jsonFields, setItems, setIsUpdate }) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const updateRecord = (data) => {
+
+        console.log('happening');
+
         setLoading(true);
         setError(null);
         try {
@@ -20,7 +23,7 @@ const useReturnedData = ({ jsonFields, setPortfolioItems, setIsUpdate }) => {
                 }
             });
 
-            setPortfolioItems(prev => {
+            setItems(prev => {
                 const index = prev.findIndex(item => item.id == stringifiedData.id);
                 if (index !== -1) {
                     const updated = [...prev];
@@ -35,6 +38,7 @@ const useReturnedData = ({ jsonFields, setPortfolioItems, setIsUpdate }) => {
             setLoading(false);
             return true;
         } catch (error) {
+            console.log(error);
             setError('Unknown error when formatting post data.');
             setLoading(false);
             return false;

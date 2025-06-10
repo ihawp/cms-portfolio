@@ -23,7 +23,7 @@ function BlogForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
 
     const { updateRecord } = useReturnedData({
         jsonFields,
-        setBlogItems,
+        setItems: setBlogItems,
         setIsUpdate
     });
 

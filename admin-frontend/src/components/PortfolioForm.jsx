@@ -29,7 +29,7 @@ function PortfolioForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
 
     const { updateRecord } = useReturnedData({
         jsonFields,
-        setPortfolioItems,
+        setItems: setPortfolioItems,
         setIsUpdate
     });
 

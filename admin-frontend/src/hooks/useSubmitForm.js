@@ -57,6 +57,9 @@ function useSubmitForm({ url, isUpdate, setIsUpdate }) {
 
             setLoading(false);
             setIsUpdate(data.data.id || false);
+
+            console.log(data);
+
             return data.data;
         } catch (err) {
             setError(err.message || 'Unknown error');
