@@ -2,4 +2,10 @@
 
 body {
     background-color: #222;
+    color: #fffddd
+}
+
+a.active {
+    text-decoration: underline;
+    text-underline-offset: 5px;
 }

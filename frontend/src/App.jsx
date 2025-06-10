@@ -13,7 +13,7 @@ function App() {
   <BlogProvider>
 
     <Header />
-    <main>
+    <main className="flex flex-col items-center">
       <Routing />
     </main>
     <Footer />
