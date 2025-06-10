@@ -31,16 +31,16 @@ function BlogProvider({ children }) {
         const doFetch = async () => {
             const response = await makeFetch();
 
-            console.log(response);
+            if (!response) return;
 
-            setBlogItems(response);
+            setBlogItems(response.data.response);
         }
 
         doFetch();
 
     }, []);
 
-    return <BlogContext.Provider value={ blogItems }>
+    return <BlogContext.Provider value={{ blogItems, setBlogItems }}>
         { children }
     </BlogContext.Provider>
 }

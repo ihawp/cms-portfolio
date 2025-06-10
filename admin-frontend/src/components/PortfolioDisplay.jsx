@@ -1,39 +1,11 @@
 import { useContext } from 'react';
 import { PortfolioContext } from '../providers/PortfolioProvider';
 import { FaTrash } from 'react-icons/fa';
+import deleteItem from '../utils/deleteItem';
 
 function PortfolioDisplay({ changeUpdateForm }) {
 
     const { portfolioItems, setPortfolioItems } = useContext(PortfolioContext);
-
-    const deleteItem = async (e, id) => {
-
-        e.preventDefault();
-
-        // Use window.confirm instead of custom modal (for now?).
-        if (!window.confirm(`Do you want to delete Portfolio Item #${id}?`)) return;
-
-        try {
-            const response = await fetch(import.meta.env.VITE_SERVER_URL + `api/v1/portfolio/${encodeURIComponent(id)}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
-            });
-
-            if (!response.ok) return false;
-
-            const data = await response.json();
-
-            if (data.error) return false;
-
-            setPortfolioItems(prev => prev.filter(item => item.id !== id));
-
-        } catch (error) {
-            return false;
-        }
-    }
 
     const bcl = "px-4 border border-gray-400";
 
@@ -67,7 +39,7 @@ function PortfolioDisplay({ changeUpdateForm }) {
                         <button className="flex gap-2 cursor-pointer hover:bg-green-600 rounded-lg p-2" onClick={(e) => changeUpdateForm(e, item.id)}>Update</button>
                     </td>
                     <td className={bcl}>
-                        <button className="flex gap-2 cursor-pointer hover:bg-red-600 rounded-lg p-2" onClick={(e) => deleteItem(e, item.id)}><FaTrash size={13} className='self-center' /> Delete</button>
+                        <button className="flex gap-2 cursor-pointer hover:bg-red-600 rounded-lg p-2" onClick={(e) => deleteItem(e, item.id, setPortfolioItems, 'Portfolio')}><FaTrash size={13} className='self-center' /> Delete</button>
                     </td>
                     <td className={bcl}>{item.title}</td>
                     <td className={bcl}>{item.intro}</td>
