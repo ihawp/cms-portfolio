@@ -23,28 +23,31 @@ blogRouter.get('/',
 );
 
 /**
- * @route
+ * @route POST /blog
  * @description Insert a new blog post.
  * @middleware verifyJWT
  * @controller blogInsertController
  */
-blogRouter.post('/', 
-    verifyJWT, 
-    blogValidate, 
-    validate, 
+blogRouter.post('/',
+    verifyJWT,
+    (req, res, next) => {
+        console.log(req.body);
+    },
+    blogValidate,
+    validate,
     blogInsertController
 );
 
 /**
- * @route
+ * @route PUT /blog/:id
  * @description
  * @middleware verifyJWT
  * @controller blogUpdateController
  */
-blogRouter.put('/:id', 
-    verifyJWT, 
-    blogValidate, 
-    validate, 
+blogRouter.put('/:id',
+    verifyJWT,
+    blogValidate,
+    validate,
     blogUpdateController
 );
 
@@ -54,8 +57,8 @@ blogRouter.put('/:id',
  * @middleware verifyJWT
  * @controller blogDeleteController
  */
-blogRouter.delete('/:id', 
-    verifyJWT, 
+blogRouter.delete('/:id',
+    verifyJWT,
     blogDeleteController
 );
 

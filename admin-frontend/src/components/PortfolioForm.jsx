@@ -1,91 +1,23 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import ToolsUsed from './toolsUsed';
 import { PortfolioContext } from '../providers/PortfolioProvider';
 import MultiInput from './MultiInput';
+import { useFormState } from '../hooks/useFormState';
 
 function PortfolioForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
 
-    const [form, setForm] = useState(formOrig);
+    const { setPortfolioItems } = useContext(PortfolioContext);
 
-    const { portfolioItems, setPortfolioItems } = useContext(PortfolioContext);
-
-    const handleChange = (e) => {
-        const { name, id, value, dataset } = e.target;
-        const field = dataset.type;
-
-        setForm((prevForm) => {
-            const currentField = prevForm[name];
-
-            if (Array.isArray(currentField)) {
-                return {
-                    ...prevForm,
-                    [name]: currentField.map((item) =>
-                    item.id === id
-                        ? { ...item, [field || "value"]: value }
-                        : item
-                    ),
-                };
-            }
-
-            return {
-                ...prevForm,
-                [name]: value,
-            };
-        });
-    };
-
-
-    const handleAdd = (e, template) => {
-        e.preventDefault();
-        const { name } = e.target;
-
-        const dateNow = new Date().getTime();
-        const newId = `${name}${dateNow}`;
-
-        setForm(prev => ({
-            ...prev,
-            [name]: [
-                ...prev[name],
-                { id: newId, ...template }
-            ]
-        }));
-    };
-
-    const handleRemove = (e, id) => {
-        e.preventDefault();
-        const { name } = e.target;
-
-        setForm(prev => ({
-            ...prev,
-            [name]: prev[name].filter(item => item.id !== id)
-        }));
-    };
-
-    const handleClear = (e) => {
-
-        const { name } = e.target;
-
-        setForm(prev => ({
-            ...prev,
-            [name]: []
-        }));
-    }
-
-    const handleFileChange = (e) => {
-
-        const selectedFiles = Array.from(e.target.files);
-
-        const validFiles = selectedFiles.filter(file => file.type === 'image/webp');
-
-        if (validFiles.length === 0) {
-            return;
-        }
-
-        setForm(prev => ({
-            ...prev,
-            files: validFiles
-        }));
-    };
+    const { 
+        form,
+        handleChange,
+        handleFileChange,
+        handleCheckboxUpdate,
+        handleAdd,
+        handleRemove,
+        handleClear,
+        resetForm
+    } = useFormState(formOrig);
 
    const submitPortfolioEntry = async (event) => {
         event.preventDefault();
@@ -159,6 +91,9 @@ function PortfolioForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
                 'files'
             ];
 
+            // replace or add data depending on if it was a post update
+            // or not.
+
             const stringifiedData = { ...data.data };
 
             jsonFields.forEach((field) => {
@@ -188,26 +123,6 @@ function PortfolioForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
         } catch (error) {
             console.error('Submission error:', error);
         }
-    }
-
-    const handleCheckboxUpdate = (e) => {
-        const { name, value, checked } = e.target;
-
-        setForm(prev => {
-            const current = prev[name] || [];
-
-            return {
-                ...prev,
-                [name]: checked
-                ? [...current, value] // add if checked
-                : current.filter(v => v !== value)
-            };
-        });
-    };
-
-    const resetForm = (e) => {
-        e.preventDefault();
-        setForm(formOrig);
     }
 
     return <form onSubmit={submitPortfolioEntry} encType="multipart/form-data" className='flex flex-col w-180 bg-[#222] p-8 rounded-[8px]'>

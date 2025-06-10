@@ -27,6 +27,7 @@ const registerController = async (req, res) => {
     }
 
     // User account could be deleted if this fails
+    // I think it would be ideal to use a listener for emails
     try {
         const emailTemplate = generateMagicTokenEmailTemplate(email, insertId.id, authToken);
         await sendEmailTemplate(emailTemplate);

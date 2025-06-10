@@ -17,11 +17,8 @@ function Portfolio() {
         const item = portfolioItems.find(p => p.id === itemId);
         if (!item) return;
 
-        console.log('before normalized:', item);
-
         const normalized = normalizePortfolioItem(item);
 
-        console.log('normalized:', normalized);
         setUpdateForm(normalized);
         setIsUpdate(itemId);
         setAddVisible(true);

@@ -22,8 +22,20 @@ const insertBlogPost = async () => {
     return response;
 }
 
+// #######################################################################
+// DELETE
+
+const deleteBlogPostById = async (postId) => {
+    await pool.execute(
+        'DELETE FROM blog WHERE id = ?',
+        [postId]
+    );
+}
+
 module.exports = {
     selectBlogPostById,
 
     insertBlogPost,
+
+    deleteBlogPostById,
 }

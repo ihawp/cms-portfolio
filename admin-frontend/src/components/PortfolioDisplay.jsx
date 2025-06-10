@@ -89,8 +89,4 @@ function PortfolioDisplay({ changeUpdateForm }) {
     </table>
 }
 
-
-function TH({ content }) {
-    return <th className={bcl}>{content}</th>
-}
 export default PortfolioDisplay;

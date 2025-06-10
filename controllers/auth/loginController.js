@@ -33,6 +33,8 @@ const loginController = async (req, res) => {
         return res.status(500).json({ success: false, error: 'Database error.', code: 'DATABASE_ERROR'})
     }
 
+    // I think it would be ideal to use a listener for emails
+
     try {
         const emailTemplate = generateMagicTokenEmailTemplate(email, userInfo.id, authToken);
         await sendEmailTemplate(emailTemplate);

@@ -17,21 +17,15 @@ function PortfolioProvider({ children }) {
                     },
                 });
 
-                console.log(response);
-
-                if (!response.ok) return false;
+                if (!response.ok) return [];
 
                 const data = await response.json();
 
-                console.log(data);
-
-                if (data.error) return false;
-
-                console.log(data);
+                if (data.error) return [];
 
                 return data.data.response;
             } catch (error) {
-                return false;
+                return [];
             }
         }
 

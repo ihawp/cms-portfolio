@@ -20,7 +20,7 @@ const blogValidate = [
         .isArray()
         .isLength({ min: 1 })
         .withMessage('Content must be in array format.'),
-    body(['content[*]', 'tags[*]'])
+    body(['content.*', 'tags.*'])
         .isString()
         .isLength({ min: 1, max: 500 })
         .withMessage('Array contents must be in string format.'),

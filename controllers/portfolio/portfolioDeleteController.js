@@ -1,8 +1,13 @@
 const { deletePortfolioPostById } = require('../../utils/portfolioQueries');
+const validator = require('validator');
 
 const portfolioDeleteController = async (req, res) => {
 
     const { id } = req.params;
+
+    if (!validator.isNumeric(id)) {
+        return res.status(400).json({ success: false, error: '', code: '' });
+    }
 
     // Should also delete any affiliated media from the appropriate directory.
 

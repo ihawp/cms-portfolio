@@ -2,10 +2,7 @@ const { insertBlogPost } = require('../../utils/blogQueries');
 
 const blogInsertController = async (req, res) => {
 
-    const {
-        title,
-
-    } = req.body;
+    console.log(req.body);
 
     try {
         await insertBlogPost(
