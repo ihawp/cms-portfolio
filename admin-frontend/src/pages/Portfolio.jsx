@@ -7,7 +7,7 @@ import { PortfolioContext } from '../providers/PortfolioProvider';
 
 function Portfolio() {
 
-    const { portfolioItems, setPortfolioItems } = useContext(PortfolioContext);
+    const { portfolioItems } = useContext(PortfolioContext);
 
     const [addVisible, setAddVisible] = useState(false);
     const [isUpdate, setIsUpdate] = useState(false);
@@ -25,6 +25,8 @@ function Portfolio() {
     };
 
     function normalizePortfolioItem(item) {
+
+        // Need to get rid of the whole storing the frontend id: thing!
         const makeArrayOfObjects = (arr, name, key = "value") =>
             Array.isArray(arr)
                 ? arr.map((v, g) =>

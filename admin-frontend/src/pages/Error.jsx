@@ -1,6 +1,7 @@
 function Error() {
     return <>
-        ERROR!!
+        ERROR!!<br></br>
+        <a href="https://ihawp.com">Go to home.</a>
     </>
 }
 

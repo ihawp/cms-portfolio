@@ -3,83 +3,28 @@ import ToolsUsed from './toolsUsed';
 import { PortfolioContext } from '../providers/PortfolioProvider';
 import MultiInput from './MultiInput';
 import { useFormState } from '../hooks/useFormState';
+import useSubmitForm from '../hooks/useSubmitForm';
 
 function PortfolioForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
 
     const { setPortfolioItems } = useContext(PortfolioContext);
 
-    const { 
-        form,
-        handleChange,
-        handleFileChange,
-        handleCheckboxUpdate,
-        handleAdd,
-        handleRemove,
-        handleClear,
-        resetForm
-    } = useFormState(formOrig);
+    const { submitForm, loading, error } = useSubmitForm({
+        url: import.meta.env.VITE_SERVER_URL + 'api/v1/portfolio/',
+        isUpdate,
+        setIsUpdate
+    });
 
-   const submitPortfolioEntry = async (event) => {
-        event.preventDefault();
+    const submitPortfolioEntry = async (e) => {
+        e.preventDefault();
+        
+        const data = await submitForm(form, formOrig);
+        
+        if (!data) return false;
 
-        const formData = new FormData();
-
-        Object.entries(form).forEach(([key, value]) => {
-            if (key === 'files' || key === 'images') return; // skip files for now
-
-            if (Array.isArray(value)) {
-                // Check if array items are objects with a `value` property
-                if (value.length > 0 && typeof value[0] === 'object' && 'value' in value[0]) {
-                    const simplifiedArray = value.map(item => item.value);
-                    formData.append(key, JSON.stringify(simplifiedArray));
-                } else {
-                    formData.append(key, JSON.stringify(value));
-                }
-            } else if (typeof value === 'object' && value !== null) {
-                formData.append(key, JSON.stringify(value));
-            } else {
-                formData.append(key, value);
-            }
-        });
-
-        // Append files individually
-        if (formOrig.files !== form.files) {
-            form.files.forEach(item => {
-                formData.append('files', item);
-            });
-        } else {
-            form.files.forEach(item => {
-                formData.append('files', item.value);
-            });
-        }
-
-        // Debug print to verify final structure
-        for (const [key, value] of formData.entries()) {
-            console.log(key, value);
-        }
-
-        if (isUpdate) {
-            formData.append('id', isUpdate);
-        }
+        setUpdateForm(data);
 
         try {
-            const res = await fetch(import.meta.env.VITE_SERVER_URL + 'api/v1/portfolio/', {
-                method: isUpdate ? 'PUT' : 'POST',
-                body: formData,
-                credentials: 'include'
-            });
-
-            const data = await res.json();
-
-            console.log(data);
-            console.log(isUpdate ? 'PUT' : 'POST');
-
-            if (data.error) return false;
-
-            console.log(data.data);
-
-            setUpdateForm(data.data);
-
             const jsonFields = [
                 'challenges',
                 'images',
@@ -94,7 +39,7 @@ function PortfolioForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
             // replace or add data depending on if it was a post update
             // or not.
 
-            const stringifiedData = { ...data.data };
+            const stringifiedData = { ...data };
 
             jsonFields.forEach((field) => {
                 if (Array.isArray(stringifiedData[field]) || typeof stringifiedData[field] === 'object') {
@@ -124,6 +69,17 @@ function PortfolioForm({ formOrig, isUpdate, setIsUpdate, setUpdateForm }) {
             console.error('Submission error:', error);
         }
     }
+
+    const { 
+        form,
+        handleChange,
+        handleFileChange,
+        handleCheckboxUpdate,
+        handleAdd,
+        handleRemove,
+        handleClear,
+        resetForm
+    } = useFormState(formOrig);
 
     return <form onSubmit={submitPortfolioEntry} encType="multipart/form-data" className='flex flex-col w-180 bg-[#222] p-8 rounded-[8px]'>
 

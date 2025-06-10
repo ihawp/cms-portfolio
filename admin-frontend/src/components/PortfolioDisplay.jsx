@@ -14,7 +14,7 @@ function PortfolioDisplay({ changeUpdateForm }) {
         if (!window.confirm(`Do you want to delete Portfolio Item #${id}?`)) return;
 
         try {
-            const response = await fetch(import.meta.env.VITE_SERVER_URL + `api/v1/portfolio/${id}`, {
+            const response = await fetch(import.meta.env.VITE_SERVER_URL + `api/v1/portfolio/${encodeURIComponent(id)}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

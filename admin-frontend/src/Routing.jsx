@@ -4,15 +4,14 @@ import { Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Blog from './pages/Blog';
-
-// Will build seperate react app for admin interface.
-// I will set cookies on the /admin route for logins.
-// I will also update clearing cookies to this route.
-// (maybe I'll add .env variable for cookie path!).
 import Portfolio from './pages/Portfolio';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Error from './pages/Error';
+
+// Will build seperate react app for admin interface. (this is the seperate react app)
+// I will set cookies on the /admin/ihawp route for logins.
+// I will also update clearing cookies to this route (/admin/ihawp).
 
 function Routing() {
 
