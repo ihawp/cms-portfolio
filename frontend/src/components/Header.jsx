@@ -1,6 +1,7 @@
 import { NavLink, Link } from 'react-router';
 import { useState } from 'react';
 import useWindowWidth from '../hooks/useWindowWidth';
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 function Header() {
 
@@ -15,11 +16,14 @@ function Header() {
                         xl:w-300
             `}
             aria-hidden={navState}>
-            <Link to="/" title="ihawp.com Home Page">
-                <img src="/ihawp-com-logo.svg" alt="ihawp.com Logo" title="ihawp.com Logo" draggable="false" />
-            </Link>
+            
+            <div className='md:min-w-[25%] md:flex md:justify-start'>
+                <Link to="/" title="ihawp.com Home Page">
+                    <img src="/ihawp-com-logo.svg" alt="ihawp.com Logo" title="ihawp.com Logo" draggable="false" />
+                </Link>
+            </div>
 
-            <nav>
+            <nav className='md:min-w-[50%] md:flex md:justify-center'>
                 <ul className="flex flex-col md:flex-row md:gap-16">
                     <li><NavLink to="/">Home</NavLink></li>
                     <li><NavLink to="/portfolio">Portfolio</NavLink></li>
@@ -27,10 +31,10 @@ function Header() {
                 </ul>
             </nav>
 
-            <nav>
-                <ul>
-                    <li><a href="" title="GitHub">GitHub</a></li>
-                    <li><a href="" title="LinkedIn">LinkedIn</a></li>
+            <nav className='md:min-w-[25%] md:flex md:justify-end'>
+                <ul className="flex flex-row gap-8">
+                    <li><a href="" title="GitHub"><FaGithub size={32} /></a></li>
+                    <li><a href="" title="LinkedIn"><FaLinkedin size={32} /></a></li>
                 </ul>
             </nav>
         </div>

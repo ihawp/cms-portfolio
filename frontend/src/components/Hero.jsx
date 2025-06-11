@@ -2,7 +2,7 @@ function Hero() {
 
     return <header className="flex flex-col items-center">
 
-        <div className="w-screen md:w-190 xl:w-300">
+        <div className="w-screen md:w-190">
             <div>
                 <h1>Warren Chemerika</h1>
                 <h2>Some other text</h2>

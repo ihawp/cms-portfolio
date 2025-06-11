@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { PortfolioContext } from "../providers/PortfolioProvider";
 import PortfolioItem from '../components/PortfolioItem';
 
+import {  } from 'react-icons/fa';
+
 function Portfolio() {
 
     const { posts } = useContext(PortfolioContext);
@@ -13,9 +15,9 @@ function Portfolio() {
         </header>
 
         {posts ? posts.map((item, key) => {
-            return <PortfolioItem item={ item } />
+            return <PortfolioItem item={ item } key={ key } />
         }) : null}
-    
+
     </div>
 }
 

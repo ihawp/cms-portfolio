@@ -13,7 +13,7 @@ function Blog() {
         </header>
 
         {blogPosts ? blogPosts.map((item, key) => {
-            return <BlogItem item={ item } />
+            return <BlogItem item={ item } key={ key } />
         }) : null}
     
     </div>
