@@ -4,7 +4,7 @@ function Footer() {
     return <footer className="flex flex-col items-center w-full">
 
         <div className='w-full md:w-190 xl:w-300 flex flex-col'>
-            <Link to="/" title="ihawp.com Home Page">
+            <Link to="/" title="ihawp.com Home Page" className='w-max'>
                 <img src="/ihawp-com-logo.svg" alt="ihawp.com Logo" title="ihawp.com Logo" draggable="false" />
             </Link>
 
@@ -32,8 +32,8 @@ function Footer() {
             </div>
 
             <div className='flex flex-row justify-between items-center'>
-                <p>ihawp 205</p>
-                <Link to="">Privacy Policy</Link>
+                <p>&copy; ihawp.com {new Date().getFullYear()}</p>
+                <Link to="/privacy-policy">Privacy Policy</Link>
             </div>
         </div>
 
