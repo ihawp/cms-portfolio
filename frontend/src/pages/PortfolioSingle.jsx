@@ -22,7 +22,7 @@ function PortfolioSingle() {
 
     const post = posts.find(item => item.id == id);
 
-    const parseImages = post ? JSON.parse(post.images) : ['default-img.webp'];
+    const parseImages = post ? post.images : ['default-img.webp'];
 
     console.log(parseImages);
 
@@ -36,34 +36,27 @@ function PortfolioSingle() {
 
     return post ? <div className='w-full md:w-180 mt-10'>
 
-        <header>
+        <header className='mb-8'>
             <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
 
-            <div className='flex flex-row items-center justify-between mb-4 opacity-70'>
+            <div className='flex flex-row items-center justify-between mb-8 opacity-70'>
                 <p>{post.role} &middot; {dateCreated}</p>
             </div>
 
             <p>{post.intro}</p>
         </header>
 
-        <section className='flex flex-col gap-2'>
-            <div className=''>
-                <img src={import.meta.env.VITE_SERVER_URL + 'images/' + (selectedImage)} alt="" title="" draggable="false" className='w-full h-100 rounded object-cover' />
+        <section className='flex flex-col md:flex-row gap-2'>
+            <div className='w-full aspect'>
+                <img src={import.meta.env.VITE_SERVER_URL + 'images/' + (selectedImage)} alt="" title="" draggable="false" className='w-full h-full rounded object-cover' />
             </div>
-            <div className='flex flex-row gap-2 mb-4 md:mb-0'>
+            <div className='flex flex-row md:flex-col gap-2 mb-4 md:mb-0'>
                 {post.images.length > 1 ? parseImages.map((item, key) => { if (key < 5) return <img src={import.meta.env.VITE_SERVER_URL + 'images/' + item} alt="" title="" draggable="false" onClick={ updateSelectedImage } data-item={item} className={`cursor-pointer w-10 h-10 object-cover rounded border-[#555] ${item === selectedImage ? 'border' : ''}`} key={key} /> }) : null}
             </div>
         </section>
 
         <section>
-            <h2>Tools Used:</h2>
-            {post.toolsUsed ? JSON.parse(post.toolsUsed).map((item, key) => {
-                return <div key={key}>{icons[item]}</div>
-            }) : null}
-        </section>
-
-        <section>
-            {post.timeline ? JSON.parse(post.timeline).map((item, key) => {
+            {post.timeline.length > 0 ? post.timeline.map((item, key) => {
                 return <div className="flex flex-col" key={key}>
                     <span>{item.date}</span>
                     <span>{item.title}</span>
@@ -73,15 +66,21 @@ function PortfolioSingle() {
         </section>
 
         <section>
-            {post.skillsApplied ? JSON.parse(post.skillsApplied).map((item, key) => {
+            {post.skillsApplied.length > 0 ? post.skillsApplied.map((item, key) => {
                 return <div key={key}>
                     <span>{item.skill}</span>
                 </div>
             }) : null}
         </section>
+        <section className='flex flex-row gap-4 my-4' title="Tools Used">
+            {/* need to parse the json arrays when we receive the data I feel like im killing someones cpu */}
+            {post.toolsUsed.length > 0 ? post.toolsUsed.map((item, key) => {
+                return <div key={key}>{icons[item]}</div>
+            }) : null}
+        </section>
 
         <section>
-            {post.keyTasks ? JSON.parse(post.keyTasks).map((item, key) => {
+            {post.keyTasks.length > 0 ? post.keyTasks.map((item, key) => {
                 return <div key={key}>
                     <span>{item.task}</span>
                 </div>
@@ -89,7 +88,8 @@ function PortfolioSingle() {
         </section>
 
         <section>
-            {post.challenges ? JSON.parse(post.challenges).map((item, key) => {
+            <h2 className='text-2xl font-semibold'>Challenges Faced:</h2>
+            {post.challenges.length > 0 ? post.challenges.map((item, key) => {
                 return <div key={key}>
                     <span>{item.challenge}</span>
                     <span>{item.solution}</span>
@@ -99,7 +99,7 @@ function PortfolioSingle() {
 
         <section>
             <h2>Takeaways:</h2>
-            {post.takeaways ? JSON.parse(post.takeaways).map((item, key) => {
+            {post.takeaways.length > 0 ? post.takeaways.map((item, key) => {
                 return <div key={key}>
                     <span>{item.takeaway}</span>
                 </div>
@@ -122,7 +122,7 @@ function PortfolioSingle() {
         </section>
 
     </div> : <>
-        <span class="loader"></span>
+        loading
     </>
 }
 

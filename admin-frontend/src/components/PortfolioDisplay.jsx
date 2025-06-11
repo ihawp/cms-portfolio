@@ -7,9 +7,9 @@ function PortfolioDisplay({ changeUpdateForm }) {
 
     const { portfolioItems, setPortfolioItems } = useContext(PortfolioContext);
 
-    const bcl = "px-4 border border-gray-400";
+    const bcl = "px-4 border border-gray-400 h-1";
 
-    return <table className="border border-white border-collapse rounded-lg">
+    return <table className="border border-gray-400 border-collapse rounded-lg">
         <thead>
             <tr>
                 <th className={bcl}>ID</th>
@@ -33,7 +33,7 @@ function PortfolioDisplay({ changeUpdateForm }) {
         </thead>
         <tbody>
             {portfolioItems.map((item, key) => {
-                return <tr className={bcl} key={item.id}>
+                return <tr className={bcl + ' h-1 overflow-scroll'} key={item.id}>
                     <td className={bcl}>{item.id}</td>
                     <td className={bcl}>
                         <button className="flex gap-2 cursor-pointer hover:bg-green-600 rounded-lg p-2" onClick={(e) => changeUpdateForm(e, item.id)}>Update</button>

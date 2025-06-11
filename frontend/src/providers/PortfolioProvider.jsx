@@ -2,6 +2,16 @@ import { useState, useEffect, createContext } from 'react';
 
 export const PortfolioContext = createContext(null);
 
+const rows = [
+    'timeline',
+    'toolsUsed',
+    'skillsApplied',
+    'keyTasks',
+    'challenges',
+    'takeaways',
+    'images'
+]
+
 function PortfolioProvider({ children }) {
 
     const [posts, setPosts] = useState([]);
@@ -31,7 +41,26 @@ function PortfolioProvider({ children }) {
 
         const doFetch = async () => {
             const response = await makeFetch();
-            setPosts(response || []);
+
+            console.log(response);
+
+            const parsedResponse = response.map(post => {
+                const newPost = { ...post };
+
+                rows.forEach(key => {
+                if (newPost[key]) {
+                    try {
+                    newPost[key] = JSON.parse(newPost[key]);
+                    } catch (e) {
+                    console.warn(`Failed to parse ${key} in post ${post.id}`, e);
+                    }
+                }
+                });
+
+                return newPost;
+            });
+
+            setPosts(parsedResponse || []);
         }
 
         doFetch();

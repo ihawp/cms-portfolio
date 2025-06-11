@@ -17,7 +17,7 @@ function PortfolioItem({ item }) {
 
     const navigate = useNavigate();
 
-    const [selectedImage, setSelectedImage] = useState(item.images ? JSON.parse(item.images)[0] : 'default-img.webp');
+    const [selectedImage, setSelectedImage] = useState(item.images ? item.images[0] : 'default-img.webp');
     const [keyMax, setKeyMax] = useState(2);
 
     const dateCreated = formatDate(item.date_created);
@@ -27,8 +27,8 @@ function PortfolioItem({ item }) {
         setSelectedImage(e.target.dataset.item)
     }
 
-    const updateKeyMax = (e) => {
-        setKeyMax(JSON.parse(item.images).length);
+    const updateKeyMax = () => {
+        setKeyMax(item.images.length);
     }
 
     return <div className="bg-[#333] rounded border border-[#666] flex flex-col-reverse md:flex-row p-4 md:p-6 gap-4 justify-between">
@@ -42,27 +42,26 @@ function PortfolioItem({ item }) {
 
             <div className='flex flex-row gap-8 items-center justify-between md:justify-start'>
                 <div className='flex flex-row gap-8 items-center'>
-                    {item.githubURL ? <a href={item.githubURL} title={item.title + ' GitHub Link'} target="_blank" rel="noreferrer"><FaGithub size={26} /></a> : null }
-                    {item.projectSite ? <a href={item.projectSite} title={item.title + ' Project Link'} target="_blank" rel="noreferrer"><FaLink size={26} /></a> : null}
+                    {item.githubURL ? <a href={item.githubURL} title={item.title + ' GitHub Link'} target="_blank" rel="noreferrer"><FaGithub size={22} /></a> : null }
+                    {item.projectSite ? <a href={item.projectSite} title={item.title + ' Project Link'} target="_blank" rel="noreferrer"><FaLink size={22} /></a> : null}
                 </div>
                 <button onClick={() => navigate('/portfolio/' + encodeURIComponent(item.id))} className='px-3 py-2 cursor-pointer' title={`Learn more about the ${item.title} project`}>Learn More</button>
             </div>
         </div>
 
-        {/* very wildcard image loading */}
         {/* Thank you Michael LaRoy */}
-        {item?.images ? <div className='flex flex-col sm:flex-row md:flex-col gap-2'>
+        {item.images ? <div className='flex flex-col sm:flex-row md:flex-col gap-2'>
             <div className='w-full aspect-square'>
-                <img src={import.meta.env.VITE_SERVER_URL + 'images/' + (selectedImage)} alt="" title="" draggable="false" className='w-full h-full md:w-60 md:h-60 rounded object-cover' />
+                <img src={import.meta.env.VITE_SERVER_URL + 'images/' + (selectedImage)} alt="" title="" draggable="false" className='w-full h-full md:w-60 md:h-60 rounded object-cover border border-[#555]' />
             </div>
             
             <div className='flex flex-row flex-wrap sm:flex-col md:flex-row gap-2 mb-4 md:mb-0'>
-                {item.images.length > 1 ? JSON.parse(item.images).map((image, key) => {
+                {item.images.length > 1 ? item.images.map((image, key) => {
                     if (key < keyMax) { 
                         return <img src={import.meta.env.VITE_SERVER_URL + 'images/' + image} alt="" title="" draggable="false" onClick={ updateSelectedImage } data-item={image} className={`cursor-pointer max-w-15 h-15 sm:max-w-20 md:min-w-0 sm:h-20 md:max-w-10 md:h-10 object-cover rounded border ${image === selectedImage ? 'border-[#555]' : 'border-transparent'}`} key={key} /> 
-                    } else if (JSON.parse(item.images).length - 1 === key) {
+                    } else if (item.images.length - 1 === key) {
                         return <div onClick={updateKeyMax} className="relative" key={key}>
-                            <div className='absolute top-[-5px] right-[-5px] bg-red-500 cursor-pointer rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold'>+{JSON.parse(item.images).length - 2}</div>
+                            <div className='absolute top-[-5px] right-[-5px] bg-red-600 cursor-pointer rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold'>+{item.images.length - 2}</div>
                             <img src={import.meta.env.VITE_SERVER_URL + 'images/' + 'default-img.webp'} alt="" title="" draggable="false" className={`cursor-pointer max-w-15 h-15 sm:max-w-20 md:min-w-0 sm:h-20 md:max-w-10 md:h-10 object-cover rounded border-[#555] ${image === selectedImage ? 'border' : ''}`} key={key} />
                         </div>
                     }
