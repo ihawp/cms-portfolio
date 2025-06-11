@@ -11,7 +11,16 @@ function Header() {
     const widthCheck = width < 768;
 
     const updateNavState = (e) => {
-        setNavState(prev => !prev);
+        setNavState(prev => {
+
+            if (!prev) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto'
+            }
+
+            return !prev;
+        });
     }
 
     return <header className='flex flex-col items-center md:my-4'>
@@ -31,7 +40,7 @@ function Header() {
         {widthCheck ? navState ? <div className="w-[50%] h-screen fixed top-0 left-0" onClick={ updateNavState }></div> : null : null}
 
         <div className={`${widthCheck ? navState ? 'w-[50%] opacity' : 'w-0 opacity-0 invisible' : null } 
-                        transition-all flex flex-col bg-[#333] border-l border-l-[5px] border-[#444] h-screen fixed top-0 right-0 gap-12 p-4
+                        transition-all flex flex-col bg-[#333] border-l border-l-[5px] border-[#444] h-screen fixed top-0 right-0 gap-12 p-4 z-100
                         md:items-center md:flex-row md:w-180 md:bg-transparent md:relative md:h-min md:justify-between md:border-none md:p-0
             `}>
             
