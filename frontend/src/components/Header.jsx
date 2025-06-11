@@ -13,7 +13,7 @@ function Header() {
     const updateNavState = (e) => {
         setNavState(prev => {
 
-            let updateString = prev ? 'auto' : 'hidden';
+            const updateString = prev ? 'auto' : 'hidden';
 
             document.body.style.overflow = updateString;
 
