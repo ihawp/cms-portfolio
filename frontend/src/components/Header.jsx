@@ -13,11 +13,9 @@ function Header() {
     const updateNavState = (e) => {
         setNavState(prev => {
 
-            if (!prev) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto'
-            }
+            let updateString = prev ? 'auto' : 'hidden';
+
+            document.body.style.overflow = updateString;
 
             return !prev;
         });
@@ -39,8 +37,8 @@ function Header() {
         */}
         {widthCheck ? navState ? <div className="w-[50%] h-screen fixed top-0 left-0" onClick={ updateNavState }></div> : null : null}
 
-        <div className={`${widthCheck ? navState ? 'w-[50%] opacity' : 'w-0 opacity-0 invisible' : null } 
-                        transition-all flex flex-col bg-[#333] border-l border-l-[5px] border-[#444] h-screen fixed top-0 right-0 gap-12 p-4 z-100
+        <div className={`${widthCheck ? navState ? 'w-[50%] opacity p-4 visible ' : 'w-0 opacity-0 invisible' : null } 
+                        transition-all flex flex-col bg-[#333] border-l border-l-[5px] border-[#444] h-screen fixed top-0 right-0 gap-12 z-100
                         md:items-center md:flex-row md:w-180 md:bg-transparent md:relative md:h-min md:justify-between md:border-none md:p-0
             `}>
             
@@ -66,7 +64,7 @@ function Header() {
             </nav>
         </div>
 
-        {width < 768 ? <button className={`fixed bottom-10 right-10 bg-[#222] w-10 h-10 rounded-[100px] cursor-pointer p-2`} title="Mobile Navigation Button" onClick={ updateNavState }>
+        {width < 768 ? <button className={`fixed bottom-10 right-10 bg-[#222] w-10 h-10 rounded-[100px] cursor-pointer p-2 z-101`} title="Mobile Navigation Button" onClick={ updateNavState }>
             <div className={`navigation-icon ${navState ? 'active' : ''}`}></div>
         </button> : null}
 
