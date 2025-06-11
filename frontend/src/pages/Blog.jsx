@@ -6,7 +6,7 @@ function Blog() {
 
     const { blogPosts } = useContext(BlogContext);
 
-    return <div className="w-full md:w-190 xl:w-300">
+    return <div className="w-full md:w-180">
     
         <header>
             <h1>Blog</h1>

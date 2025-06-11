@@ -1,11 +1,92 @@
 @import 'tailwindcss';
 
+html {
+    box-sizing: border-box;
+    scrollbar-behaviour: smooth;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 body {
     background-color: #222;
-    color: #fffddd
+    color: #fffddd;
+    margin: 1rem;
 }
 
 a.active {
     text-decoration: underline;
     text-underline-offset: 5px;
+}
+
+
+/* Mobile Navigation Button ||| -> X animation* */
+.navigation-icon:after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.navigation-icon, .navigation-icon:after, .navigation-icon:before {
+    content: '';
+    background-color: #fff;
+    width: 24px;
+    height: 4px;
+    border-radius: 8px;
+    transition: .25s ease all;
+}
+
+.navigation-icon:after {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+}
+
+.navigation-icon:before {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+}
+
+.navigation-icon.active {
+    width: 0%;
+}
+
+.navigation-icon.active:after {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.navigation-icon.active:before {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, .1);
+    border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, .2);
+}
+
+
+
+
+@media (min-width: 768px) {
+    body {
+        margin: 0;
+    }
 }

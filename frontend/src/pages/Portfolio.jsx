@@ -8,15 +8,22 @@ function Portfolio() {
 
     const { posts } = useContext(PortfolioContext);
 
-    return <div className="w-full md:w-190 xl:w-300">
+    return <div className="w-full md:w-180">
     
-        <header>
-            <h1>Portfolio</h1>
+        <header className="mb-8">
+            <div className="w-full md:w-180 mt-10">
+                <div className="w-full flex flex-col items-start">
+                    <h1 className="text-4xl font-bold mb-4">Portfolio</h1>
+                    <p className="max-w-120">A collection of Personal and Professional projects.</p>
+                </div>
+            </div>
         </header>
 
-        {posts ? posts.map((item, key) => {
-            return <PortfolioItem item={ item } key={ key } />
-        }) : null}
+        <section className="flex flex-col gap-4">
+            {posts ? posts.map((item, key) => {
+                return <PortfolioItem item={ item } key={ key } />
+            }) : null}
+        </section>
 
     </div>
 }

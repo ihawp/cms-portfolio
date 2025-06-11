@@ -1,5 +1,5 @@
 function Privacy() {
-    return <div className="max-w-3xl py-8">
+    return <div className="w-full md:w-180 mt-10">
         <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
 
         <p className="mb-4">
