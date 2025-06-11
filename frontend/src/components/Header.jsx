@@ -51,7 +51,7 @@ function Header() {
             <nav aria-label="Main Site Navigation" className='md:w-full md:flex md:justify-center'>
                 <ul className="flex flex-col md:flex-row md:gap-16 font-semibold text-2xl md:text-base gap-8">
                     <li><NavLink to="/" title="Home">Home</NavLink></li>
-                    <li><NavLink to="/portfolio" title="Portfolio">Portfolio</NavLink></li>
+                    <li><NavLink to="/portfolio" title="Portfolio" end>Portfolio</NavLink></li>
                     <li><NavLink to="/blog" title="Blog">Blog</NavLink></li>
                 </ul>
             </nav>

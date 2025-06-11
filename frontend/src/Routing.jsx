@@ -8,17 +8,22 @@ import PortfolioSingle from './pages/PortfolioSingle';
 import Privacy from './pages/Privacy';
 import Error from './pages/Error';
 
+import ScrollToTop from './utils/ScrollToTop';
+
 function Routing() {
 
-    return <Routes>
-        <Route path="/" element={ <Home /> } />
-        <Route path="/portfolio" element={ <Portfolio /> } />
-        <Route path="/portfolio/:id" element={ <PortfolioSingle /> } />
-        <Route path="/blog" element={ <Blog /> } />
-        <Route path="/blog/:id" element={ <BlogSingle /> } />
-        <Route path="/privacy-policy" element={ <Privacy /> } />
-        <Route path="*" element={ <Error /> } />
-    </Routes>
+    return <>
+        <ScrollToTop />
+        <Routes>
+            <Route path="/" element={ <Home /> } />
+            <Route path="/portfolio" element={ <Portfolio /> } />
+            <Route path="/portfolio/:id" element={ <PortfolioSingle /> } />
+            <Route path="/blog" element={ <Blog /> } />
+            <Route path="/blog/:id" element={ <BlogSingle /> } />
+            <Route path="/privacy-policy" element={ <Privacy /> } />
+            <Route path="*" element={ <Error /> } />
+        </Routes>
+    </>
 
 }
 

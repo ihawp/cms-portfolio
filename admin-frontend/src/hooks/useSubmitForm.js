@@ -32,7 +32,7 @@ function useSubmitForm({ url, isUpdate, setIsUpdate }) {
         // Great no difference in functionality!
 
         // If it doesnt exist then no new files were added 
-        if (!form.files[0].value) {
+        if (!form.files[0]?.value) {
             form.files.forEach(item => formData.append('files', item));
         } else {
             form.files.forEach(item => formData.append('files', item.value));

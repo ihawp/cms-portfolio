@@ -8,10 +8,10 @@ function Portfolio() {
 
     const { posts } = useContext(PortfolioContext);
 
-    return <div className="w-full md:w-180">
+    return <div className="w-full md:w-180 mt-10">
     
         <header className="mb-8">
-            <div className="w-full md:w-180 mt-10">
+            <div className="w-full md:w-180">
                 <div className="w-full flex flex-col items-start">
                     <h1 className="text-4xl font-bold mb-4">Portfolio</h1>
                     <p className="max-w-120">A collection of Personal and Professional projects.</p>
