@@ -14,7 +14,7 @@ function Footer() {
 
                 <div className='flex flex-row flex-wrap gap-8'>
                     <div className='w-30'>
-                        <h2 className="text-xl mb-3">Pages</h2>
+                        <h2 className="text-xl mb-3 font-semibold">Pages</h2>
                         <ul className='flex flex-col gap-2 text-sm'>
                             <li><Link to="/" title="Home" className='opacity-80 hover:opacity-100'>Home</Link></li>
                             <li><Link to="/portfolio" title="Portfolio" className='opacity-80 hover:opacity-100'>Portfolio</Link></li>
@@ -22,7 +22,7 @@ function Footer() {
                         </ul>
                     </div>
                     <div className='w-30'>
-                        <h2 className="text-xl mb-3">Contact</h2>
+                        <h2 className="text-xl mb-3 font-semibold">Contact</h2>
                         <ul className='flex flex-col gap-2 text-sm'>
                             <li><a href="https://www.linkedin.com/in/warren-chemerika-628b15275/" target="_blank" rel="noreferrer" title="LinkedIn" className='opacity-80 hover:opacity-100'>LinkedIn</a></li>
                             <li><a href="https://github.com/ihawp" title="LinkedIn" target="_blank" rel="noreferrer" className='opacity-80 hover:opacity-100'>GitHub</a></li>
@@ -30,7 +30,7 @@ function Footer() {
                         </ul>
                     </div>
                     <div className='w-30'>
-                        <h2 className="text-xl mb-3">Documents</h2>
+                        <h2 className="text-xl mb-3 font-semibold">Documents</h2>
                         <ul className='flex flex-col gap-2 text-sm'>
                             <li><a href="#" title="Download Warren Chemerika's Resume" className='opacity-80 hover:opacity-100'>Resume</a></li>
                             <li><a href="#" title="View Warren Chemerika's Certificate of Front-End Web Development from Saskatchewan Polytechnic." className='opacity-80 hover:opacity-100'>Saskatchewan Polytechnic Certificate</a></li>
@@ -43,7 +43,7 @@ function Footer() {
 
             </nav>
 
-            <div className='flex flex-col sm:flex-row gap-8 justify-between md:items-center'>
+            <div className='flex flex-col md:flex-row gap-8 justify-between md:items-center'>
                 <p>&copy; ihawp.com {new Date().getFullYear()}</p>
                 <nav>
                     <ul className='flex flex-col md:flex-row gap-8'>

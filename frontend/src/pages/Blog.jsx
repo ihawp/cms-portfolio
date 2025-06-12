@@ -20,7 +20,7 @@ function Blog() {
             </div>
         </header>
 
-        <section className="flex flex-col sm:flex-row gap-4">
+        <section className="flex flex-col sm:flex-row flex-wrap gap-4">
             {blogPosts ? blogPosts.map((item, key) => {
                 return <BlogItem item={ item } key={ key } />
             }) : null}

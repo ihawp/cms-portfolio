@@ -5,7 +5,7 @@ function Privacy() {
     updateDocumentTitle('Privacy Policy | ihawp.com');
 
     return <div className="w-full md:w-180 mt-10">
-        <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
+        <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
 
         <p className="mb-4">
             This Privacy Policy explains how we collect, use, and protect your information when you use our website or services.
@@ -43,7 +43,7 @@ function Privacy() {
 
         <h2 className="text-xl font-semibold mt-6 mb-2">7. Contact Me</h2>
         <p>
-            If you have questions about this policy, please contact me at <a href="mailto:ihawp@ihawp.com" className="text-blue-600">ihawp@ihawp.com</a>.
+            If you have questions about this policy, please contact me at <a href="mailto:ihawp@ihawp.com" className="underline underline-offset-[2px]">ihawp@ihawp.com</a>.
         </p>
     </div>
 }
