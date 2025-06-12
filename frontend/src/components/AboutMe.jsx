@@ -12,6 +12,10 @@ function AboutMe() {
                 I am a professional Front-End Web Developer who spends his time building and learning about full-stack web
                 applications.
             </p>
+
+            <p>
+                My education consists of two 6 month certificates of Front-End Web Development.
+            </p>
         </div>
 
     </section>

@@ -10,7 +10,7 @@ const rows = [
     'challenges',
     'takeaways',
     'images'
-]
+];
 
 function PortfolioProvider({ children }) {
 
@@ -27,22 +27,22 @@ function PortfolioProvider({ children }) {
                     },
                 });
 
-                if (!response.ok) return [];
+                if (!response.ok) return false;
 
                 const data = await response.json();
 
-                if (data.error) return [];
+                if (data.error) return false;
 
                 return data.data.response;
             } catch (error) {
-                return [];
+                return false;
             }
         }
 
         const doFetch = async () => {
             const response = await makeFetch();
 
-            console.log(response);
+            if (!response) return false;
 
             const parsedResponse = response.map(post => {
                 const newPost = { ...post };
@@ -60,7 +60,7 @@ function PortfolioProvider({ children }) {
                 return newPost;
             });
 
-            setPosts(parsedResponse || []);
+            setPosts(parsedResponse);
         }
 
         doFetch();

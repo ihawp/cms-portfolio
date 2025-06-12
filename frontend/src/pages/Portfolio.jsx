@@ -1,14 +1,17 @@
 import { useContext } from "react";
 import { PortfolioContext } from "../providers/PortfolioProvider";
 import PortfolioItem from '../components/PortfolioItem';
+import updateDocumentTitle from '../utils/updateDocumentTitle';
 
 import {  } from 'react-icons/fa';
 
 function Portfolio() {
 
+    updateDocumentTitle('Portfolio | ihawp.com')
+
     const { posts } = useContext(PortfolioContext);
 
-    return <div className="w-full md:w-180 mt-10">
+    return posts ? <div className="w-full md:w-180 mt-10">
     
         <header className="mb-8">
             <div className="w-full md:w-180">
@@ -25,7 +28,7 @@ function Portfolio() {
             }) : null}
         </section>
 
-    </div>
+    </div> : <span className="loader"></span>;
 }
 
 export default Portfolio;

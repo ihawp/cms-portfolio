@@ -11,7 +11,7 @@ html {
 
 body {
     background-color: #222;
-    color: #fffddd;
+    color: #ffffff;
     margin: 1rem;
 }
 
@@ -20,6 +20,9 @@ a.active {
     text-underline-offset: 5px;
 }
 
+p {
+    line-height: 2rem;
+}
 
 /* Mobile Navigation Button ||| -> X animation* */
 .navigation-icon:after {
@@ -82,6 +85,10 @@ a.active {
     background-color: rgba(255, 255, 255, .2);
 }
 
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 /* Loader */
 /* https://cssloaders.github.io/ */
 .loader {
@@ -95,6 +102,7 @@ a.active {
   animation: rotation 1s linear infinite;
 }
 
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -104,9 +112,32 @@ a.active {
   }
 } 
 
+.header-main:before, footer:before {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1607843137), rgba(255, 255, 255, 0));
+    bottom: -12px;
+    content: "";
+    height: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    width: 55%;
+}
+
+.header-main:before {
+    opacity: 0;
+}
+
+footer:before {
+    top: 0;
+}
 
 @media (min-width: 768px) {
     body {
         margin: 0;
     }
+
+    .header-main:before {
+        opacity: 1;
+    }
+
 }

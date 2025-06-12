@@ -2,6 +2,12 @@ import { createContext, useState, useEffect } from 'react';
 
 export const BlogContext = createContext(null);
 
+const rows = [
+    'content',
+    'tags',
+    'files'
+];
+
 function BlogProvider({ children }) {
 
     const [blogPosts, setBlogPosts] = useState([]);
@@ -32,7 +38,26 @@ function BlogProvider({ children }) {
 
         const doFetch = async () => {
             const response = await makeFetch();
-            setBlogPosts(response || []);
+
+            if (!response) return;
+
+            const parsedResponse = response.map(post => {
+                const newPost = { ...post };
+
+                rows.forEach(key => {
+                if (newPost[key]) {
+                    try {
+                    newPost[key] = JSON.parse(newPost[key]);
+                    } catch (e) {
+                    console.warn(`Failed to parse ${key} in post ${post.id}`, e);
+                    }
+                }
+                });
+
+                return newPost;
+            });
+
+            setBlogPosts(parsedResponse);
         }
 
         doFetch();

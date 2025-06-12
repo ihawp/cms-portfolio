@@ -1,4 +1,9 @@
+import updateDocumentTitle from "../utils/updateDocumentTitle";
+
 function Privacy() {
+
+    updateDocumentTitle('Privacy Policy | ihawp.com');
+
     return <div className="w-full md:w-180 mt-10">
         <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
 

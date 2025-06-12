@@ -1,56 +1,49 @@
 import { Link } from 'react-router';
+import ContactCard from './ContactCard';
 
 function Footer() {
-    return <footer className="flex flex-col items-center w-full mb-30 md:mb-8 mt-8">
+    return <footer className="flex flex-col items-center w-full mb-8 mt-12 relative pt-8">
 
         <div className='w-full md:w-180 flex flex-col gap-8'>
-            <Link to="/" title="ihawp.com Home Page" className='w-max'>
-                <img src="/ihawp-com-logo.svg" alt="ihawp.com Logo" title="ihawp.com Logo" draggable="false" />
+            <Link to="/" title="ihawp.com Home Page" className='w-max flex flex-row items-center gap-3'>
+                <img src="/ihawp-com-logo.svg" alt={"ihawp.com Logo"} title="ihawp.com Logo" draggable="false" width={30} />
+                <p className='text-lg font-semibold'>ihawp.com</p>
             </Link>
 
-            <nav className='flex flex-col-reverse md:flex-row justify-between gap-8'>
+            <nav className='flex flex-row flex-wrap justify-between gap-8 mb-4 pb-8'>
+
                 <div className='flex flex-row flex-wrap gap-8'>
                     <div className='w-30'>
-                        <h2 className="text-xl">Pages</h2>
-                        <hr className='my-4 w-5 opacity-20'></hr>
-                        <ul className='flex flex-col gap-2'>
-                            <li><Link to="/" title="Home">Home</Link></li>
-                            <li><Link to="/portfolio" title="Portfolio">Portfolio</Link></li>
-                            <li><Link to="/blog" title="Blog">Blog</Link></li>
+                        <h2 className="text-xl mb-3">Pages</h2>
+                        <ul className='flex flex-col gap-2 text-sm'>
+                            <li><Link to="/" title="Home" className='opacity-80 hover:opacity-100'>Home</Link></li>
+                            <li><Link to="/portfolio" title="Portfolio" className='opacity-80 hover:opacity-100'>Portfolio</Link></li>
+                            <li><Link to="/blog" title="Blog" className='opacity-80 hover:opacity-100'>Blog</Link></li>
                         </ul>
                     </div>
                     <div className='w-30'>
-                        <h2 className="text-xl">Socials</h2>
-                        <hr className='my-4 w-5 opacity-20'></hr>
-                        <ul className='flex flex-col gap-2'>
-                            <li><a href="https://www.linkedin.com/in/warren-chemerika-628b15275/" target="_blank" rel="noreferrer" title="LinkedIn">LinkedIn</a></li>
-                            <li><a href="https://github.com/ihawp" title="LinkedIn" target="_blank" rel="noreferrer">GitHub</a></li>
-                            <li><a href="mailto:ihawp@ihawp.com">Email</a></li>
+                        <h2 className="text-xl mb-3">Contact</h2>
+                        <ul className='flex flex-col gap-2 text-sm'>
+                            <li><a href="https://www.linkedin.com/in/warren-chemerika-628b15275/" target="_blank" rel="noreferrer" title="LinkedIn" className='opacity-80 hover:opacity-100'>LinkedIn</a></li>
+                            <li><a href="https://github.com/ihawp" title="LinkedIn" target="_blank" rel="noreferrer" className='opacity-80 hover:opacity-100'>GitHub</a></li>
+                            <li><a href="mailto:ihawp@ihawp.com" className='opacity-80 hover:opacity-100'>Email</a></li>
                         </ul>
                     </div>
                     <div className='w-30'>
-                        <h2 className="text-xl">Documents</h2>
-                        <hr className='my-4 w-5 opacity-20'></hr>
-                        <ul className='flex flex-col gap-2'>
-                            <li><a href="#" title="Download Warren Chemerika's Resume">Resume</a></li>
-                            <li><a href="#" title="View Warren Chemerika's Certificate of Front-End Web Development from Saskatchewan Polytechnic.">Saskatchewan Polytechnic Certificate</a></li>
-                            <li><a href="#" title="View Warren Chemerika's Front-End Web Developer Certificate from the British Columbia Institute of Technology.">BCIT Certificate</a></li>
+                        <h2 className="text-xl mb-3">Documents</h2>
+                        <ul className='flex flex-col gap-2 text-sm'>
+                            <li><a href="#" title="Download Warren Chemerika's Resume" className='opacity-80 hover:opacity-100'>Resume</a></li>
+                            <li><a href="#" title="View Warren Chemerika's Certificate of Front-End Web Development from Saskatchewan Polytechnic." className='opacity-80 hover:opacity-100'>Saskatchewan Polytechnic Certificate</a></li>
+                            <li><a href="#" title="View Warren Chemerika's Front-End Web Developer Certificate from the British Columbia Institute of Technology." className='opacity-80 hover:opacity-100'>BCIT Certificate</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <div className='w-[240px] h-40 bg-[#333] border border-[#555] rounded p-4 flex flex-col gap-2'>
-                    <p>Warren Chemerika</p>
-                    <a href="mailto:ihawp@ihawp.com" className='w-min'>ihawp@ihawp.com</a>
-                </div>
+                <ContactCard />
 
             </nav>
 
-            <div>
-                {/* Section with drawing or something. */}
-            </div>
-
-            <div className='flex flex-row justify-between items-center'>
+            <div className='flex flex-col sm:flex-row gap-8 justify-between md:items-center'>
                 <p>&copy; ihawp.com {new Date().getFullYear()}</p>
                 <nav>
                     <ul className='flex flex-col md:flex-row gap-8'>
