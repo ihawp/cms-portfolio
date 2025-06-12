@@ -31,7 +31,7 @@ function PortfolioItem({ item }) {
     const updateSelectedImageByKey = (e) => {
 
         if (e.key === 'Enter') {
-            updateSelectedImage(e.target.dataset.item);
+            updateSelectedImage(e);
         }
 
     }

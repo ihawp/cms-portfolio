@@ -66,7 +66,7 @@ function Header() {
 
         </div>
 
-        {width < 768 ? <button className={`fixed bottom-10 right-10 bg-[#222] w-10 h-10 rounded-[100px] cursor-pointer p-2 z-101`} title="Mobile Navigation Button" onClick={ updateNavState }>
+        {width < 768 ? <button className={`fixed safe-bottom bottom-10 right-10 bg-[#222] w-14 h-14 rounded-[100px] cursor-pointer p-2 z-101 border border-[#555] flex items-center justify-center`} title="Mobile Navigation Button" onClick={ updateNavState }>
             <div className={`navigation-icon ${navState ? 'active' : ''}`}></div>
         </button> : null}
 

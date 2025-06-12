@@ -25,34 +25,26 @@ p {
 }
 
 /* Mobile Navigation Button ||| -> X animation* */
-.navigation-icon:after {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 .navigation-icon, .navigation-icon:after, .navigation-icon:before {
     content: '';
     background-color: #fff;
-    width: 24px;
+    width: 32px;
     height: 4px;
     border-radius: 8px;
     transition: .25s ease all;
+    position: absolute;
 }
 
 .navigation-icon:after {
     position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -30%);
+    top: -8px;
+    left: 0;
 }
 
 .navigation-icon:before {
     position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -70%);
+    top: 8px;
+    left: 0;
 }
 
 .navigation-icon.active {
@@ -120,7 +112,7 @@ p {
     left: 50%;
     transform: translateX(-50%);
     position: absolute;
-    width: 55%;
+    width: 40%;
 }
 
 .header-main:before {
@@ -129,6 +121,11 @@ p {
 
 footer:before {
     top: 0;
+}
+
+/* Safe Bottom: Keep the fixed mobile navigation button from being covered up in safari. */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 @media (min-width: 768px) {
