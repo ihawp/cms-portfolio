@@ -1,8 +1,7 @@
 import { NavLink, Link } from 'react-router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useWindowWidth from '../hooks/useWindowWidth';
 import { FaLinkedin, FaGithub } from "react-icons/fa";
-import ContactCard from './ContactCard';
 
 function Header() {
 
@@ -11,16 +10,18 @@ function Header() {
     const width = useWindowWidth();
     const widthCheck = width < 768;
 
-    const updateNavState = (e) => {
+    const updateNavState = () => {
         setNavState(prev => {
 
-            const updateString = prev ? 'auto' : 'hidden';
-
-            document.body.style.overflow = updateString;
+            document.body.style.overflow = prev ? 'auto' : 'hidden';
 
             return !prev;
         });
     }
+
+    useEffect(() => {
+        width > 768 ? document.body.style.overflow = 'auto' : navState ? document.body.style.overflow = 'hidden' : null;
+    }, [width]);
 
     return <header className='flex flex-col items-center md:my-4 header-main relative'>
 
@@ -36,7 +37,7 @@ function Header() {
             this div is clickable, when clicked it updates the nav state using the same method as the
             open/close button
         */}
-        {widthCheck ? navState ? <div className="w-[50%] h-screen fixed top-0 left-0" onClick={ updateNavState }></div> : null : null}
+        {widthCheck ? navState ? <div className="w-[40%] sm:w-[50%] h-screen fixed top-0 left-0 z-100" onClick={ updateNavState }></div> : null : null}
 
         <div className={`${widthCheck ? navState ? 'w-[60%] sm:w-[50%] opacity p-4 visible ' : 'w-0 opacity-0 invisible' : null } 
                         transition-all flex flex-col bg-[#333] border-l border-l-[5px] border-[#444] h-screen fixed top-0 right-0 gap-8 z-100 overflow-scroll
@@ -66,9 +67,11 @@ function Header() {
 
         </div>
 
-        {width < 768 ? <button className={`fixed safe-bottom bottom-10 right-10 bg-[#222] w-14 h-14 rounded-[100px] cursor-pointer p-2 z-101 border border-[#555] flex items-center justify-center`} title="Mobile Navigation Button" onClick={ updateNavState }>
-            <div className={`navigation-icon ${navState ? 'active' : ''}`}></div>
-        </button> : null}
+        {width < 768 ? <div className='fixed bottom-5 right-5 min-h-1 safe-bottom flex justify-end rounded-full z-100'>
+            <button className={`bg-[#222] w-14 h-14 rounded-[100px] cursor-pointer p-2 z-101 border border-[#555] flex items-center justify-center`} title="Mobile Navigation Button" onClick={ updateNavState }>
+                <div className={`navigation-icon ${navState ? 'active' : ''}`}></div>
+            </button>
+        </div> : null}
 
     </header>
 }
