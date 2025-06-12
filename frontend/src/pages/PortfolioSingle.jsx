@@ -157,7 +157,7 @@ function PortfolioSingle() {
                 </div>
             </div> : null}
 
-            {post.skillsApplied.length > 0 ? <div className='flex flex-col gap-4 max-w-80 w-80 mb-8'>
+            {post.skillsApplied.length > 0 ? <div className='w-full flex flex-col gap-4 max-w-80 w-80 mb-8'>
                 <h2 className='text-xl font-bold'>Skills Applied</h2>
                 <ul className='flex flex-row flex-wrap gap-2'>
                     {post.skillsApplied.map((item, key) => {
