@@ -2,20 +2,19 @@ import { useState } from 'react';
 
 function FeaturedImageDisplay({ item, mainImageClasses, secondaryClasses, containerClasses, imageClasses, smallImageClasses, addClasses }) {
 
+    if (item.files) {
+        item.images = item.files;
+    }
+
     const [selectedImage, setSelectedImage] = useState(item.images ? item.images[0] : 'default-img.webp');
     const [keyMax, setKeyMax] = useState(1);
 
     const updateSelectedImage = (e) => {
-
         setSelectedImage(e.target.dataset.item)
     }
 
     const updateSelectedImageByKey = (e) => {
-
-        if (e.key === 'Enter') {
-            updateSelectedImage(e);
-        }
-
+        if (e.key === 'Enter') updateSelectedImage(e);
     }
 
     const updateKeyMax = () => {
@@ -23,9 +22,7 @@ function FeaturedImageDisplay({ item, mainImageClasses, secondaryClasses, contai
     }
 
     const updateKeyMaxByKey = (e) => {
-        if (e.key === 'Enter') {
-            updateKeyMax();
-        }
+        if (e.key === 'Enter') updateKeyMax();
     }
 
     return item.images ? <div className={containerClasses}>

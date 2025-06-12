@@ -16,8 +16,17 @@ body {
 }
 
 a.active {
-    text-decoration: underline;
-    text-underline-offset: 5px;
+    position: relative;
+}
+a.active:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    width: 7px;
+    height: 7px;
+    border-radius: 7px;
+    background-color: limegreen;
 }
 
 p {
@@ -135,6 +144,15 @@ footer:before {
 
     .header-main:before {
         opacity: 1;
+    }
+
+    a.active {
+        text-decoration: underline;
+        text-underline-offset: 5px;
+    }
+
+    a.active:after {
+        all: unset;
     }
 
 }

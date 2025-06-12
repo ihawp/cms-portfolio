@@ -13,7 +13,8 @@ import {
     FaArrowAltCircleLeft,
     FaShareAlt,
     FaExclamationTriangle,
-    FaLightbulb
+    FaLightbulb,
+    FaKey
 } from 'react-icons/fa';
 import { HiOutlineExternalLink } from 'react-icons/hi';
 import formatDate from '../utils/formatDate';
@@ -88,9 +89,14 @@ function PortfolioSingle() {
             <p>{post.solutionSummary}</p>
         </section>
 
-        {post.keyTasks.length > 0 ? <section className='mb-8'>
-            <h2 className="text-xl font-bold mb-4">Key Tasks Completed</h2>
-            <ul className='list-disc pl-8 flex flex-col gap-2 border border-[#555] p-4 bg-[#333] rounded'>
+        {post.keyTasks.length > 0 ? <section className='mb-8 border border-[#555] p-4 md:p-6 bg-[#333] rounded'>
+            <div className='flex flex-row items-center gap-3 mb-6'>
+                <div className='opacity-70'>
+                    <FaKey size={16} />
+                </div>
+                <h2 className="text-xl font-semibold">Key Tasks Completed</h2>
+            </div>
+            <ul className='list-disc pl-8 flex flex-col gap-2 mb-2 opacity-90'>
                 {post.keyTasks.map((item, key) => {
                     return <li key={key}>
                         <p>{item.task}</p>
@@ -109,7 +115,7 @@ function PortfolioSingle() {
         </section> : null}
 
         {post.challenges.length > 0 ? <section className='mb-8'>
-            <h2 className='text-xl font-bold mb-4'>Challenges</h2>
+            <h2 className='text-xl font-bold mb-4'>Challenges Faced</h2>
             <div className="flex flex-row flex-wrap gap-4">
                 {post.challenges.map((item, key) => {
                     return <div key={key} className='flex flex-col bg-[#333] w-full sm:w-[calc(50%-8px)] md:w-[352px] border border-[#555] rounded p-4 gap-2'>
@@ -134,10 +140,10 @@ function PortfolioSingle() {
             {post.timeline.length > 0 ? <div className='mb-8'>
                 <h2 className="text-xl font-bold mb-4">Project Timeline</h2>
                 <div className='pl-2'>
-                    <div className='border-l border-[#444] flex flex-col gap-4'>
+                    <div className='border-l border-[#444] flex flex-col gap-8'>
                         {post.timeline.map((item, key) => {
                             return <ul className="flex flex-col relative gap-2" key={key}>
-                                <li className={`absolute left-[-6px] top-2 w-3 h-3 rounded-full ${key === 0 ? 'bg-yellow-500' : ''} ${key === post.timeline.length - 1 ? 'bg-red-500' : 'bg-green-500'}`}></li>
+                                <li className={`absolute left-[-4px] top-2.5 w-2 h-2 rounded-full ${key === 0 ? 'bg-yellow-500' : ''} ${key === post.timeline.length - 1 ? 'bg-red-500' : 'bg-green-500'}`}></li>
                                 <li className='text-lg font-semibold ml-4'>{item.date}</li>
                                 <li>
                                     <ul className='ml-4 flex flex-col gap-2'>
@@ -162,7 +168,7 @@ function PortfolioSingle() {
         </section>
 
         <section className="mt-8 mb-4 flex justify-center">
-            <Link to="/portfolio" className='flex flex-row gap-2 items-center'><FaArrowAltCircleLeft size={20}/> Back to Portfolio</Link>
+            <Link to="/portfolio" className='flex flex-row gap-2 items-center' title="Back to Portfolio Page"><FaArrowAltCircleLeft size={20}/> Back to Portfolio</Link>
         </section>
 
     </article> : <div className='loader h-screen'></div>

@@ -9,13 +9,13 @@ function BlogItem({ item }) {
     const image = item.files[0];
     console.log(item.files[0]);
 
-    return <div className="flex-grow-1 sm:max-w-[calc(50%-8px)] md:max-w-[352px] bg-[#333] border border-[#555] rounded p-2 sm:p-4">
+    return <div className="flex-grow-1 sm:max-w-[calc(50%-8px)] md:max-w-[352px] bg-[#333] border border-[#555] rounded p-4">
 
         <div className="sm:w-full sm:aspect-square">
             <img src={import.meta.env.VITE_SERVER_URL + 'images/' + image} alt="" title="" className="sm:w-full sm:h-full" draggable="false" />
         </div>
 
-        <h2 className="text-2xl font-semibold mb-4">{item.title}</h2>
+        <h2 className="text-2xl font-semibold my-4">{item.title}</h2>
 
         <p className="text-sm opacity-70 mb-3">{item.author} &middot; {formatDate(item.date_created)}</p>
 

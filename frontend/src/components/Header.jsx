@@ -40,18 +40,18 @@ function Header() {
         {widthCheck ? navState ? <div className="w-[40%] sm:w-[50%] h-screen fixed top-0 left-0 z-100" onClick={ updateNavState }></div> : null : null}
 
         <div className={`${widthCheck ? navState ? 'w-[60%] sm:w-[50%] opacity p-4 visible ' : 'w-0 opacity-0 invisible' : null } 
-                        transition-all flex flex-col bg-[#333] border-l border-l-[5px] border-[#444] h-screen fixed top-0 right-0 gap-8 z-100 overflow-scroll
-                        md:items-center md:flex-row md:w-180 md:bg-transparent md:relative md:h-min md:justify-between md:border-none md:p-0
+                        transition-all flex flex-col bg-[#333] border-l border-l-[5px] border-[#555] h-screen fixed top-0 right-0 gap-16 z-100 overflow-scroll
+                        md:items-center md:flex-row md:w-180 md:bg-transparent md:relative md:h-min md:justify-between md:border-none md:p-0 md:gap-0
             `}>
             
             <div className='md:flex md:justify-start md:w-30'>
                 <Link to="/" title="ihawp.com Home Page">
-                    <img src="/ihawp-com-logo.svg" alt="ihawp.com Logo" title="ihawp.com Logo" draggable="false" width={30} />
+                    <img src="/ihawp-com-logo.svg" alt="ihawp.com Logo" title="ihawp.com Logo" draggable="false" width={width < 768 ? 45 : 30} />
                 </Link>
             </div>
 
             <nav aria-label="Main Site Navigation" className='md:w-full md:flex md:justify-center'>
-                <ul className="flex flex-col md:flex-row md:gap-16 font-semibold text-2xl md:text-base gap-8">
+                <ul className="flex flex-col md:flex-row gap-12 md:gap-16 font-semibold text-2xl md:text-base gap-8">
                     <li><NavLink to="/" title="Home">Home</NavLink></li>
                     <li><NavLink to="/portfolio" title="Portfolio" end>Portfolio</NavLink></li>
                     <li><NavLink to="/blog" title="Blog">Blog</NavLink></li>
