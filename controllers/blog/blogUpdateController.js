@@ -1,4 +1,5 @@
-const { updateBlogPostById } = require('../../utils/blogQueries');
+const { updateBlogPostById, selectBlogPostFilesById } = require('../../utils/blogQueries');
+const fs = require('node:fs').promises;
 
 const blogUpdateController = async (req, res) => {
 
@@ -20,10 +21,23 @@ const blogUpdateController = async (req, res) => {
 
     if (req.files.length > 0) {
 
-        // delete the old files.
-        // Or maybe build media library thing where I can delete images?
-        // And then eventually maybe update images for blog or portfolio from the
-        // media library
+        try {
+            const response = await selectBlogPostFilesById(id);
+
+            if (response[0] && response[0].files) {
+                const parseResponse = JSON.parse(response[0].files);
+
+                for (const file of parseResponse) {
+                    try {
+                        await fs.unlink(`verified_uploads/${file}`);
+                    } catch (error) {
+                        // fallthrough
+                    }
+                }
+            }
+        } catch (error) {
+            return res.status(400).json({ success: false, error: 'Database error.', code: 'DATABASE_ERROR' });
+        }
 
         req.files.forEach(item => {
             fileLocations.push(item.filename);
