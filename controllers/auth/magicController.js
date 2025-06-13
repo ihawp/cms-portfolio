@@ -57,7 +57,7 @@ const magicController = async (req, res) => {
     res.cookie('jwt', createJWT, cookieOptions1h);
     res.cookie('long-jwt', createLongLastingJWT, cookieOptions1w);
 
-    res.status(200).json({ data: { authenticated: true }, error: null });
+    res.redirect(process.env.SERVER_URL + 'admin/ihawp/');
 
 }
 

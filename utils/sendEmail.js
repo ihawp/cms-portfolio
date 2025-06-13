@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const nodemailerTransporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
   host: 'mail.ihawp.com',
   port: 465,
   secure: true,
@@ -10,7 +10,7 @@ const nodemailerTransporter = nodemailer.createTransport({
   }
 });
 
-const transporter = nodemailer.createTransport({
+const nodemailerTransporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: process.env.GMAIL_EMAIL,
@@ -19,12 +19,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendEmailTemplate = async (emailTemplate) => {
-
-    try{
-        return await nodemailerTransporter.sendMail(emailTemplate);
-    } catch (error) {
-        console.log(error);
-    }
+    return await nodemailerTransporter.sendMail(emailTemplate);
 }
 
 module.exports = { 

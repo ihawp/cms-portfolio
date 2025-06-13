@@ -19,11 +19,12 @@ function PortfolioItem({ item }) {
 
     const navigate = useNavigate();
 
+
     const dateCreated = formatDate(item.date_created);
 
     return item ? <div className="bg-[#333] rounded border border-[#666] flex flex-col-reverse md:flex-row p-4 md:p-6 sm:gap-4 justify-between">
 
-        <div className='flex flex-col md:max-w-[60%]'>
+        <div className='flex flex-col md:w-[60%]'>
             <h2 className="text-2xl font-semibold mb-4">{item.title}</h2>
 
             <div className='mb-4 text-sm opacity-70 flex flex-row items-center gap-2 flex-wrap'>
@@ -37,8 +38,8 @@ function PortfolioItem({ item }) {
 
             <p className='md:h-41 mb-4 md:mb-0 '>{item.intro.slice(0, 200).trim()}...</p>
 
-            <div className='flex flex-row gap-8 items-center justify-between md:justify-start'>
-                <button onClick={() => navigate('/portfolio/' + encodeURIComponent(item.id))} className='border border-[#555] md:border-none md:w-max rounded cursor-pointer w-full py-2' title={`Learn more about the ${item.title} project`}>Learn More</button>
+            <div className='flex flex-row gap-8 items-center justify-between md:justify-center w-full'>
+                <button onClick={() => navigate('/portfolio/' + encodeURIComponent(item.id))} className='border border-[#555] md:border-none md:w-max rounded cursor-pointer w-full py-2 button-underline-hover relative font-semibold' title={`Learn more about the ${item.title} project`}>Learn More</button>
             </div>
         </div>
 

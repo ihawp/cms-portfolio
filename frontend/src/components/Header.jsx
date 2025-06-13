@@ -54,7 +54,7 @@ function Header() {
                 <ul className="flex flex-col md:flex-row gap-12 md:gap-16 text-2xl md:text-base gap-8">
                     <li><NavLink to="/" title="Home">Home</NavLink></li>
                     <li><NavLink to="/portfolio" title="Portfolio" end>Portfolio</NavLink></li>
-                    <li><NavLink to="/blog" title="Blog">Blog</NavLink></li>
+                    <li><NavLink to="/blog" title="Blog" end>Blog</NavLink></li>
                 </ul>
             </nav>
 
