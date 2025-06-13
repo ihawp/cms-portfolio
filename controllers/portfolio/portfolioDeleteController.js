@@ -21,6 +21,7 @@ const portfolioDeleteController = async (req, res) => {
             console.log('parseResponse', parseResponse);
 
             for (const file of parseResponse) {
+                console.log(file);
                 try {
                     await fs.unlink(`verified_uploads/${file}`);
                 } catch (error) {

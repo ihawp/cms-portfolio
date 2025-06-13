@@ -1,4 +1,5 @@
-const { updatePortfolioPost } = require('../../utils/portfolioQueries');
+const { updatePortfolioPost, selectPortfolioPostFilesById } = require('../../utils/portfolioQueries');
+const fs = require('node:fs').promises;
 
 const portfolioUpdateController = async (req, res) => {
 
@@ -26,6 +27,24 @@ const portfolioUpdateController = async (req, res) => {
         // Or maybe build media library thing where I can delete images?
         // And then eventually maybe update images for blog or portfolio from the
         // media library
+
+        try {
+            const response = await selectPortfolioPostFilesById(id);
+
+            if (response[0] && response[0].images) {
+                const parseResponse = JSON.parse(response[0].images);
+
+                for (const file of parseResponse) {
+                    try {
+                        await fs.unlink(`verified_uploads/${file}`);
+                    } catch (error) {
+                        // fallthrough
+                    }
+                }
+            }
+        } catch (error) {
+            return res.status(400).json({ success: false, error: 'Database error.', code: 'DATABASE_ERROR' });
+        }
 
         req.files.forEach(item => {
             fileLocations.push(item.filename);
