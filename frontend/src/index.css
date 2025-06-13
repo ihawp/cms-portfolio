@@ -139,10 +139,6 @@ footer:before {
     top: 0;
 }
 
-.button-underline-hover:hover:after {
-    width: 100%;
-}
-
 /* Safe Bottom: Keep the fixed mobile navigation button from being covered up in safari. */
 .safe-bottom {
   padding-bottom: env(safe-area-inset-bottom);
@@ -172,10 +168,15 @@ footer:before {
         width: 0;
         height: 2px;
         background-color: white;
+        opacity: .43;
         position: absolute;
         bottom: 4px;
         left: 0;
         transition: .43s ease all;
+    }
+
+    .button-underline-hover:hover:after {
+        width: 100%;
     }
 
 }

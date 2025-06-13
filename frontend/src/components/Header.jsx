@@ -28,7 +28,7 @@ function Header() {
         {/* for main header (always visible) on mobile */}
         {widthCheck ? <div className='w-full flex justify-start'>
             <Link to="/" title="ihawp.com Home Page">
-                <img src="/ihawp-com-logo.svg" alt="ihawp.com Logo" title="ihawp.com Logo" draggable="false" />
+                <img src="/ihawp-com-logo.webp" alt="ihawp.com Logo" title="ihawp.com Logo" draggable="false" />
             </Link>
         </div> : null}
 
@@ -46,7 +46,7 @@ function Header() {
             
             <div className='md:flex md:justify-start md:w-30'>
                 <Link to="/" title="ihawp.com Home Page">
-                    <img src="/ihawp-com-logo.svg" alt="ihawp.com Logo" title="ihawp.com Logo" draggable="false" width={width < 768 ? 45 : 30} />
+                    <img src="/ihawp-com-logo.webp" alt="ihawp.com Logo" title="ihawp.com Logo" draggable="false" width={width < 768 ? 45 : 30} />
                 </Link>
             </div>
 

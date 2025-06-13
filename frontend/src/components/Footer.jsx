@@ -6,7 +6,7 @@ function Footer() {
 
         <div className='w-full md:w-180 flex flex-col gap-8'>
             <Link to="/" title="ihawp.com Home Page" className='w-max flex flex-row items-center gap-3'>
-                <img src="/ihawp-com-logo.svg" alt={"ihawp.com Logo"} title="ihawp.com Logo" draggable="false" width={30} />
+                <img src="/ihawp-com-logo.webp" alt={"ihawp.com Logo"} title="ihawp.com Logo" draggable="false" width={30} />
                 <p className='text-lg font-semibold'>ihawp.com</p>
             </Link>
 

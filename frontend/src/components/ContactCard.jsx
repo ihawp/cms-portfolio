@@ -24,7 +24,7 @@ function ContactCard() {
                 <a href="https://ihawp.com" title="Warren Chemerika | ihawp.com" className='w-min'>ihawp.com</a>
             </div>
         </div>
-        <img src="/ihawp-com-logo.svg" alt="ihawp.com Logo" className='absolute bottom-2 right-2 w-10' draggable="false"></img>
+        <img src="/ihawp-com-logo.webp" alt="ihawp.com Logo" className='absolute bottom-2 right-2 w-10' draggable="false"></img>
     </div>
 }
 
