@@ -1,6 +1,11 @@
 const mysql = require('mysql2/promise');
-const poolOptions = require('./poolOptions');
+const { poolOptions, poolOptionsAdmin } = require('./poolOptions');
 
 const pool = mysql.createPool(poolOptions);
 
-module.exports = pool;
+const adminPool = mysql.createPool(poolOptionsAdmin);
+
+module.exports = {
+    pool,
+    adminPool
+};

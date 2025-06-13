@@ -50,9 +50,9 @@ function PortfolioProvider({ children }) {
                 rows.forEach(key => {
                 if (newPost[key]) {
                     try {
-                    newPost[key] = JSON.parse(newPost[key]);
+                        newPost[key] = JSON.parse(newPost[key]);
                     } catch (e) {
-                    console.warn(`Failed to parse ${key} in post ${post.id}`, e);
+                        console.warn(`Failed to parse ${key} in post ${post.id}`, e);
                     }
                 }
                 });

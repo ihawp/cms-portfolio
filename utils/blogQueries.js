@@ -1,4 +1,4 @@
-const pool = require('../utils/pool');
+const { pool, adminPool } = require('../utils/pool');
 
 // #######################################################################
 // SELECT
@@ -27,7 +27,7 @@ const selectBlogPosts = async () => {
 // UPDATE
 
 const updateBlogPostById = async (d, postId) => {
-    const [response] = await pool.execute(`
+    const [response] = await adminPool.execute(`
         UPDATE blog SET
             title = ?,
             author = ?,
@@ -50,7 +50,7 @@ const updateBlogPostById = async (d, postId) => {
 // INSERT
 
 const insertBlogPost = async (d) => {
-    const [response] = await pool.execute(
+    const [response] = await adminPool.execute(
         `INSERT INTO blog (title, author, content, tags, files)
         VALUES (?, ?, ?, ?, ?)`,
         [
@@ -68,7 +68,7 @@ const insertBlogPost = async (d) => {
 // DELETE
 
 const deleteBlogPostById = async (postId) => {
-    await pool.execute(
+    await adminPool.execute(
         'DELETE FROM blog WHERE id = ?',
         [postId]
     );

@@ -1,4 +1,4 @@
-const pool = require('./pool');
+const { pool, adminPool } = require('./pool');
 
 // #######################################################################
 // SELECT
@@ -50,7 +50,7 @@ const selectFrontendUserById = async (id) => {
 // UPDATE
 
 const updateAuthToken = async (authTokenHash, userId) => {
-    const [response] = await pool.execute(`
+    const [response] = await adminPool.execute(`
         UPDATE accounts 
         SET auth_token_hash = ?, 
         auth_token_created_at = CURRENT_TIMESTAMP(6) 
@@ -79,7 +79,7 @@ const updateUserEmailVerifiedById = async (connection, newEmailVerifiedLevel, id
 // INSERT
 
 const insertUser = async (username, email, passwordHash, authTokenHash) => {
-    const [response] = await pool.execute(`
+    const [response] = await adminPool.execute(`
         INSERT INTO accounts (
             username, 
             email, 
@@ -100,7 +100,7 @@ const insertUser = async (username, email, passwordHash, authTokenHash) => {
 // DELETE
 
 const deleteUser = async (userId) => {
-    const [response] = await pool.execute(
+    const [response] = await adminPool.execute(
         'DELETE FROM accounts WHERE id = ?',
         [userId]
     );

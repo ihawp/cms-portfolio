@@ -29,7 +29,7 @@ const icons = {
   faHtml5: <FaHtml5 size={16} />,
   faCss3Alt: <FaCss3Alt size={16} />,
   faWordpress: <FaWordpress size={16} />,
-  faPhp: <FaPhp size={16} />
+  faPhp: <FaPhp size={20} />
 };
 
 function PortfolioSingle() {
@@ -38,10 +38,12 @@ function PortfolioSingle() {
 
     const { id } = useParams();
 
-    const post = posts.find(item => item.id == id);
+    const post = posts.find(item => item.id === Number(id));
 
     useEffect(() => {
-        post ? updateDocumentTitle(`${post.title} | ihawp.com`) : null;
+        if (post) {
+            updateDocumentTitle(`${post.title} | ihawp.com`);
+        }
     }, [post])
 
     const dateCreated = formatDate(post ? post.date_created : new Date());
@@ -137,7 +139,7 @@ function PortfolioSingle() {
         </section> : null}
 
         <section className='flex flex-col sm:flex-row gap-4'>
-            {post.timeline.length > 0 ? <div className='mb-8'>
+            {post.timeline.length > 0 ? <div className='mb-8 w-full'>
                 <h2 className="text-xl font-bold mb-4">Project Timeline</h2>
                 <div className='pl-2'>
                     <div className='border-l border-[#444] flex flex-col gap-8'>

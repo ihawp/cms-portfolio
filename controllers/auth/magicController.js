@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const pool = require('../../utils/pool');
+const { adminPool } = require('../../utils/pool');
 
 const { selectAuthById, updateUserAuthById, updateUserEmailVerifiedById } = require('../../utils/authQueries');
 const { jwtOptions1h, jwtOptions1w } = require('../../utils/jwtOptions');
@@ -34,7 +34,7 @@ const magicController = async (req, res) => {
     }
     
     // Use ACID principles (create a transaction).
-    const connection = await pool.getConnection();
+    const connection = await adminPool.getConnection();
 
     try {
         await connection.beginTransaction();

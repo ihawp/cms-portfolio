@@ -1,4 +1,4 @@
-const pool = require('./pool');
+const { pool, adminPool } = require('./pool');
 
 // #######################################################################
 // SELECT
@@ -43,7 +43,7 @@ const selectPortfolioPosts = async () => {
  * @param {Object} d - Data; Shortened name for simplicity.
  */
 const insertPortfolioPost = async (d) => {
-    const [response] = await pool.execute(`
+    const [response] = await adminPool.execute(`
         INSERT INTO portfolio
         (title, intro, role,
         timeline, toolsUsed,
@@ -82,7 +82,7 @@ const insertPortfolioPost = async (d) => {
  * Will not be used in a transactional manor.
  */
 const updatePortfolioPost = async (d, portfolioPostId) => {
-    const [response] = await pool.execute(`
+    const [response] = await adminPool.execute(`
             UPDATE portfolio SET
                 title = ?,
                 intro = ?,
@@ -113,7 +113,6 @@ const updatePortfolioPost = async (d, portfolioPostId) => {
             portfolioPostId
         ]
     );
-    console.log(response); 
     return response;
 }
 
@@ -121,7 +120,7 @@ const updatePortfolioPost = async (d, portfolioPostId) => {
 // DELETE
 
 const deletePortfolioPostById = async (portfolioPostId) => {
-    await pool.execute(`
+    await adminPool.execute(`
         DELETE FROM portfolio
         WHERE id = ?
         `,
