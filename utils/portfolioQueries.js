@@ -34,6 +34,17 @@ const selectPortfolioPosts = async () => {
     return response;
 }
 
+const selectPortfolioPostFilesById = async (id) => {
+    const [response] = await pool.execute(`
+        SELECT images
+        FROM portfolio
+        WHERE id = ?
+        `,
+        [id]
+    );
+    return response;
+}
+
 // #######################################################################
 // INSERT
 
@@ -132,6 +143,7 @@ module.exports = {
     selectPortfolioPostById,
     selectPortfolioPostsByAmount,
     selectPortfolioPosts,
+    selectPortfolioPostFilesById,
 
     insertPortfolioPost,
 

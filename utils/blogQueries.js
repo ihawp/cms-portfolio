@@ -23,6 +23,17 @@ const selectBlogPosts = async () => {
     return response;
 }
 
+const selectBlogPostFilesById = async (id) => {
+    const [response] = await pool.execute(`
+        SELECT files
+        FROM blog
+        WHERE id = ?
+        `,
+        [id]
+    );
+    return response;
+}
+
 // #######################################################################
 // UPDATE
 
@@ -77,6 +88,7 @@ const deleteBlogPostById = async (postId) => {
 module.exports = {
     selectBlogPostById,
     selectBlogPosts,
+    selectBlogPostFilesById,
 
     updateBlogPostById,
 

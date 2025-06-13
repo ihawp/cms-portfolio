@@ -1,5 +1,6 @@
-const { deletePortfolioPostById } = require('../../utils/portfolioQueries');
+const { deletePortfolioPostById, selectPortfolioPostFilesById } = require('../../utils/portfolioQueries');
 const validator = require('validator');
+const fs = require('node:fs').promises;
 
 const portfolioDeleteController = async (req, res) => {
 
@@ -9,7 +10,28 @@ const portfolioDeleteController = async (req, res) => {
         return res.status(400).json({ success: false, error: '', code: '' });
     }
 
-    // Should also delete any affiliated media from the appropriate directory.
+    try {
+        const response = await selectPortfolioPostFilesById(id);
+
+        if (response[0] && response[0].images) {
+
+            const parseResponse = JSON.parse(response[0].images);
+
+            console.log(response);
+            console.log('parseResponse', parseResponse);
+
+            for (const file of parseResponse) {
+                try {
+                    await fs.unlink(`verified_uploads/${file}`);
+                } catch (error) {
+                    // fallthrough
+                }
+            }
+
+        }
+    } catch (error) {
+        return res.status(400).json({ success: false, error: 'Database error.', code: 'DATABASE_ERROR' });
+    }
 
     try {
         await deletePortfolioPostById(id);
