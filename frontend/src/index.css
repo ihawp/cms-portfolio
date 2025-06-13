@@ -2,7 +2,7 @@
 
 html {
     box-sizing: border-box;
-    scrollbar-behaviour: smooth;
+    scroll-behaviour: smooth;
 }
 
 *, *:before, *:after {
@@ -13,6 +13,13 @@ body {
     background-color: #222;
     color: #ffffff;
     margin: 1rem;
+}
+
+.outlined-text {
+  color: white;               /* text fill color */
+  -webkit-text-stroke: 1px black;  /* stroke thickness and color */
+  /* for Firefox */
+  text-stroke: 1px black; /* not widely supported yet */
 }
 
 a.active {

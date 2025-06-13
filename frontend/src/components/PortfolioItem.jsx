@@ -21,7 +21,7 @@ function PortfolioItem({ item }) {
 
     const dateCreated = formatDate(item.date_created);
 
-    return <div className="bg-[#333] rounded border border-[#666] flex flex-col-reverse md:flex-row p-4 md:p-6 sm:gap-4 justify-between">
+    return item ? <div className="bg-[#333] rounded border border-[#666] flex flex-col-reverse md:flex-row p-4 md:p-6 sm:gap-4 justify-between">
 
         <div className='flex flex-col md:max-w-[60%]'>
             <h2 className="text-2xl font-semibold mb-4">{item.title}</h2>
@@ -55,7 +55,7 @@ function PortfolioItem({ item }) {
                             w-15 h-15 sm:w-20 sm:h-20 md:w-10 md:h-10
                             border border-[#888] text-[#eeeeee] text-sm rounded"
         />
-    </div>
+    </div> : <div className='loader'></div>
 }
 
 export default PortfolioItem;
