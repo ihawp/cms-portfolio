@@ -17,14 +17,16 @@ const magicValidate = require('../middleware/magicValidate');
 const validate = require('../middleware/validate');
 const checkAccountExistsByUsername = require('../middleware/checkAccountExistsByUsername');
 const verifyJWT = require('../middleware/verifyJWT');
+const rateLimiterMiddleware = require('../middleware/rateLimiter');
 
 /**
  * @route POST /register
  * @description Allow a new user to register an account.
- * @middleware registerValidate, validate, checkAccountExistsByUsername
+ * @middleware rateLimiterMiddleware, registerValidate, validate, checkAccountExistsByUsername
  * @controller registerController
  */
 authRouter.post('/register', 
+    rateLimiterMiddleware,
     registerValidate,
     validate,
     checkAccountExistsByUsername,
@@ -34,10 +36,11 @@ authRouter.post('/register',
 /**
  * @route POST /login
  * @description Allow a user to login with their account credentials.
- * @middleware loginValidate, validate
+ * @middleware rateLimiterMiddleware, loginValidate, validate
  * @controller loginController
  */
 authRouter.post('/login',
+    rateLimiterMiddleware,
     loginValidate,
     validate,
     loginController

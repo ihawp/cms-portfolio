@@ -8,7 +8,7 @@ function BlogItem({ item }) {
     return item ? <div className="flex-grow-1 sm:max-w-[calc(50%-8px)] md:max-w-[352px] bg-[#333] border border-[#555] rounded p-4">
 
         <div className="sm:w-full sm:aspect-square">
-            <img src={import.meta.env.VITE_SERVER_URL + 'images/' + item.files[0]} alt="" title="" className="sm:w-full sm:h-full object-cover" draggable="false" />
+            <img src={import.meta.env.VITE_SERVER_URL + 'images/' + item.files[0]} alt="" title="" className="sm:w-full sm:h-full object-cover border border-[#555] rounded" draggable="false" />
         </div>
 
         <h2 className="text-2xl font-semibold my-4">{item.title}</h2>

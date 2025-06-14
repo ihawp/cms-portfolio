@@ -10,37 +10,37 @@ function Footer() {
                 <p className='text-lg font-semibold'>ihawp.com</p>
             </Link>
 
-            <nav className='flex flex-row flex-wrap justify-between gap-8 mb-4 pb-8'>
+            <nav className='flex flex-row flex-wrap justify-between gap-8 sm:mb-4 md:pb-8'>
 
                 <div className='flex flex-row flex-wrap gap-8'>
+
                     <div className='w-30'>
-                        <h2 className="text-xl mb-3 font-semibold">Pages</h2>
-                        <ul className='flex flex-col gap-2 md:text-sm'>
+                        <h2 className="text-xl mb-5 font-semibold">Pages</h2>
+                        <ul className='flex flex-col gap-4 md:text-sm'>
                             <li><Link to="/" title="Home" className='opacity-80 hover:opacity-100'>Home</Link></li>
                             <li><Link to="/portfolio" title="Portfolio" className='opacity-80 hover:opacity-100'>Portfolio</Link></li>
                             <li><Link to="/blog" title="Blog" className='opacity-80 hover:opacity-100'>Blog</Link></li>
                         </ul>
                     </div>
                     <div className='w-30'>
-                        <h2 className="text-xl mb-3 font-semibold">Contact</h2>
-                        <ul className='flex flex-col gap-2 md:text-sm'>
+                        <h2 className="text-xl mb-5 font-semibold">Contact</h2>
+                        <ul className='flex flex-col gap-4 md:text-sm'>
                             <li><a href="https://www.linkedin.com/in/warren-chemerika-628b15275/" target="_blank" rel="noreferrer" title="LinkedIn" className='opacity-80 hover:opacity-100'>LinkedIn</a></li>
                             <li><a href="https://github.com/ihawp" title="LinkedIn" target="_blank" rel="noreferrer" className='opacity-80 hover:opacity-100'>GitHub</a></li>
                             <li><a href="mailto:ihawp@ihawp.com" className='opacity-80 hover:opacity-100'>Email</a></li>
                         </ul>
                     </div>
                     <div className='w-30'>
-                        <h2 className="text-xl mb-3 font-semibold">Documents</h2>
-                        <ul className='flex flex-col gap-2 md:text-sm'>
-                            <li><a href="#" title="Download Warren Chemerika's Resume" className='opacity-80 hover:opacity-100'>Resume</a></li>
-                            <li><a href="#" title="View Warren Chemerika's Certificate of Front-End Web Development from Saskatchewan Polytechnic." className='opacity-80 hover:opacity-100'>Saskatchewan Polytechnic Certificate</a></li>
-                            <li><a href="#" title="View Warren Chemerika's Front-End Web Developer Certificate from the British Columbia Institute of Technology." className='opacity-80 hover:opacity-100'>BCIT Certificate</a></li>
+                        <h2 className="text-xl mb-5 font-semibold">Documents</h2>
+                        <ul className='flex flex-col gap-4  md:text-sm flex-grow-1'>
+                            <li><a href="/Warren-Chemerika-Resume-June-2025.pdf" title="Download Warren Chemerika's Resume" className='opacity-80 hover:opacity-100'>Resume</a></li>
+                            <li className='w-40 md:w-min'><a href="/Warren-Chemerika-Front-End-Web-Development-Certificate-Saskatchewan-Polytechnic.pdf" title="View Warren Chemerika's Certificate of Front-End Web Development from Saskatchewan Polytechnic." className='opacity-80 hover:opacity-100'>Saskatchewan Polytechnic Certificate</a></li>
+                            <li><a href="#coming-soon" title="View Warren Chemerika's Front-End Web Developer Certificate from the British Columbia Institute of Technology." className='opacity-80 hover:opacity-100'>BCIT Certificate</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <ContactCard />
-
             </nav>
 
             <div className='flex flex-col md:flex-row gap-8 justify-between md:items-center'>

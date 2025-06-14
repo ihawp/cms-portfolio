@@ -4,6 +4,7 @@ const corsOptions = {
     allowedHeaders: ['Content-Type'],
     optionsSuccessStatus: 200,
     credentials: true,
+    maxAge: 86400,
 }
 
 module.exports = corsOptions;
