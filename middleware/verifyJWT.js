@@ -36,8 +36,31 @@ const verifyJWT = async (req, res, next) => {
   }
 
   try {
-    const verified = await asyncVerifyJWT(longToken, process.env.LONG_JWT_SECRET);
-    req.user = verified;
+    const checkHash = await asyncVerifyJWT(longToken, process.env.LONG_JWT_SECRET);
+
+    // check the refresh password against the password stored in JWT
+    // if good update the refresh_token_hash by creating new hash
+    // and then create new refresh JWT cookie including the original term
+    // before hashing
+
+    // checkHash = {}
+      // Get 'password' from checkHash
+    // Get stored refresh_token_hash
+    // Use password_verify() on refresh_token_hash and 'password'
+    // IF GOOD
+    // Create new refresh token (32 random bytes)
+      // Hash it
+      // Store the refresh token hash in the database (refresh_token_hash)
+    // Create new longJWT that includes refresh token
+    // Use res.cookie() to set the new longJWT as refresh
+
+    // This will allow only one session by an unauthenticated user
+      // They would have to get a new long term token from the real account 
+      // owner to continue using the account once the access token expires
+
+    console.log(checkHash);
+
+    req.user = checkHash;
     return next();
   } catch (err) {
     return res.status(403).json({

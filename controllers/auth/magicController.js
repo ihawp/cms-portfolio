@@ -51,7 +51,14 @@ const magicController = async (req, res) => {
     }
 
     // Create JWT tokens.
+
+    // Refresh token should not be identical to the Access Token
+    // 
+
+    // Create Access Token
     const createJWT = jwt.sign({ id }, process.env.JWT_SECRET, jwtOptions1h);
+
+    // Create Refresh Token
     const createLongLastingJWT = jwt.sign({ id }, process.env.LONG_JWT_SECRET, jwtOptions1w);
 
     res.cookie('jwt', createJWT, cookieOptions1h);
